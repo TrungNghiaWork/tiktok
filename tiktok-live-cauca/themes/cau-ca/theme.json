@@ -1,0 +1,1675 @@
+{
+  "name": "Ao làng câu cá",
+  "description": "Ao làng lúc hoàng hôn: người xem ngồi câu bên bờ, gõ \"câu\" để thả cần, tặng quà để rải thính, mồi thơm, cá chép hoá rồng.",
+  "width": 1080,
+  "height": 1920,
+  "actions": [
+    {
+      "id": "thinh",
+      "label": "Rải thính",
+      "icon": "🌾",
+      "card": "1 XU",
+      "description": "Thính rơi xuống ao, mặt nước gợn sóng",
+      "steps": [
+        {
+          "aura": 0.6
+        },
+        {
+          "sound": "thinh"
+        },
+        {
+          "js": "raiThinh"
+        },
+        {
+          "play": "nod"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "+{total}"
+        }
+      ]
+    },
+    {
+      "id": "moi",
+      "label": "Mồi thơm",
+      "icon": "🪱",
+      "card": "10 XU",
+      "description": "Ra đầu cầu tre quăng cần, kéo lên một con cá hiếm",
+      "steps": [
+        {
+          "walk": "cau-tre"
+        },
+        {
+          "pose": "stand"
+        },
+        {
+          "sound": "quang"
+        },
+        {
+          "play": "quang"
+        },
+        {
+          "js": "moiThom"
+        },
+        {
+          "wait": 2600
+        },
+        {
+          "play": "giat"
+        },
+        {
+          "walk": "home"
+        },
+        {
+          "pose": "idle"
+        }
+      ]
+    },
+    {
+      "id": "rong",
+      "label": "Cá chép hoá rồng",
+      "icon": "🐉",
+      "card": "100 XU",
+      "description": "Camera zoom cầu tre, cá chép vàng nhảy khỏi mặt nước, cả bờ ao vỗ tay",
+      "steps": [
+        {
+          "walk": "cau-tre"
+        },
+        {
+          "pose": "stand"
+        },
+        {
+          "camera": "person",
+          "zoom": 1.45,
+          "duration": 5200
+        },
+        {
+          "play": "quang"
+        },
+        {
+          "js": "rongLen"
+        },
+        {
+          "fx": "rays",
+          "at": "mat-ao",
+          "duration": 5000
+        },
+        {
+          "crowd": [
+            {
+              "play": "giat"
+            }
+          ]
+        },
+        {
+          "wait": 3800
+        },
+        {
+          "walk": "home"
+        },
+        {
+          "pose": "idle"
+        }
+      ]
+    },
+    {
+      "id": "cau",
+      "label": "Thả cần",
+      "icon": "🎣",
+      "description": "Lệnh chat: giật cần, câu được một con cá",
+      "steps": [
+        {
+          "js": "giatCan"
+        },
+        {
+          "play": "giat"
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "joinMode": "all",
+    "joinKeywords": [
+      "câu",
+      "fish",
+      "钓鱼"
+    ],
+    "bigGiftCoins": 100,
+    "giftTiers": [
+      {
+        "minCoins": 1,
+        "action": "thinh",
+        "label": "Rải thính"
+      },
+      {
+        "minCoins": 10,
+        "action": "moi",
+        "label": "Mồi thơm"
+      },
+      {
+        "minCoins": 100,
+        "action": "rong",
+        "label": "Cá chép hoá rồng"
+      }
+    ],
+    "giftOverrides": [],
+    "chatCommands": [
+      {
+        "keywords": [
+          "câu",
+          "câu cá",
+          "thả cần",
+          "câu đi",
+          "câu nào",
+          "quăng cần",
+          "🎣",
+          "fish",
+          "cast",
+          "fishing",
+          "钓鱼",
+          "钓",
+          "甩竿",
+          "下竿"
+        ],
+        "match": "exact",
+        "action": "cau",
+        "draw": "ca",
+        "label": "thả cần",
+        "cooldownMs": 45000
+      }
+    ]
+  },
+  "bigGift": {
+    "steps": [
+      {
+        "sound": "lon"
+      }
+    ]
+  },
+  "draws": {
+    "ca": {
+      "perDay": false,
+      "items": [
+        {
+          "rank": "thuong",
+          "ca": "cá rô đồng",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,3 ký",
+          "ky": "0,3",
+          "loi": "Nhỏ mà chắc thịt, tối nay có món kho."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá rô đồng",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,4 ký",
+          "ky": "0,4",
+          "loi": "Nhỏ mà chắc thịt, tối nay có món kho."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá rô đồng",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,4 ký",
+          "ky": "0,4",
+          "loi": "Nhỏ mà chắc thịt, tối nay có món kho."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá rô đồng",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,5 ký",
+          "ky": "0,5",
+          "loi": "Nhỏ mà chắc thịt, tối nay có món kho."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá diếc",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,3 ký",
+          "ky": "0,3",
+          "loi": "Cá diếc nấu canh chua là hết sảy."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá diếc",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,4 ký",
+          "ky": "0,4",
+          "loi": "Cá diếc nấu canh chua là hết sảy."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá diếc",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,5 ký",
+          "ky": "0,5",
+          "loi": "Cá diếc nấu canh chua là hết sảy."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá rô phi",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,6 ký",
+          "ky": "0,6",
+          "loi": "Mẻ đầu thuận tay, câu tiếp nào."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá rô phi",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,7 ký",
+          "ky": "0,7",
+          "loi": "Mẻ đầu thuận tay, câu tiếp nào."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá rô phi",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,8 ký",
+          "ky": "0,8",
+          "loi": "Mẻ đầu thuận tay, câu tiếp nào."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá rô phi",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,9 ký",
+          "ky": "0,9",
+          "loi": "Mẻ đầu thuận tay, câu tiếp nào."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá trê",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,7 ký",
+          "ky": "0,7",
+          "loi": "Râu dài, vùng vẫy ghê lắm."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá trê",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 0,9 ký",
+          "ky": "0,9",
+          "loi": "Râu dài, vùng vẫy ghê lắm."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá trê",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 1,1 ký",
+          "ky": "1,1",
+          "loi": "Râu dài, vùng vẫy ghê lắm."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá mè",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 1,0 ký",
+          "ky": "1,0",
+          "loi": "Nặng tay rồi đó."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá mè",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 1,2 ký",
+          "ky": "1,2",
+          "loi": "Nặng tay rồi đó."
+        },
+        {
+          "rank": "thuong",
+          "ca": "cá mè",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 1,4 ký",
+          "ky": "1,4",
+          "loi": "Nặng tay rồi đó."
+        },
+        {
+          "rank": "thuong",
+          "ca": "con tôm càng",
+          "emoji": "🦐",
+          "image": "",
+          "nang": ", nặng 0,1 ký",
+          "ky": "0,1",
+          "loi": "Bé xíu nhưng cũng là lộc của ao."
+        },
+        {
+          "rank": "thuong",
+          "ca": "con tôm càng",
+          "emoji": "🦐",
+          "image": "",
+          "nang": ", nặng 0,1 ký",
+          "ky": "0,1",
+          "loi": "Bé xíu nhưng cũng là lộc của ao."
+        },
+        {
+          "rank": "thuong",
+          "ca": "chiếc dép tổ ong",
+          "emoji": "👡",
+          "image": "",
+          "nang": "",
+          "ky": "",
+          "loi": "Hôm nay ao trả quà hơi lạ, thử lại nhé!"
+        },
+        {
+          "rank": "thuong",
+          "ca": "chiếc dép tổ ong",
+          "emoji": "👡",
+          "image": "",
+          "nang": "",
+          "ky": "",
+          "loi": "Hôm nay ao trả quà hơi lạ, thử lại nhé!"
+        },
+        {
+          "rank": "thuong",
+          "ca": "chiếc dép tổ ong",
+          "emoji": "👡",
+          "image": "",
+          "nang": "",
+          "ky": "",
+          "loi": "Hôm nay ao trả quà hơi lạ, thử lại nhé!"
+        },
+        {
+          "rank": "kha",
+          "ca": "cá chép",
+          "emoji": "🐠",
+          "image": "",
+          "nang": ", nặng 1,6 ký",
+          "ky": "1,6",
+          "loi": "Chép to, cả nhà có bữa ngon."
+        },
+        {
+          "rank": "kha",
+          "ca": "cá chép",
+          "emoji": "🐠",
+          "image": "",
+          "nang": ", nặng 1,8 ký",
+          "ky": "1,8",
+          "loi": "Chép to, cả nhà có bữa ngon."
+        },
+        {
+          "rank": "kha",
+          "ca": "cá chép",
+          "emoji": "🐠",
+          "image": "",
+          "nang": ", nặng 2,0 ký",
+          "ky": "2,0",
+          "loi": "Chép to, cả nhà có bữa ngon."
+        },
+        {
+          "rank": "kha",
+          "ca": "cá lóc",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 1,3 ký",
+          "ky": "1,3",
+          "loi": "Lóc nướng trui, thơm cả xóm."
+        },
+        {
+          "rank": "kha",
+          "ca": "cá lóc",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 1,5 ký",
+          "ky": "1,5",
+          "loi": "Lóc nướng trui, thơm cả xóm."
+        },
+        {
+          "rank": "kha",
+          "ca": "cá lóc",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 1,7 ký",
+          "ky": "1,7",
+          "loi": "Lóc nướng trui, thơm cả xóm."
+        },
+        {
+          "rank": "kha",
+          "ca": "cá trắm cỏ",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 2,6 ký",
+          "ky": "2,6",
+          "loi": "Kéo mỏi cả tay luôn."
+        },
+        {
+          "rank": "kha",
+          "ca": "cá trắm cỏ",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 3,2 ký",
+          "ky": "3,2",
+          "loi": "Kéo mỏi cả tay luôn."
+        },
+        {
+          "rank": "kha",
+          "ca": "con lươn",
+          "emoji": "🐍",
+          "image": "",
+          "nang": ", nặng 0,5 ký",
+          "ky": "0,5",
+          "loi": "Trơn tuột, may mà giữ được."
+        },
+        {
+          "rank": "kha",
+          "ca": "con lươn",
+          "emoji": "🐍",
+          "image": "",
+          "nang": ", nặng 0,6 ký",
+          "ky": "0,6",
+          "loi": "Trơn tuột, may mà giữ được."
+        },
+        {
+          "rank": "hiem",
+          "ca": "cá chép đỏ",
+          "emoji": "🐠",
+          "image": "",
+          "nang": ", nặng 2,4 ký",
+          "ky": "2,4",
+          "loi": "Chép đỏ mang may mắn tới nhà."
+        },
+        {
+          "rank": "hiem",
+          "ca": "cá chép đỏ",
+          "emoji": "🐠",
+          "image": "",
+          "nang": ", nặng 2,8 ký",
+          "ky": "2,8",
+          "loi": "Chép đỏ mang may mắn tới nhà."
+        },
+        {
+          "rank": "hiem",
+          "ca": "cá koi gấm",
+          "emoji": "🐠",
+          "image": "",
+          "nang": ", nặng 2,9 ký",
+          "ky": "2,9",
+          "loi": "Đẹp quá, ngắm xong thả lại ao nhé."
+        },
+        {
+          "rank": "hiem",
+          "ca": "cá chình",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 2,1 ký",
+          "ky": "2,1",
+          "loi": "Hiếm lắm mới gặp một lần."
+        },
+        {
+          "rank": "hiem",
+          "ca": "cá chình",
+          "emoji": "🐟",
+          "image": "",
+          "nang": ", nặng 2,3 ký",
+          "ky": "2,3",
+          "loi": "Hiếm lắm mới gặp một lần."
+        },
+        {
+          "rank": "huyenthoai",
+          "ca": "cá chép vàng",
+          "emoji": "✨",
+          "image": "",
+          "nang": ", nặng 5,0 ký",
+          "ky": "5,0",
+          "loi": "Cá chép vượt vũ môn! Chúc vạn sự hanh thông."
+        }
+      ]
+    }
+  },
+  "characters": [],
+  "animations": {
+    "giat": {
+      "frames": [
+        "idle",
+        "idle@0.86",
+        "cheer",
+        "stand",
+        "idle"
+      ],
+      "ms": 1100
+    },
+    "quang": {
+      "frames": [
+        "stand",
+        "cheer",
+        "stand"
+      ],
+      "ms": 900
+    },
+    "nod": {
+      "frames": [
+        "idle",
+        "idle@0.9",
+        "idle"
+      ],
+      "ms": 800
+    }
+  },
+  "npcs": [],
+  "titles": [
+    {
+      "minCoins": 0,
+      "label": "Người mới"
+    },
+    {
+      "minCoins": 50,
+      "label": "Cần thủ"
+    },
+    {
+      "minCoins": 300,
+      "label": "Lão ngư",
+      "aura": 0.4
+    },
+    {
+      "minCoins": 1000,
+      "label": "Vua câu",
+      "aura": 0.8
+    }
+  ],
+  "goals": [
+    {
+      "id": "likes",
+      "metric": "likes",
+      "label": "Tim cho ao",
+      "every": 1000
+    }
+  ],
+  "voice": {
+    "enabled": true,
+    "voice": "vi-VN-HoaiMyNeural",
+    "giftMinCoins": 1,
+    "gift": [
+      "Cảm ơn {ten} đã {hanh_dong}{lan} cho ao nhà mình.",
+      "Cảm ơn {ten} nha, {hanh_dong}{lan} rồi đó."
+    ],
+    "bigGift": [
+      "Ôi, cảm ơn {ten}! Cá chép vàng hoá rồng rồi. Chúc {ten} vạn sự hanh thông."
+    ],
+    "join": [
+      "Chào {ten} ra bờ ao.",
+      "Chào {ten}, gõ câu để thả cần nhé.",
+      "{ten} vừa tới, ngồi xuống câu cùng mọi người nào."
+    ],
+    "chat": [
+      "{ten} nhắn: {chat}."
+    ],
+    "draw": [
+      "{ten} câu được {ca}{nang}. {loi}"
+    ],
+    "follow": [
+      "Cảm ơn {ten} đã theo dõi kênh."
+    ],
+    "title": [
+      "Chúc mừng {ten} lên {danh_hieu}."
+    ],
+    "goal": [
+      "Cả bờ ao đã thả đủ {gia_tri} tim. Đàn cá chép vàng bơi ngang ao rồi kìa."
+    ],
+    "cooldown": {
+      "join": 15000,
+      "chat": 10000
+    },
+    "delay": {
+      "draw": 1600
+    },
+    "fallbackWords": []
+  },
+  "periodic": {
+    "everyMinutes": 5,
+    "quietSeconds": 20,
+    "title": "BÊN BỜ AO",
+    "items": [
+      "Gõ «câu» để thả cần. Mỗi người thả lại được sau 45 giây.",
+      "Cá hiếm màu tím, cá huyền thoại màu vàng. Ai sẽ câu được cá chép vàng hôm nay?",
+      "Ngồi xuống, thở chậm, nghe tiếng nước. Chúc mọi người một tối thư thả."
+    ]
+  },
+  "prompts": {
+    "everySeconds": 90,
+    "quietSeconds": 25,
+    "items": [
+      "Gõ «câu» để thả cần nào! 🎣",
+      "Thả tim cho đom đóm bay khắp ao nhé ✨"
+    ]
+  },
+  "hud": {
+    "title": {
+      "text": "AO LÀNG",
+      "sub": "Câu cá thư giãn"
+    },
+    "text": {
+      "call": "Gõ **CÂU** để thả cần",
+      "board": "CẦN THỦ HÔM NAY",
+      "gifts": "TẶNG QUÀ",
+      "coin": "xu",
+      "empty": "Còn trống",
+      "guest": "Khách",
+      "thanks": "vừa {skill} · 🎁 {gift}",
+      "via": "nhờ {skill}",
+      "unmute": "🔔 Chạm để bật tiếng nước",
+      "rank_thuong": "THƯỜNG",
+      "rank_kha": "KHÁ",
+      "rank_hiem": "HIẾM",
+      "rank_huyenthoai": "HUYỀN THOẠI"
+    }
+  },
+  "colors": {
+    "accent": "#ffd27a",
+    "border": "rgba(255,214,140,.7)",
+    "glow": "rgba(255,200,110,.75)",
+    "placeholderRobe": "#7a8fa8"
+  },
+  "sounds": {
+    "thinh": {
+      "cooldown": 1500
+    },
+    "quang": {
+      "cooldown": 2000
+    },
+    "ca": {
+      "cooldown": 1200
+    },
+    "lon": {
+      "cooldown": 8000,
+      "duck": 0.4,
+      "priority": true
+    },
+    "like": false
+  },
+  "text": {},
+  "reactions": {
+    "like": [
+      {
+        "fx": "emit",
+        "preset": "firefly",
+        "at": "head",
+        "count": "likes"
+      }
+    ],
+    "chat": [
+      {
+        "play": "nod"
+      }
+    ],
+    "title": [
+      {
+        "aura": 1
+      },
+      {
+        "fx": "emit",
+        "preset": "star",
+        "at": "head",
+        "count": 16
+      },
+      {
+        "toast": "🎣 {ten} lên danh hiệu mới!"
+      }
+    ],
+    "goal": [
+      {
+        "js": "danCa"
+      },
+      {
+        "fx": "emit",
+        "preset": "firefly",
+        "at": "mat-ao",
+        "count": 60
+      }
+    ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Village pond fishing",
+      "description": "A relaxing village pond at sunset: type \"fish\" to cast, send gifts for bait and rare fish.",
+      "actions": {
+        "thinh": {
+          "label": "Scatter bait",
+          "description": "Bait falls into the pond, ripples spread"
+        },
+        "moi": {
+          "label": "Sweet bait",
+          "description": "Walk to the bamboo bridge and reel in a rare fish"
+        },
+        "rong": {
+          "label": "Carp becomes dragon",
+          "description": "Camera on the bridge, a golden carp leaps out, everyone claps"
+        },
+        "cau": {
+          "label": "Cast",
+          "description": "Chat command: hook a fish"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Newcomer"
+        },
+        {
+          "minCoins": 50,
+          "label": "Angler"
+        },
+        {
+          "minCoins": 300,
+          "label": "Old fisher",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "Fishing king",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Hearts for the pond",
+          "every": 1000
+        }
+      ],
+      "draws": {
+        "ca": {
+          "perDay": false,
+          "items": [
+            {
+              "rank": "thuong",
+              "ca": "climbing perch",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.3 kg",
+              "ky": "0.3",
+              "loi": "Small but tasty, dinner is sorted."
+            },
+            {
+              "rank": "thuong",
+              "ca": "climbing perch",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.4 kg",
+              "ky": "0.4",
+              "loi": "Small but tasty, dinner is sorted."
+            },
+            {
+              "rank": "thuong",
+              "ca": "climbing perch",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.4 kg",
+              "ky": "0.4",
+              "loi": "Small but tasty, dinner is sorted."
+            },
+            {
+              "rank": "thuong",
+              "ca": "climbing perch",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.5 kg",
+              "ky": "0.5",
+              "loi": "Small but tasty, dinner is sorted."
+            },
+            {
+              "rank": "thuong",
+              "ca": "crucian carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.3 kg",
+              "ky": "0.3",
+              "loi": "Perfect for a sour fish soup."
+            },
+            {
+              "rank": "thuong",
+              "ca": "crucian carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.4 kg",
+              "ky": "0.4",
+              "loi": "Perfect for a sour fish soup."
+            },
+            {
+              "rank": "thuong",
+              "ca": "crucian carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.5 kg",
+              "ky": "0.5",
+              "loi": "Perfect for a sour fish soup."
+            },
+            {
+              "rank": "thuong",
+              "ca": "tilapia",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.6 kg",
+              "ky": "0.6",
+              "loi": "A lucky first catch, keep going."
+            },
+            {
+              "rank": "thuong",
+              "ca": "tilapia",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.7 kg",
+              "ky": "0.7",
+              "loi": "A lucky first catch, keep going."
+            },
+            {
+              "rank": "thuong",
+              "ca": "tilapia",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.8 kg",
+              "ky": "0.8",
+              "loi": "A lucky first catch, keep going."
+            },
+            {
+              "rank": "thuong",
+              "ca": "tilapia",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.9 kg",
+              "ky": "0.9",
+              "loi": "A lucky first catch, keep going."
+            },
+            {
+              "rank": "thuong",
+              "ca": "walking catfish",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.7 kg",
+              "ky": "0.7",
+              "loi": "Long whiskers, what a fighter."
+            },
+            {
+              "rank": "thuong",
+              "ca": "walking catfish",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 0.9 kg",
+              "ky": "0.9",
+              "loi": "Long whiskers, what a fighter."
+            },
+            {
+              "rank": "thuong",
+              "ca": "walking catfish",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 1.1 kg",
+              "ky": "1.1",
+              "loi": "Long whiskers, what a fighter."
+            },
+            {
+              "rank": "thuong",
+              "ca": "silver carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 1.0 kg",
+              "ky": "1.0",
+              "loi": "That one is heavy."
+            },
+            {
+              "rank": "thuong",
+              "ca": "silver carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 1.2 kg",
+              "ky": "1.2",
+              "loi": "That one is heavy."
+            },
+            {
+              "rank": "thuong",
+              "ca": "silver carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 1.4 kg",
+              "ky": "1.4",
+              "loi": "That one is heavy."
+            },
+            {
+              "rank": "thuong",
+              "ca": "freshwater prawn",
+              "emoji": "🦐",
+              "image": "",
+              "nang": ", 0.1 kg",
+              "ky": "0.1",
+              "loi": "Tiny, but still a gift from the pond."
+            },
+            {
+              "rank": "thuong",
+              "ca": "freshwater prawn",
+              "emoji": "🦐",
+              "image": "",
+              "nang": ", 0.1 kg",
+              "ky": "0.1",
+              "loi": "Tiny, but still a gift from the pond."
+            },
+            {
+              "rank": "thuong",
+              "ca": "old plastic sandal",
+              "emoji": "👡",
+              "image": "",
+              "nang": "",
+              "ky": "",
+              "loi": "The pond has a funny gift today, try again!"
+            },
+            {
+              "rank": "thuong",
+              "ca": "old plastic sandal",
+              "emoji": "👡",
+              "image": "",
+              "nang": "",
+              "ky": "",
+              "loi": "The pond has a funny gift today, try again!"
+            },
+            {
+              "rank": "thuong",
+              "ca": "old plastic sandal",
+              "emoji": "👡",
+              "image": "",
+              "nang": "",
+              "ky": "",
+              "loi": "The pond has a funny gift today, try again!"
+            },
+            {
+              "rank": "kha",
+              "ca": "common carp",
+              "emoji": "🐠",
+              "image": "",
+              "nang": ", 1.6 kg",
+              "ky": "1.6",
+              "loi": "A big carp, a good meal for the family."
+            },
+            {
+              "rank": "kha",
+              "ca": "common carp",
+              "emoji": "🐠",
+              "image": "",
+              "nang": ", 1.8 kg",
+              "ky": "1.8",
+              "loi": "A big carp, a good meal for the family."
+            },
+            {
+              "rank": "kha",
+              "ca": "common carp",
+              "emoji": "🐠",
+              "image": "",
+              "nang": ", 2.0 kg",
+              "ky": "2.0",
+              "loi": "A big carp, a good meal for the family."
+            },
+            {
+              "rank": "kha",
+              "ca": "snakehead",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 1.3 kg",
+              "ky": "1.3",
+              "loi": "Grilled snakehead, the whole village can smell it."
+            },
+            {
+              "rank": "kha",
+              "ca": "snakehead",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 1.5 kg",
+              "ky": "1.5",
+              "loi": "Grilled snakehead, the whole village can smell it."
+            },
+            {
+              "rank": "kha",
+              "ca": "snakehead",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 1.7 kg",
+              "ky": "1.7",
+              "loi": "Grilled snakehead, the whole village can smell it."
+            },
+            {
+              "rank": "kha",
+              "ca": "grass carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 2.6 kg",
+              "ky": "2.6",
+              "loi": "Arms are tired after that one."
+            },
+            {
+              "rank": "kha",
+              "ca": "grass carp",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 3.2 kg",
+              "ky": "3.2",
+              "loi": "Arms are tired after that one."
+            },
+            {
+              "rank": "kha",
+              "ca": "swamp eel",
+              "emoji": "🐍",
+              "image": "",
+              "nang": ", 0.5 kg",
+              "ky": "0.5",
+              "loi": "So slippery, good thing you held on."
+            },
+            {
+              "rank": "kha",
+              "ca": "swamp eel",
+              "emoji": "🐍",
+              "image": "",
+              "nang": ", 0.6 kg",
+              "ky": "0.6",
+              "loi": "So slippery, good thing you held on."
+            },
+            {
+              "rank": "hiem",
+              "ca": "red carp",
+              "emoji": "🐠",
+              "image": "",
+              "nang": ", 2.4 kg",
+              "ky": "2.4",
+              "loi": "A red carp brings luck home."
+            },
+            {
+              "rank": "hiem",
+              "ca": "red carp",
+              "emoji": "🐠",
+              "image": "",
+              "nang": ", 2.8 kg",
+              "ky": "2.8",
+              "loi": "A red carp brings luck home."
+            },
+            {
+              "rank": "hiem",
+              "ca": "brocade koi",
+              "emoji": "🐠",
+              "image": "",
+              "nang": ", 2.9 kg",
+              "ky": "2.9",
+              "loi": "So pretty, admire it and let it go."
+            },
+            {
+              "rank": "hiem",
+              "ca": "freshwater eel",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 2.1 kg",
+              "ky": "2.1",
+              "loi": "A rare sight indeed."
+            },
+            {
+              "rank": "hiem",
+              "ca": "freshwater eel",
+              "emoji": "🐟",
+              "image": "",
+              "nang": ", 2.3 kg",
+              "ky": "2.3",
+              "loi": "A rare sight indeed."
+            },
+            {
+              "rank": "huyenthoai",
+              "ca": "golden carp",
+              "emoji": "✨",
+              "image": "",
+              "nang": ", 5.0 kg",
+              "ky": "5.0",
+              "loi": "The golden carp leaps the dragon gate! Wishing you every success."
+            }
+          ]
+        }
+      },
+      "voice": {
+        "voice": "en-US-AriaNeural",
+        "gift": [
+          "Thanks {ten} for the {hanh_dong}{lan}.",
+          "Thank you {ten}, {hanh_dong}{lan}."
+        ],
+        "bigGift": [
+          "Wow, thank you {ten}! The golden carp became a dragon. Wishing you every success."
+        ],
+        "join": [
+          "Welcome {ten} to the pond.",
+          "Hi {ten}, type fish to cast your line.",
+          "{ten} just arrived, sit down and fish with us."
+        ],
+        "chat": [
+          "{ten} says: {chat}."
+        ],
+        "draw": [
+          "{ten} caught a {ca}{nang}. {loi}"
+        ],
+        "follow": [
+          "Thanks {ten} for following."
+        ],
+        "title": [
+          "Congrats {ten}, you are now an {danh_hieu}."
+        ],
+        "goal": [
+          "The pond got {gia_tri} hearts. A school of golden carp swims by!"
+        ]
+      },
+      "periodic": {
+        "title": "BY THE POND",
+        "items": [
+          "Type «fish» to cast. You can cast again after 45 seconds.",
+          "Rare fish are purple, legendary ones are gold. Who will catch the golden carp today?",
+          "Sit back, breathe slowly, listen to the water. Have a relaxing evening."
+        ]
+      },
+      "prompts": {
+        "items": [
+          "Type «fish» to cast your line! 🎣",
+          "Send hearts and fireflies light up the pond ✨"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "VILLAGE POND",
+          "sub": "Relaxing fishing"
+        },
+        "text": {
+          "call": "Type **FISH** to cast",
+          "board": "TODAY'S ANGLERS",
+          "gifts": "GIFTS",
+          "coin": "coins",
+          "empty": "Empty",
+          "guest": "Guest",
+          "thanks": "sent {skill} · 🎁 {gift}",
+          "via": "with {skill}",
+          "unmute": "🔔 Tap to hear the water",
+          "rank_thuong": "COMMON",
+          "rank_kha": "GOOD",
+          "rank_hiem": "RARE",
+          "rank_huyenthoai": "LEGENDARY"
+        }
+      }
+    },
+    "zh": {
+      "name": "乡村池塘钓鱼",
+      "description": "黄昏的乡村池塘：发「钓鱼」甩竿，送礼物换鱼饵和稀有鱼。",
+      "actions": {
+        "thinh": {
+          "label": "撒鱼饵",
+          "description": "鱼饵落入池塘，水波荡漾"
+        },
+        "moi": {
+          "label": "香饵",
+          "description": "走到竹桥上甩竿，钓起一条稀有鱼"
+        },
+        "rong": {
+          "label": "鲤鱼化龙",
+          "description": "镜头对准竹桥，金鲤鱼跃出水面，全场鼓掌"
+        },
+        "cau": {
+          "label": "甩竿",
+          "description": "聊天指令：钓一条鱼"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "新人"
+        },
+        {
+          "minCoins": 50,
+          "label": "钓手"
+        },
+        {
+          "minCoins": 300,
+          "label": "老渔夫",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "钓鱼王",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "池塘点赞",
+          "every": 1000
+        }
+      ],
+      "draws": {
+        "ca": {
+          "perDay": false,
+          "items": [
+            {
+              "rank": "thuong",
+              "ca": "攀鲈",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.3公斤",
+              "ky": "0.3",
+              "loi": "个头小但肉结实，今晚有菜了。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "攀鲈",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.4公斤",
+              "ky": "0.4",
+              "loi": "个头小但肉结实，今晚有菜了。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "攀鲈",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.4公斤",
+              "ky": "0.4",
+              "loi": "个头小但肉结实，今晚有菜了。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "攀鲈",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.5公斤",
+              "ky": "0.5",
+              "loi": "个头小但肉结实，今晚有菜了。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "鲫鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.3公斤",
+              "ky": "0.3",
+              "loi": "煮酸汤正合适。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "鲫鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.4公斤",
+              "ky": "0.4",
+              "loi": "煮酸汤正合适。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "鲫鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.5公斤",
+              "ky": "0.5",
+              "loi": "煮酸汤正合适。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "罗非鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.6公斤",
+              "ky": "0.6",
+              "loi": "开门红，继续钓。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "罗非鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.7公斤",
+              "ky": "0.7",
+              "loi": "开门红，继续钓。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "罗非鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.8公斤",
+              "ky": "0.8",
+              "loi": "开门红，继续钓。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "罗非鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.9公斤",
+              "ky": "0.9",
+              "loi": "开门红，继续钓。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "胡子鲶",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.7公斤",
+              "ky": "0.7",
+              "loi": "胡子长长，挣扎得好厉害。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "胡子鲶",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重0.9公斤",
+              "ky": "0.9",
+              "loi": "胡子长长，挣扎得好厉害。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "胡子鲶",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重1.1公斤",
+              "ky": "1.1",
+              "loi": "胡子长长，挣扎得好厉害。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "鲢鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重1.0公斤",
+              "ky": "1.0",
+              "loi": "这条够沉的。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "鲢鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重1.2公斤",
+              "ky": "1.2",
+              "loi": "这条够沉的。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "鲢鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重1.4公斤",
+              "ky": "1.4",
+              "loi": "这条够沉的。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "大虾",
+              "emoji": "🦐",
+              "image": "",
+              "nang": "，重0.1公斤",
+              "ky": "0.1",
+              "loi": "个头小，也是池塘的礼物。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "大虾",
+              "emoji": "🦐",
+              "image": "",
+              "nang": "，重0.1公斤",
+              "ky": "0.1",
+              "loi": "个头小，也是池塘的礼物。"
+            },
+            {
+              "rank": "thuong",
+              "ca": "旧拖鞋",
+              "emoji": "👡",
+              "image": "",
+              "nang": "",
+              "ky": "",
+              "loi": "池塘今天送了个怪礼物，再试一次！"
+            },
+            {
+              "rank": "thuong",
+              "ca": "旧拖鞋",
+              "emoji": "👡",
+              "image": "",
+              "nang": "",
+              "ky": "",
+              "loi": "池塘今天送了个怪礼物，再试一次！"
+            },
+            {
+              "rank": "thuong",
+              "ca": "旧拖鞋",
+              "emoji": "👡",
+              "image": "",
+              "nang": "",
+              "ky": "",
+              "loi": "池塘今天送了个怪礼物，再试一次！"
+            },
+            {
+              "rank": "kha",
+              "ca": "鲤鱼",
+              "emoji": "🐠",
+              "image": "",
+              "nang": "，重1.6公斤",
+              "ky": "1.6",
+              "loi": "大鲤鱼，全家有口福了。"
+            },
+            {
+              "rank": "kha",
+              "ca": "鲤鱼",
+              "emoji": "🐠",
+              "image": "",
+              "nang": "，重1.8公斤",
+              "ky": "1.8",
+              "loi": "大鲤鱼，全家有口福了。"
+            },
+            {
+              "rank": "kha",
+              "ca": "鲤鱼",
+              "emoji": "🐠",
+              "image": "",
+              "nang": "，重2.0公斤",
+              "ky": "2.0",
+              "loi": "大鲤鱼，全家有口福了。"
+            },
+            {
+              "rank": "kha",
+              "ca": "黑鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重1.3公斤",
+              "ky": "1.3",
+              "loi": "烤黑鱼，香飘全村。"
+            },
+            {
+              "rank": "kha",
+              "ca": "黑鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重1.5公斤",
+              "ky": "1.5",
+              "loi": "烤黑鱼，香飘全村。"
+            },
+            {
+              "rank": "kha",
+              "ca": "黑鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重1.7公斤",
+              "ky": "1.7",
+              "loi": "烤黑鱼，香飘全村。"
+            },
+            {
+              "rank": "kha",
+              "ca": "草鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重2.6公斤",
+              "ky": "2.6",
+              "loi": "拉得手都酸了。"
+            },
+            {
+              "rank": "kha",
+              "ca": "草鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重3.2公斤",
+              "ky": "3.2",
+              "loi": "拉得手都酸了。"
+            },
+            {
+              "rank": "kha",
+              "ca": "黄鳝",
+              "emoji": "🐍",
+              "image": "",
+              "nang": "，重0.5公斤",
+              "ky": "0.5",
+              "loi": "滑溜溜的，幸好抓住了。"
+            },
+            {
+              "rank": "kha",
+              "ca": "黄鳝",
+              "emoji": "🐍",
+              "image": "",
+              "nang": "，重0.6公斤",
+              "ky": "0.6",
+              "loi": "滑溜溜的，幸好抓住了。"
+            },
+            {
+              "rank": "hiem",
+              "ca": "红鲤鱼",
+              "emoji": "🐠",
+              "image": "",
+              "nang": "，重2.4公斤",
+              "ky": "2.4",
+              "loi": "红鲤鱼带来好运。"
+            },
+            {
+              "rank": "hiem",
+              "ca": "红鲤鱼",
+              "emoji": "🐠",
+              "image": "",
+              "nang": "，重2.8公斤",
+              "ky": "2.8",
+              "loi": "红鲤鱼带来好运。"
+            },
+            {
+              "rank": "hiem",
+              "ca": "锦鲤",
+              "emoji": "🐠",
+              "image": "",
+              "nang": "，重2.9公斤",
+              "ky": "2.9",
+              "loi": "真漂亮，欣赏完放回池塘吧。"
+            },
+            {
+              "rank": "hiem",
+              "ca": "鳗鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重2.1公斤",
+              "ky": "2.1",
+              "loi": "难得一见。"
+            },
+            {
+              "rank": "hiem",
+              "ca": "鳗鱼",
+              "emoji": "🐟",
+              "image": "",
+              "nang": "，重2.3公斤",
+              "ky": "2.3",
+              "loi": "难得一见。"
+            },
+            {
+              "rank": "huyenthoai",
+              "ca": "金鲤鱼",
+              "emoji": "✨",
+              "image": "",
+              "nang": "，重5.0公斤",
+              "ky": "5.0",
+              "loi": "金鲤跃龙门！祝你万事顺利。"
+            }
+          ]
+        }
+      },
+      "voice": {
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "gift": [
+          "谢谢{ten}的{hanh_dong}{lan}。",
+          "感谢{ten}，{hanh_dong}{lan}。"
+        ],
+        "bigGift": [
+          "哇，谢谢{ten}！金鲤鱼化成龙了，祝你万事顺利。"
+        ],
+        "join": [
+          "欢迎{ten}来到池塘。",
+          "你好{ten}，发钓鱼就可以甩竿啦。",
+          "{ten}来了，坐下一起钓鱼吧。"
+        ],
+        "chat": [
+          "{ten}说：{chat}。"
+        ],
+        "draw": [
+          "{ten}钓到了{ca}{nang}。{loi}"
+        ],
+        "follow": [
+          "谢谢{ten}的关注。"
+        ],
+        "title": [
+          "恭喜{ten}成为{danh_hieu}。"
+        ],
+        "goal": [
+          "池塘点赞达到{gia_tri}个，一群金鲤鱼游过来了！"
+        ]
+      },
+      "periodic": {
+        "title": "池塘边",
+        "items": [
+          "发「钓鱼」甩竿，每人45秒后可以再钓。",
+          "紫色是稀有鱼，金色是传说鱼。今天谁能钓到金鲤鱼？",
+          "坐下来，慢慢呼吸，听听水声。祝大家晚上轻松愉快。"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "发「钓鱼」甩竿吧！🎣",
+          "点赞让萤火虫照亮池塘 ✨"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "乡村池塘",
+          "sub": "轻松钓鱼"
+        },
+        "text": {
+          "call": "发 **钓鱼** 甩竿",
+          "board": "今日钓手",
+          "gifts": "送礼物",
+          "coin": "币",
+          "empty": "空位",
+          "guest": "游客",
+          "thanks": "送了{skill} · 🎁 {gift}",
+          "via": "靠{skill}",
+          "unmute": "🔔 点一下听水声",
+          "rank_thuong": "普通",
+          "rank_kha": "不错",
+          "rank_hiem": "稀有",
+          "rank_huyenthoai": "传说"
+        }
+      }
+    }
+  }
+}

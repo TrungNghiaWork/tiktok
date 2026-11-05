@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <!-- Nền tạm (vẽ tay): đấu trường đá lúc chạng vạng. Boss đứng trên bục giữa (tâm y ~930, chân y ~1080), người xem trên sân đá từ y ~1220. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#160c2e"/><stop offset=".55" stop-color="#3e1f5c"/><stop offset="1" stop-color="#a1426a"/>
+    </linearGradient>
+    <radialGradient id="moon" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe9c2"/><stop offset=".4" stop-color="#ffb87a" stop-opacity=".5"/><stop offset="1" stop-color="#ff8a5c" stop-opacity="0"/></radialGradient>
+    <linearGradient id="stage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b5873"/><stop offset="1" stop-color="#3a2d44"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#57485e"/><stop offset="1" stop-color="#231a2b"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff7a3c" stop-opacity=".55"/><stop offset="1" stop-color="#ff7a3c" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1080" height="1000" fill="url(#sky)"/>
+  <circle cx="540" cy="780" r="440" fill="url(#moon)"/>
+  <circle cx="540" cy="780" r="160" fill="#ffe2b0" opacity=".85"/>
+  <!-- núi xa -->
+  <path d="M0 960 L0 820 L140 700 L260 800 L360 720 L460 820 L540 780 L620 820 L720 710 L840 800 L940 690 L1080 810 L1080 960 Z" fill="#2a1840" opacity=".9"/>
+  <!-- tường đấu trường -->
+  <rect y="920" width="1080" height="120" fill="#2e2238"/>
+  <g fill="#3d2f49"><rect x="0" y="890" width="80" height="150"/><rect x="1000" y="890" width="80" height="150"/>
+    <rect x="200" y="906" width="60" height="134"/><rect x="820" y="906" width="60" height="134"/></g>
+  <!-- đuốc hai bên -->
+  <circle cx="170" cy="1030" r="120" fill="url(#glow)"/><circle cx="910" cy="1030" r="120" fill="url(#glow)"/>
+  <g fill="#5a3b1e"><rect x="164" y="1030" width="12" height="70"/><rect x="904" y="1030" width="12" height="70"/></g>
+  <g fill="#ffb347"><path d="M170 990 q-18 26 0 42 q18-16 0-42Z"/><path d="M910 990 q-18 26 0 42 q18-16 0-42Z"/></g>
+  <!-- bục đá của boss -->
+  <ellipse cx="540" cy="1080" rx="360" ry="70" fill="#1c1424" opacity=".6"/>
+  <path d="M220 1060 Q540 1000 860 1060 L860 1110 Q540 1170 220 1110 Z" fill="url(#stage)"/>
+  <path d="M220 1060 Q540 1000 860 1060" fill="none" stroke="#9b86a3" stroke-width="4" opacity=".6"/>
+  <!-- sân đá cho người xem -->
+  <rect y="1120" width="1080" height="800" fill="url(#floor)"/>
+  <g stroke="#ffffff" stroke-opacity=".06" stroke-width="3">
+    <path d="M0 1200 H1080 M0 1310 H1080 M0 1440 H1080 M0 1600 H1080 M0 1760 H1080"/>
+    <path d="M540 1120 L540 1920 M380 1120 L260 1920 M700 1120 L820 1920 M220 1120 L-20 1920 M860 1120 L1100 1920"/>
+  </g>
+  <rect y="1760" width="1080" height="160" fill="#120c18" opacity=".5"/>
+</svg>

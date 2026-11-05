@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <!-- Nền tạm (vẽ tay bằng SVG) để thử luồng. Có ảnh thật thì lưu assets/background.jpg và đổi "background" trong scene.json. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b2350"/>
+      <stop offset=".45" stop-color="#9a4a78"/>
+      <stop offset=".78" stop-color="#ee8a5c"/>
+      <stop offset="1" stop-color="#ffcf8a"/>
+    </linearGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff4cf"/>
+      <stop offset=".35" stop-color="#ffd68a"/>
+      <stop offset="1" stop-color="#ffb070" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2a56c"/>
+      <stop offset=".25" stop-color="#b16f86"/>
+      <stop offset=".65" stop-color="#4f4f80"/>
+      <stop offset="1" stop-color="#26355a"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5d7a3c"/>
+      <stop offset=".3" stop-color="#46632f"/>
+      <stop offset="1" stop-color="#1f3519"/>
+    </linearGradient>
+    <linearGradient id="plank" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a6236"/>
+      <stop offset="1" stop-color="#c79a5e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- trời, mặt trời -->
+  <rect width="1080" height="640" fill="url(#sky)"/>
+  <circle cx="660" cy="540" r="230" fill="url(#sun)" opacity=".75"/>
+  <circle cx="660" cy="545" r="62" fill="#fff0c4"/>
+
+  <!-- bờ xa: lũy tre, mái đình -->
+  <path d="M0 640 V560 q30-50 60-10 q20-70 50-20 q25-40 55 0 q30-60 60-5 q20-30 45 5 L320 575 V640 Z" fill="#3b2a48"/>
+  <path d="M250 600 L300 560 h120 l50 40 Z" fill="#2c1f38"/>
+  <path d="M232 604 q40-6 64-46 h128 q24 40 64 46 Z" fill="#45304f"/>
+  <rect x="290" y="600" width="140" height="40" fill="#2c1f38"/>
+  <path d="M480 640 V600 q40-30 80-6 q50-40 100-4 q40-24 70 0 q60-50 120 0 q50-36 100 0 q40-26 50 0 V640 Z" fill="#3b2a48"/>
+  <path d="M860 640 V520 q12-40 24 0 V640 Z M920 640 V500 q14-46 28 0 V640 Z M990 640 V530 q10-36 20 0 V640Z" fill="#33243f"/>
+
+  <!-- mặt ao -->
+  <rect y="630" width="1080" height="600" fill="url(#water)"/>
+  <g fill="#ffe3a8" opacity=".55">
+    <ellipse cx="660" cy="660" rx="90" ry="6"/>
+    <ellipse cx="655" cy="690" rx="70" ry="5"/>
+    <ellipse cx="668" cy="725" rx="54" ry="4"/>
+    <ellipse cx="650" cy="765" rx="40" ry="4"/>
+    <ellipse cx="662" cy="810" rx="28" ry="3"/>
+  </g>
+  <g fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="3">
+    <path d="M120 760 q60-10 120 0 M820 720 q50-8 100 0 M200 900 q80-12 160 0 M760 960 q70-10 140 0 M90 1080 q90-14 180 0 M820 1110 q80-12 160 0"/>
+  </g>
+  <!-- lá sen hai bên -->
+  <g fill="#2f5a3c">
+    <ellipse cx="150" cy="980" rx="70" ry="22"/><ellipse cx="250" cy="1040" rx="56" ry="18"/>
+    <ellipse cx="110" cy="1120" rx="90" ry="28"/><ellipse cx="930" cy="1010" rx="80" ry="24"/>
+    <ellipse cx="990" cy="1110" rx="70" ry="22"/><ellipse cx="830" cy="1080" rx="50" ry="16"/>
+  </g>
+  <g fill="#f3a6c0"><circle cx="160" cy="968" r="10"/><circle cx="940" cy="996" r="9"/><circle cx="116" cy="1104" r="11"/></g>
+
+  <!-- cầu tre nhô ra ao -->
+  <path d="M498 860 L582 860 L620 1236 L460 1236 Z" fill="url(#plank)"/>
+  <g stroke="#6b4826" stroke-width="3" opacity=".7">
+    <path d="M494 900 h92 M488 950 h104 M482 1000 h116 M476 1055 h128 M470 1110 h140 M465 1170 h150"/>
+  </g>
+  <g fill="#5a3b1e">
+    <rect x="494" y="860" width="8" height="40"/><rect x="578" y="860" width="8" height="40"/>
+    <rect x="474" y="1040" width="10" height="60"/><rect x="596" y="1040" width="10" height="60"/>
+  </g>
+
+  <!-- bờ cỏ gần -->
+  <path d="M0 1215 q140-22 280-6 q130 14 180 10 L460 1236 L620 1236 q70-14 200-20 q140-8 260 6 V1920 H0 Z" fill="url(#grass)"/>
+  <g stroke="#7c9a4c" stroke-width="4" stroke-linecap="round" opacity=".8">
+    <path d="M60 1222 l-8-40 M76 1224 l4-46 M92 1222 l14-34 M980 1226 l-10-42 M998 1228 l2-48 M1014 1226 l12-36 M380 1232 l-6-30 M700 1234 l8-30"/>
+  </g>
+  <rect y="1700" width="1080" height="220" fill="#162812" opacity=".5"/>
+</svg>

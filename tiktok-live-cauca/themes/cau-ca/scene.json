@@ -1,0 +1,84 @@
+{
+  "background": "assets/background.svg",
+  "horizonY": 630,
+  "person": {
+    "refY": 1260,
+    "refHeight": 92,
+    "exponent": 0.5,
+    "idleStyle": "kneel"
+  },
+  "floor": {
+    "top": 1270,
+    "bottom": 1690,
+    "left": 110,
+    "right": 970
+  },
+  "aisle": {
+    "x": 540,
+    "half": [
+      [
+        1240,
+        70
+      ],
+      [
+        1700,
+        96
+      ]
+    ],
+    "lane": 22
+  },
+  "spacing": {
+    "col": 0.95,
+    "row": 0.62
+  },
+  "obstacles": [],
+  "seats": [
+    [
+      330,
+      1250
+    ],
+    [
+      750,
+      1250
+    ],
+    [
+      220,
+      1258
+    ],
+    [
+      860,
+      1258
+    ]
+  ],
+  "points": {
+    "cau-tre": [
+      540,
+      1030
+    ],
+    "mat-ao": [
+      540,
+      905
+    ],
+    "focus": [
+      540,
+      960
+    ],
+    "entry": [
+      540,
+      2000
+    ]
+  },
+  "emitters": [],
+  "glows": [
+    [
+      660,
+      545,
+      90
+    ]
+  ],
+  "maxTags": 8,
+  "fill": {
+    "rows": 0
+  },
+  "fps": 30
+}

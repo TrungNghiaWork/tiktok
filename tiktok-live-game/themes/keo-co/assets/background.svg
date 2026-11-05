@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <!-- Nền tạm (vẽ tay): sân kéo co ngày hội làng. Nửa trái Team Girl (hồng), nửa phải Team Boy (xanh), vũng bùn giữa sân (dây ở y ~1000). -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fb3e8"/><stop offset="1" stop-color="#cfeeff"/></linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cbd52"/><stop offset="1" stop-color="#3f7a2c"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5fa2" stop-opacity=".35"/><stop offset="1" stop-color="#ff5fa2" stop-opacity="0"/></linearGradient>
+    <linearGradient id="blue" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#3d8bff" stop-opacity=".35"/><stop offset="1" stop-color="#3d8bff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1080" height="900" fill="url(#sky)"/>
+  <g fill="#ffffff" opacity=".85"><ellipse cx="220" cy="520" rx="110" ry="34"/><ellipse cx="300" cy="500" rx="80" ry="36"/><ellipse cx="820" cy="600" rx="120" ry="30"/><ellipse cx="760" cy="580" rx="70" ry="32"/></g>
+  <!-- hàng cây, cờ hội -->
+  <path d="M0 900 V780 q40-60 80-10 q30-70 70-20 q40-50 80 0 q40-70 80-10 q40-40 80 0 q40-60 80-10 q40-50 80 0 q40-70 80-10 q40-40 80 0 q40-60 80-10 q40-50 80 0 q30-40 70 0 V900 Z" fill="#2f6b34"/>
+  <path d="M60 760 Q540 690 1020 760" fill="none" stroke="#6b4a2a" stroke-width="3"/>
+  <g>
+    <path d="M120 752 l14 30 l14-30Z M220 738 l14 30 l14-30Z M320 726 l14 30 l14-30Z M420 718 l14 30 l14-30Z" fill="#ff5fa2"/>
+    <path d="M620 718 l14 30 l14-30Z M720 726 l14 30 l14-30Z M820 738 l14 30 l14-30Z M920 752 l14 30 l14-30Z" fill="#3d8bff"/>
+    <path d="M520 714 l14 30 l14-30Z" fill="#ffd25e"/>
+  </g>
+  <!-- sân cỏ, hai nửa màu đội -->
+  <rect y="880" width="1080" height="1040" fill="url(#field)"/>
+  <rect y="880" width="540" height="1040" fill="url(#red)"/>
+  <rect x="540" y="880" width="540" height="1040" fill="url(#blue)"/>
+  <!-- vũng bùn giữa, vạch giữa sân -->
+  <ellipse cx="540" cy="1010" rx="150" ry="46" fill="#6b4a2a"/>
+  <ellipse cx="540" cy="1004" rx="120" ry="32" fill="#7d5733"/>
+  <path d="M540 880 V1920" stroke="#ffffff" stroke-opacity=".6" stroke-width="6" stroke-dasharray="26 18"/>
+  <path d="M240 880 V1920 M840 880 V1920" stroke="#ffffff" stroke-opacity=".35" stroke-width="4"/>
+  <rect y="1760" width="1080" height="160" fill="#1d3a16" opacity=".4"/>
+</svg>

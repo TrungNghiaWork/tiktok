@@ -1,0 +1,686 @@
+{
+  "name": "Đánh boss cả phòng",
+  "description": "Cả phòng cùng đánh boss: gõ \"đánh\", thả tim, tặng quà để gây sát thương. Hạ boss thì vinh danh, boss mới mạnh hơn xuất hiện.",
+  "width": 1080,
+  "height": 1920,
+  "actions": [
+    {
+      "id": "danh",
+      "label": "Đánh",
+      "icon": "👊",
+      "description": "Lệnh chat: tung một đòn nhỏ vào boss",
+      "steps": [
+        {
+          "play": "cheer"
+        },
+        {
+          "js": "tanCong"
+        }
+      ]
+    },
+    {
+      "id": "phitieu",
+      "label": "Phi tiêu",
+      "icon": "⚡",
+      "card": "1 XU",
+      "description": "Tung chùm tia sét nhỏ vào boss",
+      "steps": [
+        {
+          "aura": 0.7
+        },
+        {
+          "play": "cheer"
+        },
+        {
+          "js": "tanCong"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "+{total}"
+        }
+      ]
+    },
+    {
+      "id": "caulua",
+      "label": "Cầu lửa",
+      "icon": "🔥",
+      "card": "10 XU",
+      "description": "Lên tuyến đầu, ném cầu lửa lớn, boss rung lên",
+      "steps": [
+        {
+          "walk": "tran"
+        },
+        {
+          "pose": "stand"
+        },
+        {
+          "play": "cheer",
+          "times": 2
+        },
+        {
+          "js": "cauLua"
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "walk": "home"
+        },
+        {
+          "pose": "idle"
+        }
+      ]
+    },
+    {
+      "id": "samset",
+      "label": "Sấm sét",
+      "icon": "⛈️",
+      "card": "100 XU",
+      "description": "Camera vào boss, cột sấm sét giáng xuống, cả phòng hô vang",
+      "steps": [
+        {
+          "camera": "boss",
+          "zoom": 1.3,
+          "duration": 3800
+        },
+        {
+          "js": "samSet"
+        },
+        {
+          "crowd": [
+            {
+              "play": "cheer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "joinMode": "all",
+    "joinKeywords": [
+      "đánh",
+      "attack",
+      "打"
+    ],
+    "bigGiftCoins": 100,
+    "giftTiers": [
+      {
+        "minCoins": 1,
+        "action": "phitieu",
+        "label": "Phi tiêu"
+      },
+      {
+        "minCoins": 10,
+        "action": "caulua",
+        "label": "Cầu lửa"
+      },
+      {
+        "minCoins": 100,
+        "action": "samset",
+        "label": "Sấm sét"
+      }
+    ],
+    "giftOverrides": [],
+    "chatCommands": [
+      {
+        "keywords": [
+          "đánh",
+          "danh",
+          "đấm",
+          "chém",
+          "tấn công",
+          "đánh đi",
+          "👊",
+          "⚔️",
+          "attack",
+          "hit",
+          "punch",
+          "fight",
+          "打",
+          "攻击",
+          "打它",
+          "冲"
+        ],
+        "match": "exact",
+        "action": "danh",
+        "label": "đánh boss",
+        "cooldownMs": 4000
+      }
+    ]
+  },
+  "bigGift": {
+    "steps": [
+      {
+        "fx": "flash",
+        "strength": 0.3
+      }
+    ]
+  },
+  "characters": [],
+  "npcs": [],
+  "animations": {
+    "cheer": {
+      "frames": [
+        "stand",
+        "cheer",
+        "stand"
+      ],
+      "ms": 700
+    },
+    "nod": {
+      "frames": [
+        "idle",
+        "cheer",
+        "idle"
+      ],
+      "ms": 700
+    }
+  },
+  "titles": [
+    {
+      "minCoins": 0,
+      "label": "Tân binh"
+    },
+    {
+      "minCoins": 50,
+      "label": "Chiến binh"
+    },
+    {
+      "minCoins": 300,
+      "label": "Dũng sĩ",
+      "aura": 0.4
+    },
+    {
+      "minCoins": 1000,
+      "label": "Huyền thoại",
+      "aura": 0.8
+    }
+  ],
+  "goals": [
+    {
+      "id": "likes",
+      "metric": "likes",
+      "label": "Tim tiếp sức",
+      "every": 1000
+    }
+  ],
+  "voice": {
+    "enabled": true,
+    "voice": "vi-VN-NamMinhNeural",
+    "giftMinCoins": 10,
+    "gift": [
+      "{ten} tung {hanh_dong}!",
+      "Cảm ơn {ten}, {hanh_dong}!"
+    ],
+    "bigGift": [
+      "Sấm sét từ {ten}! Cảm ơn {ten}!"
+    ],
+    "join": [
+      "Chào {ten}, vào đánh boss nào!"
+    ],
+    "chat": [
+      "{ten} nhắn: {chat}."
+    ],
+    "follow": [
+      "Cảm ơn {ten} đã theo dõi kênh."
+    ],
+    "title": [
+      "Chúc mừng {ten} thành {danh_hieu}."
+    ],
+    "goal": [
+      "Cả phòng đã gom {gia_tri} tim tiếp sức. Sát thương tăng gấp đôi!"
+    ],
+    "cooldown": {
+      "join": 30000,
+      "chat": 15000,
+      "gift": 3000
+    },
+    "fallbackWords": []
+  },
+  "periodic": {
+    "everyMinutes": 4,
+    "quietSeconds": 20,
+    "title": "CÁCH CHƠI",
+    "items": [
+      "Gõ «đánh» để ra đòn, thả tim để tiếp sức, tặng quà tung chiêu mạnh. Hạ boss cùng nhau!",
+      "Người gây nhiều sát thương nhất được vinh danh khi boss gục."
+    ]
+  },
+  "prompts": {
+    "everySeconds": 80,
+    "quietSeconds": 25,
+    "items": [
+      "Gõ «đánh» để ra đòn nào! 👊",
+      "Thả tim tiếp sức, đủ 1.000 tim là sát thương ×2 ✨"
+    ]
+  },
+  "hud": {
+    "title": {
+      "text": "ĐÁNH BOSS",
+      "sub": "Cả phòng cùng hạ boss"
+    },
+    "game": {
+      "damage": {
+        "chat": 15,
+        "like": 2,
+        "coin": 25
+      },
+      "boostMs": 30000,
+      "respawnMs": 7000,
+      "grow": 1.45,
+      "bosses": [
+        {
+          "name": "Ếch Bùn",
+          "hp": 600,
+          "color": "#62b45c",
+          "image": ""
+        },
+        {
+          "name": "Rùa Đá",
+          "hp": 1500,
+          "color": "#8f937c",
+          "image": ""
+        },
+        {
+          "name": "Cua Lửa",
+          "hp": 3000,
+          "color": "#e2653e",
+          "image": ""
+        },
+        {
+          "name": "Bạch Tuộc Tím",
+          "hp": 5000,
+          "color": "#9c6cd8",
+          "image": ""
+        },
+        {
+          "name": "Rồng Mây",
+          "hp": 8000,
+          "color": "#4fb2e2",
+          "image": ""
+        }
+      ],
+      "minDamage": {
+        "phitieu": 25,
+        "caulua": 400,
+        "samset": 3000
+      },
+      "sizeStart": 0.8,
+      "sizeStep": 0.125,
+      "sizeMax": 1.3
+    },
+    "text": {
+      "call": "Gõ **ĐÁNH** để ra đòn · ❤️ tiếp sức · 🎁 tung chiêu",
+      "board": "SÁT THƯƠNG HÔM NAY",
+      "empty": "Còn trống",
+      "guest": "Khách",
+      "everyone": "cả phòng",
+      "coin": "xu",
+      "used": "tung {skill} · 🎁 {gift}",
+      "appear": "⚔️ {boss} xuất hiện! · {hp} máu",
+      "defeated": "💥 ĐÃ HẠ {boss}!",
+      "lastHit": "Đòn kết liễu: {name}",
+      "next": "Boss tiếp theo to hơn: {boss} · {hp} máu",
+      "boost": "✨ TIẾP SỨC! Sát thương ×2 trong {s} giây",
+      "level": "{boss} · Cấp {n}",
+      "down": "ĐÃ GỤC!",
+      "unmute": "🔔 Chạm để bật âm thanh"
+    }
+  },
+  "colors": {
+    "accent": "#ffd25e",
+    "placeholderRobe": "#7f8db8"
+  },
+  "sounds": {
+    "hit": {
+      "cooldown": 120,
+      "vary": 0.08
+    },
+    "boom": {
+      "cooldown": 1500
+    },
+    "win": {
+      "cooldown": 5000,
+      "duck": 0.4,
+      "priority": true
+    },
+    "like": false
+  },
+  "text": {},
+  "reactions": {
+    "like": [
+      {
+        "fx": "emit",
+        "preset": "heart",
+        "at": "head",
+        "count": "likes"
+      }
+    ],
+    "chat": [],
+    "title": [
+      {
+        "aura": 1
+      },
+      {
+        "fx": "emit",
+        "preset": "star",
+        "at": "head",
+        "count": 16
+      },
+      {
+        "toast": "⭐ {ten} lên danh hiệu mới!"
+      }
+    ],
+    "goal": [
+      {
+        "js": "tiepSuc"
+      },
+      {
+        "crowd": [
+          {
+            "play": "cheer"
+          }
+        ]
+      }
+    ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Boss fight",
+      "description": "The whole room fights the boss: type \"attack\", send hearts and gifts to deal damage.",
+      "actions": {
+        "danh": {
+          "label": "Attack",
+          "description": "Chat command: a small hit on the boss"
+        },
+        "phitieu": {
+          "label": "Dart",
+          "description": "A burst of lightning darts"
+        },
+        "caulua": {
+          "label": "Fireball",
+          "description": "Step up front and throw a big fireball"
+        },
+        "samset": {
+          "label": "Thunder",
+          "description": "Camera on the boss, a thunder pillar strikes, the room cheers"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Rookie"
+        },
+        {
+          "minCoins": 50,
+          "label": "Fighter"
+        },
+        {
+          "minCoins": 300,
+          "label": "Hero",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "Legend",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Power-up hearts",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "en-US-GuyNeural",
+        "gift": [
+          "{ten} used {hanh_dong}!",
+          "Thanks {ten}, {hanh_dong}!"
+        ],
+        "bigGift": [
+          "Thunder from {ten}! Thank you {ten}!"
+        ],
+        "join": [
+          "Welcome {ten}, join the boss fight!"
+        ],
+        "chat": [
+          "{ten} says: {chat}."
+        ],
+        "follow": [
+          "Thanks {ten} for following."
+        ],
+        "title": [
+          "Congrats {ten}, you are now a {danh_hieu}."
+        ],
+        "goal": [
+          "The room reached {gia_tri} hearts. Damage is doubled!"
+        ]
+      },
+      "periodic": {
+        "title": "HOW TO PLAY",
+        "items": [
+          "Type «attack» to hit, send hearts to power up, send gifts for big skills. Beat the boss together!",
+          "Whoever deals the most damage is honored when the boss falls."
+        ]
+      },
+      "prompts": {
+        "items": [
+          "Type «attack» to strike! 👊",
+          "Send hearts: 1,000 hearts doubles the damage ✨"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "BOSS FIGHT",
+          "sub": "Beat the boss together"
+        },
+        "text": {
+          "call": "Type **ATTACK** to hit · ❤️ power up · 🎁 skills",
+          "board": "TODAY'S DAMAGE",
+          "empty": "Empty",
+          "guest": "Guest",
+          "everyone": "the whole room",
+          "coin": "coins",
+          "used": "used {skill} · 🎁 {gift}",
+          "appear": "⚔️ {boss} appears! · {hp} HP",
+          "defeated": "💥 {boss} DEFEATED!",
+          "lastHit": "Final blow: {name}",
+          "next": "Next boss is bigger: {boss} · {hp} HP",
+          "boost": "✨ POWER UP! Damage ×2 for {s} seconds",
+          "level": "{boss} · Lv {n}",
+          "down": "DEFEATED!",
+          "unmute": "🔔 Tap to turn on sound"
+        },
+        "game": {
+          "bosses": [
+            {
+              "name": "Mud Frog",
+              "hp": 600,
+              "color": "#62b45c",
+              "image": ""
+            },
+            {
+              "name": "Stone Turtle",
+              "hp": 1500,
+              "color": "#8f937c",
+              "image": ""
+            },
+            {
+              "name": "Fire Crab",
+              "hp": 3000,
+              "color": "#e2653e",
+              "image": ""
+            },
+            {
+              "name": "Purple Octopus",
+              "hp": 5000,
+              "color": "#9c6cd8",
+              "image": ""
+            },
+            {
+              "name": "Cloud Dragon",
+              "hp": 8000,
+              "color": "#4fb2e2",
+              "image": ""
+            }
+          ]
+        }
+      }
+    },
+    "zh": {
+      "name": "全场打怪",
+      "description": "全场一起打怪：发「打」、点赞、送礼物造成伤害。",
+      "actions": {
+        "danh": {
+          "label": "打",
+          "description": "聊天指令：小小一击"
+        },
+        "phitieu": {
+          "label": "飞镖",
+          "description": "一串闪电飞镖"
+        },
+        "caulua": {
+          "label": "火球",
+          "description": "冲到前排扔出大火球"
+        },
+        "samset": {
+          "label": "雷击",
+          "description": "镜头对准怪物，雷柱劈下，全场欢呼"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "新兵"
+        },
+        {
+          "minCoins": 50,
+          "label": "战士"
+        },
+        {
+          "minCoins": 300,
+          "label": "勇士",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "传奇",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "点赞加油",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "zh-CN-YunxiNeural",
+        "gift": [
+          "{ten}使出了{hanh_dong}！",
+          "谢谢{ten}的{hanh_dong}！"
+        ],
+        "bigGift": [
+          "{ten}召唤雷击！谢谢{ten}！"
+        ],
+        "join": [
+          "欢迎{ten}，一起来打怪！"
+        ],
+        "chat": [
+          "{ten}说：{chat}。"
+        ],
+        "follow": [
+          "谢谢{ten}的关注。"
+        ],
+        "title": [
+          "恭喜{ten}成为{danh_hieu}。"
+        ],
+        "goal": [
+          "全场点赞达到{gia_tri}个，伤害翻倍！"
+        ]
+      },
+      "periodic": {
+        "title": "玩法",
+        "items": [
+          "发「打」攻击，点赞加油，送礼物放大招。一起打败怪物！",
+          "怪物倒下时，伤害最高的人会被表彰。"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "发「打」来攻击吧！👊",
+          "点赞满1000，伤害翻倍 ✨"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "全场打怪",
+          "sub": "大家一起打败怪物"
+        },
+        "text": {
+          "call": "发 **打** 攻击 · ❤️ 加油 · 🎁 放大招",
+          "board": "今日伤害榜",
+          "empty": "空位",
+          "guest": "游客",
+          "everyone": "全场",
+          "coin": "币",
+          "used": "使出{skill} · 🎁 {gift}",
+          "appear": "⚔️ {boss}出现了！· 血量 {hp}",
+          "defeated": "💥 打败了{boss}！",
+          "lastHit": "最后一击：{name}",
+          "next": "下一个怪物更大：{boss} · 血量 {hp}",
+          "boost": "✨ 加油！伤害×2，持续{s}秒",
+          "level": "{boss} · {n}级",
+          "down": "倒下了！",
+          "unmute": "🔔 点一下打开声音"
+        },
+        "game": {
+          "bosses": [
+            {
+              "name": "泥巴蛙",
+              "hp": 600,
+              "color": "#62b45c",
+              "image": ""
+            },
+            {
+              "name": "石头龟",
+              "hp": 1500,
+              "color": "#8f937c",
+              "image": ""
+            },
+            {
+              "name": "火焰蟹",
+              "hp": 3000,
+              "color": "#e2653e",
+              "image": ""
+            },
+            {
+              "name": "紫章鱼",
+              "hp": 5000,
+              "color": "#9c6cd8",
+              "image": ""
+            },
+            {
+              "name": "云龙",
+              "hp": 8000,
+              "color": "#4fb2e2",
+              "image": ""
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "name": "Kéo co Girl vs Boy",
+  "description": "Team Girl đấu Team Boy: gõ \"girl\" / \"boy\" chọn đội, gõ \"kéo\", thả tim, tặng quà để kéo dây về phía đội mình.",
+  "width": 1080,
+  "height": 1920,
+  "actions": [
+    {
+      "id": "keo",
+      "label": "Kéo",
+      "icon": "💪",
+      "description": "Lệnh chat: kéo dây một nhịp",
+      "steps": [
+        {
+          "play": "cheer"
+        },
+        {
+          "js": "keoDay"
+        }
+      ]
+    },
+    {
+      "id": "chon-girl",
+      "label": "Vào Team Girl",
+      "icon": "🎀",
+      "description": "Lệnh chat: chọn Team Girl",
+      "steps": [
+        {
+          "say": "🎀 Team Girl!"
+        }
+      ]
+    },
+    {
+      "id": "chon-boy",
+      "label": "Vào Team Boy",
+      "icon": "🧢",
+      "description": "Lệnh chat: chọn Team Boy",
+      "steps": [
+        {
+          "say": "🧢 Team Boy!"
+        }
+      ]
+    },
+    {
+      "id": "tiepsuc",
+      "label": "Tiếp sức",
+      "icon": "⚡",
+      "card": "1 XU",
+      "description": "Người tặng sáng lên, kéo thêm lực",
+      "steps": [
+        {
+          "aura": 0.8
+        },
+        {
+          "play": "cheer"
+        },
+        {
+          "js": "keoDay"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "+{total}"
+        }
+      ]
+    },
+    {
+      "id": "keomanh",
+      "label": "Kéo mạnh",
+      "icon": "🔥",
+      "card": "10 XU",
+      "description": "Cả đội hô vang, dây giật mạnh về phía đội",
+      "steps": [
+        {
+          "play": "cheer",
+          "times": 2
+        },
+        {
+          "js": "keoManh"
+        }
+      ]
+    },
+    {
+      "id": "lucsi",
+      "label": "Lực sĩ",
+      "icon": "🏆",
+      "card": "100 XU",
+      "description": "Camera vào người tặng, pháo hoa màu đội, cả đội kéo một cú cực mạnh",
+      "steps": [
+        {
+          "camera": "person",
+          "zoom": 1.5,
+          "duration": 3200
+        },
+        {
+          "spotlight": true
+        },
+        {
+          "play": "cheer",
+          "times": 3
+        },
+        {
+          "js": "lucSi"
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "joinMode": "all",
+    "joinKeywords": [
+      "girl",
+      "boy",
+      "女生",
+      "男生"
+    ],
+    "bigGiftCoins": 100,
+    "giftTiers": [
+      {
+        "minCoins": 1,
+        "action": "tiepsuc",
+        "label": "Tiếp sức"
+      },
+      {
+        "minCoins": 10,
+        "action": "keomanh",
+        "label": "Kéo mạnh"
+      },
+      {
+        "minCoins": 100,
+        "action": "lucsi",
+        "label": "Lực sĩ"
+      }
+    ],
+    "giftOverrides": [],
+    "chatCommands": [
+      {
+        "keywords": [
+          "kéo",
+          "keo",
+          "kéo đi",
+          "cố lên",
+          "kéo nào",
+          "💪",
+          "pull",
+          "pull!",
+          "go",
+          "拉",
+          "加油",
+          "用力"
+        ],
+        "match": "exact",
+        "action": "keo",
+        "label": "kéo dây",
+        "cooldownMs": 3000
+      },
+      {
+        "keywords": [
+          "girl",
+          "gái",
+          "con gái",
+          "nữ",
+          "team girl",
+          "👧",
+          "🎀",
+          "女",
+          "女生",
+          "女孩",
+          "女队"
+        ],
+        "match": "exact",
+        "action": "chon-girl",
+        "label": "vào Team Girl",
+        "cooldownMs": 10000
+      },
+      {
+        "keywords": [
+          "boy",
+          "trai",
+          "con trai",
+          "nam",
+          "team boy",
+          "👦",
+          "🧢",
+          "男",
+          "男生",
+          "男孩",
+          "男队"
+        ],
+        "match": "exact",
+        "action": "chon-boy",
+        "label": "vào Team Boy",
+        "cooldownMs": 10000
+      }
+    ]
+  },
+  "bigGift": {
+    "steps": [
+      {
+        "fx": "flash",
+        "strength": 0.25
+      }
+    ]
+  },
+  "characters": [],
+  "npcs": [],
+  "animations": {
+    "cheer": {
+      "frames": [
+        "stand",
+        "cheer",
+        "stand"
+      ],
+      "ms": 650
+    }
+  },
+  "titles": [
+    {
+      "minCoins": 0,
+      "label": "Tân binh"
+    },
+    {
+      "minCoins": 50,
+      "label": "Tay kéo"
+    },
+    {
+      "minCoins": 300,
+      "label": "Cơ bắp",
+      "aura": 0.4
+    },
+    {
+      "minCoins": 1000,
+      "label": "Lực sĩ",
+      "aura": 0.8
+    }
+  ],
+  "goals": [
+    {
+      "id": "likes",
+      "metric": "likes",
+      "label": "Tim cổ vũ",
+      "every": 1000
+    }
+  ],
+  "voice": {
+    "enabled": true,
+    "voice": "vi-VN-NamMinhNeural",
+    "giftMinCoins": 1,
+    "gift": [
+      "{ten} {hanh_dong}{lan}! Cảm ơn {ten}.",
+      "Cảm ơn {ten}, {hanh_dong}{lan} cho đội nhà!"
+    ],
+    "bigGift": [
+      "Lực sĩ {ten} xuất hiện! Cảm ơn {ten}, kéo thật mạnh nào!"
+    ],
+    "join": [
+      "Chào {ten}! Gõ girl hoặc boy để chọn đội nhé.",
+      "{ten} vừa vào sân kéo co."
+    ],
+    "chat": [
+      "{ten} nhắn: {chat}."
+    ],
+    "follow": [
+      "Cảm ơn {ten} đã theo dõi kênh."
+    ],
+    "title": [
+      "Chúc mừng {ten} thành {danh_hieu}."
+    ],
+    "goal": [
+      "Cả sân đã thả {gia_tri} tim cổ vũ!"
+    ],
+    "cooldown": {
+      "join": 15000,
+      "chat": 10000,
+      "command:chon-girl": 8000,
+      "command:chon-boy": 8000
+    },
+    "fallbackWords": [],
+    "command:chon-girl": [
+      "{ten} vào Team Girl."
+    ],
+    "command:chon-boy": [
+      "{ten} vào Team Boy."
+    ]
+  },
+  "periodic": {
+    "everyMinutes": 4,
+    "quietSeconds": 20,
+    "title": "CÁCH CHƠI",
+    "items": [
+      "Gõ «girl» hoặc «boy» để chọn đội. Gõ «kéo», thả tim, tặng quà để kéo dây về phía đội mình!",
+      "Mỗi ván 90 giây. Hết giờ, đội nhiều lực hơn thắng."
+    ]
+  },
+  "prompts": {
+    "everySeconds": 80,
+    "quietSeconds": 25,
+    "items": [
+      "Gõ «kéo» cho đội mình nào! 💪",
+      "Team Girl hay Team Boy? Gõ «girl» hoặc «boy» 🎀🧢"
+    ]
+  },
+  "hud": {
+    "title": {
+      "text": "GIRL vs BOY"
+    },
+    "game": {
+      "points": {
+        "chat": 3,
+        "like": 1,
+        "coin": 10
+      },
+      "roundMs": 90000,
+      "restMs": 9000,
+      "soft": 150
+    },
+    "text": {
+      "title": "KÉO CO",
+      "girl": "GIRL",
+      "boy": "BOY",
+      "guest": "Khách",
+      "call": "Gõ **GIRL** / **BOY** chọn đội · **KÉO** +3 · ❤️ +1 · 🎁 1 xu = 10",
+      "people": "{n} người",
+      "round": "Ván {n} · {time}",
+      "rest": "Nghỉ giữa ván",
+      "go": "🚩 VÁN {n} · KÉO!",
+      "win": "🏆 TEAM {team} THẮNG!",
+      "draw": "🤝 HOÀ!",
+      "power": "{v} lực",
+      "summary": "Lực: {girl} {g} – {b} {boy} · Tỉ số {wg} : {wb}",
+      "nextRound": "Ván {n} bắt đầu sau {s} giây",
+      "unmute": "🔔 Chạm để bật âm thanh"
+    }
+  },
+  "colors": {
+    "accent": "#ffd25e",
+    "placeholderRobe": "#8a8f9e"
+  },
+  "sounds": {
+    "keo": {
+      "cooldown": 250,
+      "vary": 0.08
+    },
+    "manh": {
+      "cooldown": 1500
+    },
+    "win": {
+      "cooldown": 5000,
+      "duck": 0.4,
+      "priority": true
+    },
+    "like": false
+  },
+  "text": {},
+  "reactions": {
+    "like": [
+      {
+        "fx": "emit",
+        "preset": "heart",
+        "at": "head",
+        "count": "likes"
+      }
+    ],
+    "chat": [],
+    "title": [
+      {
+        "aura": 1
+      },
+      {
+        "fx": "emit",
+        "preset": "star",
+        "at": "head",
+        "count": 16
+      },
+      {
+        "toast": "⭐ {ten} lên danh hiệu mới!"
+      }
+    ],
+    "goal": [
+      {
+        "fx": "rain",
+        "preset": "confetti",
+        "count": 80
+      },
+      {
+        "crowd": [
+          {
+            "play": "cheer"
+          }
+        ]
+      }
+    ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Tug of war: Girl vs Boy",
+      "description": "Team Girl vs Team Boy: type \"girl\" / \"boy\" to pick a team, type \"pull\", send hearts and gifts to pull the rope.",
+      "actions": {
+        "keo": {
+          "label": "Pull",
+          "description": "Chat command: one pull on the rope"
+        },
+        "chon-girl": {
+          "label": "Join Team Girl",
+          "description": "Chat command: pick Team Girl"
+        },
+        "chon-boy": {
+          "label": "Join Team Boy",
+          "description": "Chat command: pick Team Boy"
+        },
+        "tiepsuc": {
+          "label": "Boost",
+          "description": "The giver lights up and adds power"
+        },
+        "keomanh": {
+          "label": "Power pull",
+          "description": "The team cheers, the rope jerks hard"
+        },
+        "lucsi": {
+          "label": "Strongman",
+          "description": "Camera on the giver, team-colour fireworks, one huge pull"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Rookie"
+        },
+        {
+          "minCoins": 50,
+          "label": "Puller"
+        },
+        {
+          "minCoins": 300,
+          "label": "Muscle",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "Strongman",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Cheer hearts",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "en-US-AriaNeural",
+        "gift": [
+          "{ten}, {hanh_dong}{lan}! Thank you {ten}.",
+          "Thanks {ten}, {hanh_dong} for your team!"
+        ],
+        "bigGift": [
+          "Strongman {ten} is here! Thank you {ten}, pull hard!"
+        ],
+        "join": [
+          "Hi {ten}! Type girl or boy to pick a team.",
+          "{ten} just joined the tug of war."
+        ],
+        "command:chon-girl": [
+          "{ten} joins Team Girl."
+        ],
+        "command:chon-boy": [
+          "{ten} joins Team Boy."
+        ],
+        "chat": [
+          "{ten} says: {chat}."
+        ],
+        "follow": [
+          "Thanks {ten} for following."
+        ],
+        "title": [
+          "Congrats {ten}, you are now a {danh_hieu}."
+        ],
+        "goal": [
+          "The field reached {gia_tri} cheer hearts!"
+        ]
+      },
+      "periodic": {
+        "title": "HOW TO PLAY",
+        "items": [
+          "Type «girl» or «boy» to pick a team. Type «pull», send hearts and gifts to pull the rope your way!",
+          "Each round is 90 seconds. The stronger team wins."
+        ]
+      },
+      "prompts": {
+        "items": [
+          "Type «pull» for your team! 💪",
+          "No team yet? Type «girl» or «boy» 🎀🧢"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "GIRL vs BOY"
+        },
+        "text": {
+          "title": "TUG OF WAR",
+          "girl": "GIRL",
+          "boy": "BOY",
+          "guest": "Guest",
+          "call": "Type **GIRL** / **BOY** to pick · **PULL** +3 · ❤️ +1 · 🎁 1 coin = 10",
+          "people": "{n} players",
+          "round": "Round {n} · {time}",
+          "rest": "Break",
+          "go": "🚩 ROUND {n} · PULL!",
+          "win": "🏆 TEAM {team} WINS!",
+          "draw": "🤝 DRAW!",
+          "power": "{v} power",
+          "summary": "Power: {girl} {g} – {b} {boy} · Score {wg} : {wb}",
+          "nextRound": "Round {n} starts in {s} seconds",
+          "unmute": "🔔 Tap to turn on sound"
+        }
+      }
+    },
+    "zh": {
+      "name": "拔河：女生 vs 男生",
+      "description": "女生队对男生队：发「女」/「男」选队，发「拉」、点赞、送礼物，把绳子拉到自己这边。",
+      "actions": {
+        "keo": {
+          "label": "拉",
+          "description": "聊天指令：拉一下绳子"
+        },
+        "chon-girl": {
+          "label": "加入女生队",
+          "description": "聊天指令：选女生队"
+        },
+        "chon-boy": {
+          "label": "加入男生队",
+          "description": "聊天指令：选男生队"
+        },
+        "tiepsuc": {
+          "label": "加油",
+          "description": "送礼的人发光，加一把力"
+        },
+        "keomanh": {
+          "label": "用力拉",
+          "description": "全队欢呼，绳子猛地一拉"
+        },
+        "lucsi": {
+          "label": "大力士",
+          "description": "镜头对准送礼的人，队伍颜色的烟花，超级一拉"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "新兵"
+        },
+        {
+          "minCoins": 50,
+          "label": "拉手"
+        },
+        {
+          "minCoins": 300,
+          "label": "肌肉王",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "大力士",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "点赞助威",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "gift": [
+          "{ten}{hanh_dong}{lan}！谢谢{ten}。",
+          "谢谢{ten}为队伍{hanh_dong}！"
+        ],
+        "bigGift": [
+          "大力士{ten}来了！谢谢{ten}，用力拉！"
+        ],
+        "join": [
+          "你好{ten}！发女或男选择队伍吧。",
+          "{ten}加入了拔河。"
+        ],
+        "command:chon-girl": [
+          "{ten}加入了女生队。"
+        ],
+        "command:chon-boy": [
+          "{ten}加入了男生队。"
+        ],
+        "chat": [
+          "{ten}说：{chat}。"
+        ],
+        "follow": [
+          "谢谢{ten}的关注。"
+        ],
+        "title": [
+          "恭喜{ten}成为{danh_hieu}。"
+        ],
+        "goal": [
+          "全场点赞助威达到{gia_tri}个！"
+        ]
+      },
+      "periodic": {
+        "title": "玩法",
+        "items": [
+          "发「女」或「男」选队。发「拉」、点赞、送礼物，把绳子拉向自己的队！",
+          "每局90秒，力量大的队伍获胜。"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "为你的队伍发「拉」！💪",
+          "还没选队？发「女」或「男」🎀🧢"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "女生 vs 男生"
+        },
+        "text": {
+          "title": "拔河",
+          "girl": "女生",
+          "boy": "男生",
+          "guest": "游客",
+          "call": "发 **女** / **男** 选队 · **拉** +3 · ❤️ +1 · 🎁 1币 = 10",
+          "people": "{n}人",
+          "round": "第{n}局 · {time}",
+          "rest": "休息",
+          "go": "🚩 第{n}局 · 拉！",
+          "win": "🏆 {team}队获胜！",
+          "draw": "🤝 平局！",
+          "power": "{v}力量",
+          "summary": "力量：{girl} {g} – {b} {boy} · 比分 {wg} : {wb}",
+          "nextRound": "第{n}局{s}秒后开始",
+          "unmute": "🔔 点一下打开声音"
+        }
+      }
+    }
+  }
+}
