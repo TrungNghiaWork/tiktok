@@ -293,7 +293,11 @@
     "joinMode": "all",
     "joinKeywords": [
       "a di đà phật",
-      "nam mô"
+      "nam mô",
+      "namo",
+      "amitabha",
+      "阿弥陀佛",
+      "南无"
     ],
     "bigGiftCoins": 100,
     "giftTiers": [
@@ -327,7 +331,13 @@
           "xin quẻ",
           "rút quẻ",
           "bốc quẻ",
-          "xin keo"
+          "xin keo",
+          "fortune",
+          "draw a stick",
+          "求签",
+          "抽签",
+          "求籤",
+          "抽籤"
         ],
         "match": "contains",
         "action": "xam",
@@ -345,7 +355,14 @@
           "nam mô",
           "a di đà",
           "mô Phật",
-          "🙏"
+          "🙏",
+          "namo",
+          "amitabha",
+          "bow to buddha",
+          "阿弥陀佛",
+          "南无",
+          "拜佛",
+          "礼佛"
         ],
         "match": "contains",
         "action": "pray",
@@ -355,7 +372,9 @@
       {
         "keywords": [
           "lạy",
-          "lạy lạy"
+          "lạy lạy",
+          "bow",
+          "拜"
         ],
         "match": "exact",
         "action": "pray",
@@ -371,7 +390,14 @@
           "nguyện cầu",
           "cầu bình an",
           "cầu sức khoẻ",
-          "cầu tài lộc"
+          "cầu tài lộc",
+          "pray for",
+          "wish",
+          "bless",
+          "祈福",
+          "保佑",
+          "许愿",
+          "祈求"
         ],
         "match": "contains",
         "action": "cau",
@@ -680,7 +706,24 @@
     },
     "drawTop": 770,
     "periodicTop": 800,
-    "toastTop": 1010
+    "toastTop": 1010,
+    "text": {
+      "people": "Phật tử",
+      "likes": "tim",
+      "seal": "PHÚC\nLÀNH",
+      "unmute": "Chạm để nghe chuông mõ",
+      "waiting": "Chờ người hữu duyên",
+      "comment": "Bình luận",
+      "enter": "vào chùa",
+      "heart": "Thả tim",
+      "heartDo": "gõ mõ",
+      "guest": "Thí chủ",
+      "drawNo": "QUẺ SỐ {n}",
+      "advice": "Lời bàn",
+      "drawOf": "Quẻ của {ten}",
+      "drawAgain": " · đã xin hôm nay",
+      "periodic": "THỜI KINH"
+    }
   },
   "colors": {
     "accent": "#ffd987",
@@ -1012,5 +1055,1274 @@
       "Gõ cầu an kèm lời nguyện để thả một ngọn đèn sen.",
       "Gõ lạy Phật để cùng lễ Phật nhé."
     ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Virtual temple",
+      "description": "Viewers become Buddhist devotees in a temple: gifts offer incense, prostrations and lotus flowers; chat to bow, draw a fortune or release a wish lantern.",
+      "actions": {
+        "incense": {
+          "label": "Incense offering",
+          "offering": "Incense",
+          "card": "1 coin",
+          "description": "Walk up to the censer and bow, smoke rises, the bell rings",
+          "steps": [
+            {
+              "walk": "offer"
+            },
+            {
+              "pose": "stand"
+            },
+            {
+              "play": "offer",
+              "times": "count",
+              "max": 3,
+              "each": [
+                {
+                  "sound": "chuong"
+                },
+                {
+                  "fx": "emit",
+                  "preset": "smoke",
+                  "at": "censerMouth",
+                  "count": 8,
+                  "strong": true
+                },
+                {
+                  "fx": "emit",
+                  "preset": "spark",
+                  "at": "censerMouth",
+                  "count": 6,
+                  "spread": 14
+                }
+              ]
+            },
+            {
+              "fx": "text",
+              "at": "head",
+              "text": "+{total} merit"
+            },
+            {
+              "walk": "home"
+            },
+            {
+              "pose": "idle"
+            }
+          ]
+        },
+        "bow": {
+          "label": "Prostration",
+          "offering": "Bowing",
+          "card": "5 coins",
+          "description": "Kneel on the mat and bow three times, glowing aura",
+          "steps": [
+            {
+              "walk": "bow"
+            },
+            {
+              "pose": "idle"
+            },
+            {
+              "aura": 1
+            },
+            {
+              "sound": "chuong"
+            },
+            {
+              "play": "bow",
+              "times": 3,
+              "each": [
+                {
+                  "sound": "mo"
+                },
+                {
+                  "aura": 1
+                },
+                {
+                  "fx": "emit",
+                  "preset": "spark",
+                  "at": "head",
+                  "count": 12
+                }
+              ]
+            },
+            {
+              "fx": "text",
+              "at": "head",
+              "text": "+{total} merit"
+            },
+            {
+              "walk": "home"
+            },
+            {
+              "pose": "idle"
+            }
+          ]
+        },
+        "lotus": {
+          "label": "Lotus offering",
+          "offering": "Lotus",
+          "card": "10 coins",
+          "description": "A pillar of light on the giver, lotus flowers fly to the altar, petals rain down",
+          "steps": [
+            {
+              "fx": "pillar",
+              "at": "person",
+              "color": "255,230,160",
+              "duration": 2600
+            },
+            {
+              "aura": 1
+            },
+            {
+              "fx": "fly",
+              "what": "assets/cdo/fx_lotus.png",
+              "from": "head",
+              "to": "altar",
+              "count": "count",
+              "max": 10
+            },
+            {
+              "sound": "sen"
+            },
+            {
+              "fx": "rain",
+              "preset": "petal",
+              "count": 40
+            },
+            {
+              "play": "bow",
+              "times": 3
+            },
+            {
+              "fx": "text",
+              "at": "head",
+              "text": "+{total} merit"
+            }
+          ]
+        },
+        "grand": {
+          "label": "Grand ceremony",
+          "offering": "Grand",
+          "card": "100 coins",
+          "description": "The Buddha statue glows, rays fill the hall, everyone bows, the great bell rings"
+        },
+        "pray": {
+          "label": "Bow to the Buddha",
+          "description": "Bow three times in place, the wooden fish keeps time"
+        },
+        "xam": {
+          "label": "Draw a fortune",
+          "description": "Kneel at the altar, shake the fortune sticks, draw one (one per person per day)"
+        },
+        "cau": {
+          "label": "Release a wish lantern",
+          "description": "The viewer's wish becomes a lotus lantern rising into the hall"
+        }
+      },
+      "reactions": {
+        "like": [
+          {
+            "fx": "emit",
+            "preset": "heart",
+            "at": "head",
+            "count": "likes"
+          },
+          {
+            "sound": "mo",
+            "volume": 0.7
+          },
+          {
+            "fx": "text",
+            "at": "head",
+            "text": "+1 merit",
+            "size": 24
+          }
+        ],
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 18
+          },
+          {
+            "toast": "Rejoice! {ten} reached a new rank"
+          }
+        ]
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Devotee"
+        },
+        {
+          "minCoins": 30,
+          "label": "Faithful"
+        },
+        {
+          "minCoins": 200,
+          "label": "Dharma guardian",
+          "aura": 0.45
+        },
+        {
+          "minCoins": 1000,
+          "label": "Great patron",
+          "aura": 0.9
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Hearts for the Buddha",
+          "every": 1000
+        },
+        {
+          "id": "coins",
+          "metric": "coins",
+          "label": "Merit",
+          "every": 500
+        }
+      ],
+      "voice": {
+        "voice": "en-US-GuyNeural",
+        "gift": [
+          "Namo Amitabha. Thank you, {ten}, for the {hanh_dong}. {loi}."
+        ],
+        "bigGift": [
+          "Namo Amitabha. With a generous heart, {ten} makes the {hanh_dong}. {loi}. May this merit spread everywhere."
+        ],
+        "follow": [
+          "Thank you, {ten}, for following."
+        ],
+        "title": [
+          "Rejoice! {ten} is now a {danh_hieu}."
+        ],
+        "goal": [
+          "Together we have gathered {gia_tri} {muc_tieu}. Namo Amitabha."
+        ],
+        "fallbackWords": [
+          "May your family be at peace and all go well",
+          "May your parents be healthy and live long",
+          "May your body and mind be at ease, free of worry",
+          "May your work go smoothly and your family be happy"
+        ],
+        "draw": [
+          "Fortune number {so}, {loai}. {tho}. {loi}"
+        ],
+        "drawAgain": [
+          "{ten}, you already drew fortune number {so} today, {loai}. One fortune a day, come back tomorrow."
+        ],
+        "join": [
+          "Amitabha, welcome {ten} to the temple.",
+          "Hello {ten}. Type fortune to draw your fortune for today.",
+          "{ten} just entered the temple. Send hearts to strike the wooden fish and gather blessings."
+        ],
+        "chat": [
+          "{ten} says: {chat}.",
+          "{ten} writes: {chat}."
+        ],
+        "command:cau": [
+          "{ten} prays: {loi}. May the wish come true."
+        ],
+        "command:pray": [
+          "{ten} bows to the Buddha with a sincere heart.",
+          "Amitabha, {ten} is bowing to the Buddha."
+        ]
+      },
+      "periodic": {
+        "title": "CHANTING",
+        "items": [
+          "Namo Shakyamuni Buddha. May the merit of this practice reach all beings everywhere, so that we and all beings together attain the Buddha way.",
+          "Namo Amitabha Buddha. May we be reborn in the Western Pure Land, with the lotus of nine grades as our parents.",
+          "Namo Avalokiteshvara, Bodhisattva of Great Compassion. May all beings be at peace in body and mind, and free from harm.",
+          "When Avalokiteshvara Bodhisattva practiced the deep Prajna Paramita, he saw that the five aggregates are empty and passed beyond all suffering."
+        ]
+      },
+      "prompts": {
+        "items": [
+          "Want today's fortune? Type fortune.",
+          "Send hearts to strike the wooden fish and gather blessings for the whole temple.",
+          "Type pray for with your wish to release a lotus lantern.",
+          "Type namo to bow to the Buddha together."
+        ]
+      },
+      "hud": {
+        "plaque": {
+          "text": "AN LẠC TỰ",
+          "sub": "Calm mind · good days"
+        },
+        "guide": {
+          "title": "GUIDE"
+        },
+        "board": {
+          "title": "HONORS"
+        },
+        "tray": {
+          "title": "OFFERINGS"
+        },
+        "giftCard": {
+          "verb": "offers",
+          "unit": "merit"
+        },
+        "text": {
+          "people": "devotees",
+          "likes": "hearts",
+          "seal": "GOOD\nLUCK",
+          "unmute": "Tap to hear the bell",
+          "waiting": "Awaiting you",
+          "comment": "Comment",
+          "enter": "join",
+          "heart": "Hearts",
+          "heartDo": "wooden fish",
+          "guest": "Friend",
+          "drawNo": "FORTUNE NO. {n}",
+          "advice": "Advice",
+          "drawOf": "{ten}'s fortune",
+          "drawAgain": " · drawn today",
+          "periodic": "CHANTING",
+          "kw_xam": "fortune",
+          "kw_pray": "namo",
+          "kw_cau": "pray for",
+          "cmd_xam": "draw",
+          "cmd_pray": "bow",
+          "cmd_cau": "lantern"
+        }
+      },
+      "draws": {
+        "xam": {
+          "items": [
+            {
+              "so": 1,
+              "loai": "Great fortune",
+              "tho": [
+                "Spring returns, the branches bloom",
+                "An honest heart meets kindly fate"
+              ],
+              "loi": "What you hope for is close. Keep your heart honest."
+            },
+            {
+              "so": 2,
+              "loai": "Good fortune",
+              "tho": [
+                "A boat drifts down on a gentle wind",
+                "Slow, sure strokes will reach the shore"
+              ],
+              "loi": "Don't rush. Steady work will get you there."
+            },
+            {
+              "so": 3,
+              "loai": "Small fortune",
+              "tho": [
+                "Clouds hide the moon, but not for long",
+                "The wind will part them, light returns"
+              ],
+              "loi": "The sad times will pass. Be patient a few more days."
+            },
+            {
+              "so": 4,
+              "loai": "Great fortune",
+              "tho": [
+                "A straight tree stands on solid roots",
+                "Kind seeds sown bring sweet fruit later"
+              ],
+              "loi": "The good you have done will soon be repaid."
+            },
+            {
+              "so": 5,
+              "loai": "Peaceful",
+              "tho": [
+                "Fear not the long and weary road",
+                "A steady will can cross it all"
+              ],
+              "loi": "Things are still hard, but persistence will see you through."
+            },
+            {
+              "so": 6,
+              "loai": "Good fortune",
+              "tho": [
+                "A warm home, everyone gathered near",
+                "Parents well and days at peace"
+              ],
+              "loi": "Your home is calm and happy. Spend more time with family."
+            },
+            {
+              "so": 7,
+              "loai": "Small fortune",
+              "tho": [
+                "Small raindrops soak the thirsty earth",
+                "Bit by bit a fortune grows"
+              ],
+              "loi": "Money comes slowly. Save patiently and it will build up."
+            },
+            {
+              "so": 8,
+              "loai": "Great fortune",
+              "tho": [
+                "The dragon meets the clouds on time",
+                "Career doors open wide for life"
+              ],
+              "loi": "A work opportunity is coming. Take it boldly."
+            },
+            {
+              "so": 9,
+              "loai": "Peaceful",
+              "tho": [
+                "Gaze upon the still autumn lake",
+                "A calm mind clears the mist away"
+              ],
+              "loi": "Worry less. With a calm mind, everything becomes clear."
+            },
+            {
+              "so": 10,
+              "loai": "Good fortune",
+              "tho": [
+                "A good friend is a jewel on the road",
+                "A kindred soul, a love made whole"
+              ],
+              "loi": "You will meet someone who helps you. Keep your word."
+            },
+            {
+              "so": 11,
+              "loai": "Great fortune",
+              "tho": [
+                "A lotus blooms in the green pond",
+                "Near the mud, yet never stained"
+              ],
+              "loi": "Keep yourself pure and people will respect you."
+            },
+            {
+              "so": 12,
+              "loai": "Small fortune",
+              "tho": [
+                "The new moon grows full and round",
+                "Small today, it grows tomorrow"
+              ],
+              "loi": "A small start with a future. Keep nurturing it."
+            },
+            {
+              "so": 13,
+              "loai": "Good fortune",
+              "tho": [
+                "Sailing out with a following wind",
+                "Nets full of silver fish, homes well fed"
+              ],
+              "loi": "Business brings luck. Remember to share with loved ones."
+            },
+            {
+              "so": 14,
+              "loai": "Peaceful",
+              "tho": [
+                "The wind can't fell the pine tree",
+                "Stand firm and peace is endless"
+              ],
+              "loi": "People may gossip. Just stay steady."
+            },
+            {
+              "so": 15,
+              "loai": "Great fortune",
+              "tho": [
+                "Incense glows upon the altar",
+                "Ancestors bless, your wish comes true"
+              ],
+              "loi": "A sincere wish will come true. Light incense in thanks."
+            },
+            {
+              "so": 16,
+              "loai": "Small fortune",
+              "tho": [
+                "After the rain the sun comes out",
+                "Joy and sorrow pass, keep smiling"
+              ],
+              "loi": "The unhappy matter is fleeting. Stay optimistic."
+            },
+            {
+              "so": 17,
+              "loai": "Good fortune",
+              "tho": [
+                "A fine horse runs on level road",
+                "Safe travels, blessings follow home"
+              ],
+              "loi": "Travel and new journeys go smoothly."
+            },
+            {
+              "so": 18,
+              "loai": "Great fortune",
+              "tho": [
+                "High heaven opens its red gates",
+                "Studies succeed, hopes fulfilled"
+              ],
+              "loi": "Luck in exams and study. Work a little harder."
+            },
+            {
+              "so": 19,
+              "loai": "Peaceful",
+              "tho": [
+                "Flowing water wears down stone",
+                "Step by step, near and far are crossed"
+              ],
+              "loi": "Results won't come at once. Diligence is the key."
+            },
+            {
+              "so": 20,
+              "loai": "Good fortune",
+              "tho": [
+                "Who tied the red thread to whose feet",
+                "A good match is set and drawing near"
+              ],
+              "loi": "Good news in love. Open your heart."
+            },
+            {
+              "so": 21,
+              "loai": "Small fortune",
+              "tho": [
+                "A warm hearth on a winter night",
+                "Hands joined, the love stays strong"
+              ],
+              "loi": "When family members give way to each other, all goes smoothly."
+            },
+            {
+              "so": 22,
+              "loai": "Great fortune",
+              "tho": [
+                "The bell rings across the high hills",
+                "Blessings arrive in peace and plenty"
+              ],
+              "loi": "A very good fortune: health and wealth both thrive."
+            },
+            {
+              "so": 23,
+              "loai": "Peaceful",
+              "tho": [
+                "Autumn leaves return to the roots",
+                "Remember your origins, the path shines"
+              ],
+              "loi": "Visit home and check in on your parents and grandparents."
+            },
+            {
+              "so": 24,
+              "loai": "Good fortune",
+              "tho": [
+                "Seeds are sown in fertile ground",
+                "With rain and sun they grow green fast"
+              ],
+              "loi": "Your new plan has a good foundation. You can start now."
+            },
+            {
+              "so": 25,
+              "loai": "Small fortune",
+              "tho": [
+                "Mist lifts, morning sun on the hill",
+                "The night was cold, the day is warm"
+              ],
+              "loi": "Your health is recovering. Rest well and keep a balanced routine."
+            },
+            {
+              "so": 26,
+              "loai": "Great fortune",
+              "tho": [
+                "Gold at last meets a skilled hand",
+                "Talent shines, a name is made"
+              ],
+              "loi": "Someone sees your talent. Be confident."
+            },
+            {
+              "so": 27,
+              "loai": "Peaceful",
+              "tho": [
+                "Sit still and hear the steady drum",
+                "Less greed, less anger, more blessing"
+              ],
+              "loi": "A little patience and everything goes smoothly."
+            },
+            {
+              "so": 28,
+              "loai": "Good fortune",
+              "tho": [
+                "A kite full of wind flies high",
+                "Dreams within reach, sweet success"
+              ],
+              "loi": "Your goal is near. Keep your current pace."
+            },
+            {
+              "so": 29,
+              "loai": "Small fortune",
+              "tho": [
+                "Sweep the dust from your front door",
+                "A pure heart makes blessings bloom"
+              ],
+              "loi": "Tidy your home and your heart, and luck will come."
+            },
+            {
+              "so": 30,
+              "loai": "Great fortune",
+              "tho": [
+                "A hundred flowers bloom in the temple yard",
+                "A kind heart finds a joyful harvest"
+              ],
+              "loi": "Everything looks bright. Remember to do good deeds."
+            },
+            {
+              "so": 31,
+              "loai": "Peaceful",
+              "tho": [
+                "The ferry waits upon the bank",
+                "The time's not yet, don't hurry it"
+              ],
+              "loi": "Not the right time yet. Wait a little before deciding."
+            },
+            {
+              "so": 32,
+              "loai": "Good fortune",
+              "tho": [
+                "A hand offers a cup of kindness",
+                "Help others today, be loved tomorrow"
+              ],
+              "loi": "Helping others will be repaid with warm friendship."
+            }
+          ]
+        }
+      }
+    },
+    "zh": {
+      "name": "线上寺院",
+      "description": "观众化身寺中佛弟子：送礼即上香、礼拜、献莲花；在聊天中礼佛、求签、放祈愿灯。",
+      "actions": {
+        "incense": {
+          "label": "上香",
+          "offering": "一炷香",
+          "card": "1币",
+          "description": "走到香炉前礼拜，香烟升起，钟声加持",
+          "steps": [
+            {
+              "walk": "offer"
+            },
+            {
+              "pose": "stand"
+            },
+            {
+              "play": "offer",
+              "times": "count",
+              "max": 3,
+              "each": [
+                {
+                  "sound": "chuong"
+                },
+                {
+                  "fx": "emit",
+                  "preset": "smoke",
+                  "at": "censerMouth",
+                  "count": 8,
+                  "strong": true
+                },
+                {
+                  "fx": "emit",
+                  "preset": "spark",
+                  "at": "censerMouth",
+                  "count": 6,
+                  "spread": 14
+                }
+              ]
+            },
+            {
+              "fx": "text",
+              "at": "head",
+              "text": "+{total} 功德"
+            },
+            {
+              "walk": "home"
+            },
+            {
+              "pose": "idle"
+            }
+          ]
+        },
+        "bow": {
+          "label": "礼拜",
+          "offering": "礼拜",
+          "card": "5币",
+          "description": "跪在拜垫上三拜，身旁光环环绕",
+          "steps": [
+            {
+              "walk": "bow"
+            },
+            {
+              "pose": "idle"
+            },
+            {
+              "aura": 1
+            },
+            {
+              "sound": "chuong"
+            },
+            {
+              "play": "bow",
+              "times": 3,
+              "each": [
+                {
+                  "sound": "mo"
+                },
+                {
+                  "aura": 1
+                },
+                {
+                  "fx": "emit",
+                  "preset": "spark",
+                  "at": "head",
+                  "count": 12
+                }
+              ]
+            },
+            {
+              "fx": "text",
+              "at": "head",
+              "text": "+{total} 功德"
+            },
+            {
+              "walk": "home"
+            },
+            {
+              "pose": "idle"
+            }
+          ]
+        },
+        "lotus": {
+          "label": "献莲花",
+          "offering": "莲花",
+          "card": "10币",
+          "description": "光柱照下，莲花飞上供桌，花瓣如雨",
+          "steps": [
+            {
+              "fx": "pillar",
+              "at": "person",
+              "color": "255,230,160",
+              "duration": 2600
+            },
+            {
+              "aura": 1
+            },
+            {
+              "fx": "fly",
+              "what": "assets/cdo/fx_lotus.png",
+              "from": "head",
+              "to": "altar",
+              "count": "count",
+              "max": 10
+            },
+            {
+              "sound": "sen"
+            },
+            {
+              "fx": "rain",
+              "preset": "petal",
+              "count": 40
+            },
+            {
+              "play": "bow",
+              "times": 3
+            },
+            {
+              "fx": "text",
+              "at": "head",
+              "text": "+{total} 功德"
+            }
+          ]
+        },
+        "grand": {
+          "label": "大供养",
+          "offering": "大供养",
+          "card": "100币",
+          "description": "佛像放光，光芒遍满大殿，众人同拜，大钟长鸣"
+        },
+        "pray": {
+          "label": "礼佛",
+          "description": "原地三拜，木鱼随拜而响"
+        },
+        "xam": {
+          "label": "求签",
+          "description": "跪在佛前摇签筒，抽一支签（每人每天一签）"
+        },
+        "cau": {
+          "label": "放祈愿灯",
+          "description": "观众的心愿化作莲花灯升入大殿"
+        }
+      },
+      "reactions": {
+        "like": [
+          {
+            "fx": "emit",
+            "preset": "heart",
+            "at": "head",
+            "count": "likes"
+          },
+          {
+            "sound": "mo",
+            "volume": 0.7
+          },
+          {
+            "fx": "text",
+            "at": "head",
+            "text": "+1 功德",
+            "size": 24
+          }
+        ],
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 18
+          },
+          {
+            "toast": "随喜{ten}晋升新阶"
+          }
+        ]
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "佛弟子"
+        },
+        {
+          "minCoins": 30,
+          "label": "善信"
+        },
+        {
+          "minCoins": 200,
+          "label": "护法",
+          "aura": 0.45
+        },
+        {
+          "minCoins": 1000,
+          "label": "大施主",
+          "aura": 0.9
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "献佛爱心",
+          "every": 1000
+        },
+        {
+          "id": "coins",
+          "metric": "coins",
+          "label": "功德",
+          "every": 500
+        }
+      ],
+      "voice": {
+        "voice": "zh-CN-YunxiNeural",
+        "gift": [
+          "南无阿弥陀佛。感谢施主{ten}{hanh_dong}。{loi}。"
+        ],
+        "bigGift": [
+          "南无阿弥陀佛。施主{ten}发心{hanh_dong}。{loi}。愿以此功德，普及于一切。"
+        ],
+        "follow": [
+          "感谢佛弟子{ten}的关注。"
+        ],
+        "title": [
+          "随喜佛弟子{ten}，如今已是{danh_hieu}。"
+        ],
+        "goal": [
+          "大众已共同积满{gia_tri}{muc_tieu}。南无阿弥陀佛。"
+        ],
+        "fallbackWords": [
+          "愿家宅平安，万事吉祥",
+          "愿父母身体健康，福寿绵长",
+          "愿身心安乐，烦恼消除",
+          "愿工作顺利，家庭幸福"
+        ],
+        "draw": [
+          "第{so}签，{loai}。{tho}。{loi}"
+        ],
+        "drawAgain": [
+          "佛弟子{ten}今天已求得第{so}签，{loai}。每天一签，明天再来。"
+        ],
+        "join": [
+          "阿弥陀佛，欢迎{ten}来到寺院。",
+          "你好{ten}。打求签，抽今天的第一支签吧。",
+          "佛弟子{ten}来到寺院。请{ten}点赞敲木鱼积福。"
+        ],
+        "chat": [
+          "{ten}说：{chat}。",
+          "佛弟子{ten}说：{chat}。"
+        ],
+        "command:cau": [
+          "佛弟子{ten}祈愿：{loi}。愿心愿圆满。"
+        ],
+        "command:pray": [
+          "佛弟子{ten}虔诚礼佛。",
+          "阿弥陀佛，{ten}正在礼佛。"
+        ]
+      },
+      "periodic": {
+        "title": "诵经",
+        "items": [
+          "南无本师释迦牟尼佛。愿以此功德，普及于一切，我等与众生，皆共成佛道。",
+          "南无阿弥陀佛。愿生西方净土中，九品莲花为父母。",
+          "南无大悲观世音菩萨。愿一切众生身心安乐，消灾免难。",
+          "观自在菩萨，行深般若波罗蜜多时，照见五蕴皆空，度一切苦厄。"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "想看今天的签，就打求签。",
+          "点赞敲木鱼，为全寺积福。",
+          "打祈福加上心愿，放一盏莲花灯。",
+          "打阿弥陀佛，一起礼佛。"
+        ]
+      },
+      "hud": {
+        "plaque": {
+          "text": "安乐寺",
+          "sub": "心安 · 万事吉祥"
+        },
+        "guide": {
+          "title": "参与方式"
+        },
+        "board": {
+          "title": "功德榜"
+        },
+        "tray": {
+          "title": "供品"
+        },
+        "giftCard": {
+          "verb": "敬献",
+          "unit": "功德"
+        },
+        "text": {
+          "people": "佛弟子",
+          "likes": "爱心",
+          "seal": "福\n缘",
+          "unmute": "点一下听钟声木鱼",
+          "waiting": "静候有缘人",
+          "comment": "发评论",
+          "enter": "进寺",
+          "heart": "点赞",
+          "heartDo": "敲木鱼",
+          "guest": "施主",
+          "drawNo": "第 {n} 签",
+          "advice": "解签",
+          "drawOf": "{ten}的签",
+          "drawAgain": " · 今日已求",
+          "periodic": "诵经",
+          "kw_xam": "求签",
+          "kw_pray": "阿弥陀佛",
+          "kw_cau": "祈福",
+          "cmd_xam": "求签",
+          "cmd_pray": "礼佛",
+          "cmd_cau": "放祈愿灯"
+        }
+      },
+      "draws": {
+        "xam": {
+          "items": [
+            {
+              "so": 1,
+              "loai": "上吉",
+              "tho": [
+                "春回花开满枝头",
+                "心正自逢好因缘"
+              ],
+              "loi": "所盼之事即将成，守住正直之心。"
+            },
+            {
+              "so": 2,
+              "loai": "中吉",
+              "tho": [
+                "顺风行船长河远",
+                "稳步慢行到彼岸"
+              ],
+              "loi": "莫急，踏实做事自然水到渠成。"
+            },
+            {
+              "so": 3,
+              "loai": "小吉",
+              "tho": [
+                "浮云遮月不多时",
+                "风吹云散月重来"
+              ],
+              "loi": "伤心事快过去了，再耐心几天。"
+            },
+            {
+              "so": 4,
+              "loai": "上吉",
+              "tho": [
+                "树正根深能长久",
+                "种下善因得甜果"
+              ],
+              "loi": "做过的善事很快会有回报。"
+            },
+            {
+              "so": 5,
+              "loai": "平安",
+              "tho": [
+                "路远莫怕多艰难",
+                "一心坚持万事过"
+              ],
+              "loi": "事情仍辛苦，但坚持就能度过。"
+            },
+            {
+              "so": 6,
+              "loai": "中吉",
+              "tho": [
+                "家和门暖人团圆",
+                "父母安康岁月宁"
+              ],
+              "loi": "家宅安乐，多陪陪家人。"
+            },
+            {
+              "so": 7,
+              "loai": "小吉",
+              "tho": [
+                "细雨润物滋干土",
+                "点滴积累家业成"
+              ],
+              "loi": "财运慢慢来，勤俭积累会渐好。"
+            },
+            {
+              "so": 8,
+              "loai": "上吉",
+              "tho": [
+                "龙逢云会正当时",
+                "功名大开一生顺"
+              ],
+              "loi": "事业良机将至，大胆把握。"
+            },
+            {
+              "so": 9,
+              "loai": "平安",
+              "tho": [
+                "静看秋湖水如镜",
+                "心安浪静雾自散"
+              ],
+              "loi": "少些忧虑，心安则万事明朗。"
+            },
+            {
+              "so": 10,
+              "loai": "中吉",
+              "tho": [
+                "良友如玉路中逢",
+                "知己相遇情圆满"
+              ],
+              "loi": "将遇贵人相助，记得守信。"
+            },
+            {
+              "so": 11,
+              "loai": "上吉",
+              "tho": [
+                "莲花盛开碧池中",
+                "出泥不染美名扬"
+              ],
+              "loi": "洁身自好，自会受人敬重。"
+            },
+            {
+              "so": 12,
+              "loai": "小吉",
+              "tho": [
+                "新月终有圆满时",
+                "今日虽小明日成"
+              ],
+              "loi": "起步虽小但有前途，继续用心经营。"
+            },
+            {
+              "so": 13,
+              "loai": "中吉",
+              "tho": [
+                "出海遇上顺风帆",
+                "网满银鱼家温饱"
+              ],
+              "loi": "生意有财，记得与家人分享。"
+            },
+            {
+              "so": 14,
+              "loai": "平安",
+              "tho": [
+                "风吹不倒青松树",
+                "守心坚定永安宁"
+              ],
+              "loi": "有人说三道四，站稳就好。"
+            },
+            {
+              "so": 15,
+              "loai": "上吉",
+              "tho": [
+                "香灯明亮照佛台",
+                "祖先保佑愿得圆"
+              ],
+              "loi": "正当的心愿会实现，记得上香答谢。"
+            },
+            {
+              "so": 16,
+              "loai": "小吉",
+              "tho": [
+                "阵雨过后又放晴",
+                "悲喜寻常莫忘笑"
+              ],
+              "loi": "不快之事转眼即过，保持乐观。"
+            },
+            {
+              "so": 17,
+              "loai": "中吉",
+              "tho": [
+                "良马奔驰平坦路",
+                "远行平安福随归"
+              ],
+              "loi": "出行、远行皆顺利。"
+            },
+            {
+              "so": 18,
+              "loai": "上吉",
+              "tho": [
+                "天门高开朱红启",
+                "学业有成愿圆满"
+              ],
+              "loi": "考试学业有好运，再加把劲。"
+            },
+            {
+              "so": 19,
+              "loai": "平安",
+              "tho": [
+                "滴水石穿非一日",
+                "勤奋步步远近通"
+              ],
+              "loi": "成果不会马上来，勤奋是关键。"
+            },
+            {
+              "so": 20,
+              "loai": "中吉",
+              "tho": [
+                "红线谁系有缘人",
+                "良缘已定近眼前"
+              ],
+              "loi": "感情有喜讯，敞开心扉吧。"
+            },
+            {
+              "so": 21,
+              "loai": "小吉",
+              "tho": [
+                "炉火温暖冬夜长",
+                "同心协力情意浓"
+              ],
+              "loi": "家人互相谦让，万事和顺。"
+            },
+            {
+              "so": 22,
+              "loai": "上吉",
+              "tho": [
+                "钟声回荡高山远",
+                "福气临门享平安"
+              ],
+              "loi": "上上好签，健康财运皆旺。"
+            },
+            {
+              "so": 23,
+              "loai": "平安",
+              "tho": [
+                "秋叶归根落故土",
+                "饮水思源道光明"
+              ],
+              "loi": "该回家看看，问候父母长辈。"
+            },
+            {
+              "so": 24,
+              "loai": "中吉",
+              "tho": [
+                "种子播在沃土中",
+                "雨足阳足快成长"
+              ],
+              "loi": "新计划基础良好，可以动手了。"
+            },
+            {
+              "so": 25,
+              "loai": "小吉",
+              "tho": [
+                "雾散朝阳上山岗",
+                "昨夜虽寒今日暖"
+              ],
+              "loi": "身体正在恢复，注意作息有度。"
+            },
+            {
+              "so": 26,
+              "loai": "上吉",
+              "tho": [
+                "真金终遇巧匠手",
+                "才华闪耀美名扬"
+              ],
+              "loi": "有人赏识你的才华，要有自信。"
+            },
+            {
+              "so": 27,
+              "loai": "平安",
+              "tho": [
+                "静坐细听木鱼声",
+                "少贪少怒福更多"
+              ],
+              "loi": "忍一忍，万事顺。"
+            },
+            {
+              "so": 28,
+              "loai": "中吉",
+              "tho": [
+                "风筝乘风上青天",
+                "梦想在望喜成功"
+              ],
+              "loi": "目标将近，保持现在的节奏。"
+            },
+            {
+              "so": 29,
+              "loai": "小吉",
+              "tho": [
+                "门前扫净红尘土",
+                "心归清净福更添"
+              ],
+              "loi": "整理家居与内心，好运将至。"
+            },
+            {
+              "so": 30,
+              "loai": "上吉",
+              "tho": [
+                "百花齐放寺院中",
+                "善心得福乐丰年"
+              ],
+              "loi": "各方面都很光明，记得多行善。"
+            },
+            {
+              "so": 31,
+              "loai": "平安",
+              "tho": [
+                "渡船岸边等客人",
+                "时机未到莫心急"
+              ],
+              "loi": "时候未到，再等等再做决定。"
+            },
+            {
+              "so": 32,
+              "loai": "中吉",
+              "tho": [
+                "双手奉上一杯情",
+                "今日助人明日得"
+              ],
+              "loi": "帮助他人，会得到真情回报。"
+            }
+          ]
+        }
+      }
+    }
   }
 }

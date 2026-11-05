@@ -12,13 +12,18 @@
 //   "tray":   { "title": "..." }                mục lễ phẩm cuối thẻ hướng dẫn (lấy từ actions có "card", tên hiện là "offering")
 //   "giftCard": { "verb": "kính dâng", "unit": "công đức", "top": 1120 }
 //   "drawTop": 770, "periodicTop": 800, "toastTop": 1010   vị trí thẻ quẻ, thời kinh, dòng chúc mừng (liễn tự xếp dưới biển tên / ô số liệu; "sideTop" để cố định)
+//   "text": { "people": "Phật tử", ... }        chữ còn lại trên màn hình; bản dịch ở i18n.en.hud.text / i18n.zh.hud.text
 
 (function () {
   const K = window.Kit;
   const Z = K.safe || { top: 240, side: 100, chatTop: 1250 };
   const $ = (sel, root) => (root || document).querySelector(sel);
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const fmt = (n) => Number(n || 0).toLocaleString('vi-VN');
+  // Ngôn ngữ (kit: theme.json "langs" + "i18n"): chữ trên màn hình ở hud.text, bản dịch ở i18n.<lang>.hud.text
+  const LOCALE = { vi: 'vi-VN', en: 'en-US', zh: 'zh-CN' };
+  let words = {}, locale = 'vi-VN';
+  const t = (key, fallback, vars = {}) => String(words[key] ?? fallback).replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
+  const fmt = (n) => Number(n || 0).toLocaleString(locale);
   const later = (ms) => new Promise((r) => setTimeout(r, ms));
 
   let theme = {}, cfg = {}, root = null;
@@ -29,7 +34,7 @@
   const corners = () => ['tl', 'tr', 'bl', 'br'].map((c) => `<i class="cn ${c}">${CORNER}</i>`).join('');
 
   const STYLE = `
-  .cx { position:absolute; inset:0; pointer-events:none; font-family:'Be Vietnam Pro', system-ui, sans-serif; color:#fbefd2; --gold:#e8c06a; --gold2:#fff1c1; --lac:#7d1610; --lac2:#4a0a06; --ink:#5b1209; }
+  .cx { position:absolute; inset:0; pointer-events:none; font-family:'Be Vietnam Pro', 'Noto Sans SC', system-ui, sans-serif; color:#fbefd2; --gold:#e8c06a; --gold2:#fff1c1; --lac:#7d1610; --lac2:#4a0a06; --ink:#5b1209; }
   .cx .cn { position:absolute; width:24px; height:24px; color:var(--gold); }
   .cx .cn svg { width:100%; height:100%; display:block; }
   .cx .cn.tl { left:4px; top:4px } .cx .cn.tr { right:4px; top:4px; transform:scaleX(-1) } .cx .cn.bl { left:4px; bottom:4px; transform:scaleY(-1) } .cx .cn.br { right:4px; bottom:4px; transform:scale(-1,-1) }
@@ -40,11 +45,11 @@
 
   /* hoành phi */
   .cx-plaque { box-sizing:border-box; padding:12px 10px 11px; text-align:center; border-radius:6px; }
-  .cx-plaque h1 { margin:0; font:900 32px/1.1 'Playfair Display', serif; letter-spacing:2px; white-space:nowrap; }
-  .cx-plaque p { margin:5px 0 0; font:italic 600 20px/1.25 'Lora', serif; color:#f6dfae; }
+  .cx-plaque h1 { margin:0; font:900 32px/1.1 'Playfair Display', 'Noto Serif SC', serif; letter-spacing:2px; white-space:nowrap; }
+  .cx-plaque p { margin:5px 0 0; font:italic 600 20px/1.25 'Lora', 'Noto Serif SC', serif; color:#f6dfae; }
   .cx-stats { padding:12px 16px 12px; border-radius:6px; display:grid; gap:4px; }
-  .cx-stats > div:not(.cx-goal) { display:flex; align-items:baseline; gap:10px; font:italic 600 21px 'Lora', serif; color:#f6e2bb; white-space:nowrap; }
-  .cx-stats b { min-width:64px; text-align:right; font:800 27px 'Playfair Display', serif; font-style:normal; color:var(--gold2); }
+  .cx-stats > div:not(.cx-goal) { display:flex; align-items:baseline; gap:10px; font:italic 600 21px 'Lora', 'Noto Serif SC', serif; color:#f6e2bb; white-space:nowrap; }
+  .cx-stats b { min-width:64px; text-align:right; font:800 27px 'Playfair Display', 'Noto Serif SC', serif; font-style:normal; color:var(--gold2); }
 
   /* liễn dọc hai bên */
   .cx-scroll { padding:34px 16px 28px; border-radius:4px; }
@@ -52,31 +57,31 @@
   .cx-scroll .rod::before, .cx-scroll .rod::after { content:''; position:absolute; top:-3px; width:14px; height:18px; border-radius:4px; background:linear-gradient(180deg, var(--gold2), #a8742a); }
   .cx-scroll .rod::before { left:-5px } .cx-scroll .rod::after { right:-5px }
   .cx-scroll .rod.t { top:-7px } .cx-scroll .rod.b { bottom:-7px }
-  .cx-scroll h3 { margin:0 0 10px; text-align:center; font:800 26px 'Playfair Display', serif; letter-spacing:4px; }
+  .cx-scroll h3 { margin:0 0 10px; text-align:center; font:800 26px 'Playfair Display', 'Noto Serif SC', serif; letter-spacing:4px; }
   .cx-scroll h3::after { content:''; display:block; height:1px; margin:8px 10px 0; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
   .cx-guide ul { list-style:none; margin:0; padding:0; display:grid; gap:9px; }
   .cx-guide li { display:flex; align-items:baseline; gap:8px; line-height:1.2; white-space:nowrap; }
-  .cx-guide li .k { font:700 24px 'Lora', serif; color:var(--gold2); }
+  .cx-guide li .k { font:700 24px 'Lora', 'Noto Serif SC', serif; color:var(--gold2); }
   .cx-guide li .d { font-size:20px; font-weight:600; color:#f6e2bb; overflow:hidden; text-overflow:ellipsis; }
   .cx-board ol { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
   .cx-board li { display:grid; grid-template-columns:44px 1fr; align-items:center; gap:10px; }
   .cx-board li > div { min-width:0; }
-  .cx-board .rk { width:44px; height:44px; display:grid; place-items:center; border-radius:50%; font:900 22px 'Playfair Display', serif; color:var(--lac2); text-shadow:none; background:radial-gradient(circle at 35% 30%, #fff6d4, var(--gold) 55%, #9a6a22); box-shadow:0 0 0 2px var(--lac2), 0 0 0 3px var(--gold); }
+  .cx-board .rk { width:44px; height:44px; display:grid; place-items:center; border-radius:50%; font:900 22px 'Playfair Display', 'Noto Serif SC', serif; color:var(--lac2); text-shadow:none; background:radial-gradient(circle at 35% 30%, #fff6d4, var(--gold) 55%, #9a6a22); box-shadow:0 0 0 2px var(--lac2), 0 0 0 3px var(--gold); }
   .cx-board li:nth-child(2) .rk { background:radial-gradient(circle at 35% 30%, #ffffff, #c9ccd4 55%, #7b808c); }
   .cx-board li:nth-child(3) .rk { background:radial-gradient(circle at 35% 30%, #ffe2c4, #c98a4b 55%, #7a4a1e); }
   .cx-board .nm { font-weight:700; font-size:24px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .cx-board .cd { font:italic 600 20px 'Lora', serif; color:var(--gold2); }
+  .cx-board .cd { font:italic 600 20px 'Lora', 'Noto Serif SC', serif; color:var(--gold2); }
   .cx-board li.empty { opacity:.55 }
-  .cx-board li.empty .nm { font:italic 600 20px 'Lora', serif; }
+  .cx-board li.empty .nm { font:italic 600 20px 'Lora', 'Noto Serif SC', serif; }
 
   /* lễ phẩm: cuối thẻ hướng dẫn bên trái (gọn như cách chanh-dien chỉ dùng 2 thẻ hai bên) */
   .cx-tiers { margin-top:14px; padding-top:10px; border-top:1px solid rgba(232,192,106,.5); display:grid; gap:7px; }
-  .cx-tiers h4 { margin:0 0 2px; text-align:center; font:800 22px 'Playfair Display', serif; letter-spacing:4px; color:var(--gold2); }
+  .cx-tiers h4 { margin:0 0 2px; text-align:center; font:800 22px 'Playfair Display', 'Noto Serif SC', serif; letter-spacing:4px; color:var(--gold2); }
   .cx-item { display:grid; grid-template-columns:34px 1fr auto; align-items:center; gap:7px; }
   .cx-item .md { width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle, #6d1a10, #2d0805 72%); box-shadow:0 0 0 2px var(--gold); transition:box-shadow .4s; }
   .cx-item .md img { width:26px; height:26px; object-fit:contain; }
   .cx-item .md span { font-size:22px; }
-  .cx-item .nm { font:700 20px 'Lora', serif; color:var(--gold2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .cx-item .nm { font:700 20px 'Lora', 'Noto Serif SC', serif; color:var(--gold2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .cx-item .pr { font-size:17px; font-weight:800; color:#fff; text-shadow:none; background:var(--lac); padding:1px 6px; border-radius:3px; box-shadow:0 0 0 1px var(--gold); white-space:nowrap; }
   .cx-item.hit { animation:cxHit 1s ease-out; }
   .cx-item.hit .md { box-shadow:0 0 0 2px var(--gold2), 0 0 24px 8px rgba(255,210,120,.85); }
@@ -84,7 +89,7 @@
 
   /* nén nhang: thanh mục tiêu, cuối ô số liệu */
   .cx-goal { margin-top:6px; padding-top:10px; border-top:1px solid rgba(232,192,106,.45); text-align:center; }
-  .cx-goal .lb { line-height:1.25; font:italic 600 20px 'Lora', serif; color:#f6dfae; text-shadow:0 2px 4px #000, 0 0 2px #000; margin-bottom:6px; }
+  .cx-goal .lb { line-height:1.25; font:italic 600 20px 'Lora', 'Noto Serif SC', serif; color:#f6dfae; text-shadow:0 2px 4px #000, 0 0 2px #000; margin-bottom:6px; }
   .cx-goal .lb b { font-style:normal; color:var(--gold2); }
   .cx-goal .stick { position:relative; height:8px; border-radius:3px; background:linear-gradient(180deg, #8a5a2e, #4d2c12); box-shadow:0 2px 6px rgba(0,0,0,.6); }
   .cx-goal .ash { position:absolute; left:0; top:0; bottom:0; width:0; border-radius:3px; background:linear-gradient(90deg, #d8cfc0, #f2ece2); transition:width .8s; }
@@ -94,12 +99,12 @@
   /* tờ sớ khi dâng lễ: một dải gọn */
   .cx-so { position:absolute; box-sizing:border-box; padding:12px 100px 12px 26px; color:var(--ink); background: repeating-linear-gradient(95deg, rgba(120,80,30,.05) 0 2px, transparent 2px 7px), linear-gradient(180deg, rgba(246,234,208,.95), rgba(230,210,166,.93)); border-left:8px solid var(--lac); box-shadow:0 10px 24px rgba(0,0,0,.45); clip-path:inset(0 50% 0 50%); opacity:0; transition:clip-path .55s cubic-bezier(.2,.8,.2,1), opacity .3s; }
   .cx-so.show { clip-path:inset(-60px -60px -60px -60px); opacity:1; }
-  .cx-so .who { font:italic 800 42px/1.1 'Playfair Display', serif; color:var(--lac); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .cx-so .who { font:italic 800 42px/1.1 'Playfair Display', 'Noto Serif SC', serif; color:var(--lac); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .cx-so .what { font-size:27px; font-weight:600; margin-top:3px; }
   .cx-so .what b { color:var(--lac); }
-  .cx-so .quote { font:italic 23px 'Lora', serif; margin-top:3px; opacity:.85; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .cx-so .quote { font:italic 23px 'Lora', 'Noto Serif SC', serif; margin-top:3px; opacity:.85; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .cx-so .quote:empty { display:none }
-  .cx-so .seal { position:absolute; right:18px; top:50%; width:68px; height:68px; margin-top:-34px; display:grid; place-items:center; border:3px double #b3140e; border-radius:6px; color:#b3140e; font:900 17px/1.05 'Playfair Display', serif; text-align:center; transform:rotate(-8deg); background:rgba(179,20,14,.06); }
+  .cx-so .seal { position:absolute; right:18px; top:50%; width:68px; height:68px; margin-top:-34px; display:grid; place-items:center; border:3px double #b3140e; border-radius:6px; color:#b3140e; font:900 17px/1.05 'Playfair Display', 'Noto Serif SC', serif; text-align:center; transform:rotate(-8deg); background:rgba(179,20,14,.06); }
   .cx-so.big { box-shadow:0 0 0 3px var(--gold), 0 0 50px rgba(255,200,90,.85); }
   .cx-so.big .seal { background:#b3140e; color:#fff3d0; }
 
@@ -108,8 +113,8 @@
   .cx-kinh.show { opacity:1; transform:none; }
   .cx-kinh .rod { position:absolute; left:-12px; right:-12px; height:14px; border-radius:7px; background:linear-gradient(180deg, #6b3b1c, #2e160a); }
   .cx-kinh .rod.t { top:-7px } .cx-kinh .rod.b { bottom:-7px }
-  .cx-kinh h4 { margin:0 0 8px; font:800 24px 'Playfair Display', serif; letter-spacing:6px; color:var(--lac); }
-  .cx-kinh p { margin:0; font:italic 28px/1.45 'Lora', serif; }
+  .cx-kinh h4 { margin:0 0 8px; font:800 24px 'Playfair Display', 'Noto Serif SC', serif; letter-spacing:6px; color:var(--lac); }
+  .cx-kinh p { margin:0; font:italic 28px/1.45 'Lora', 'Noto Serif SC', serif; }
 
   /* quẻ xăm: tờ giấy dó khung sơn son, mở từ giữa ra như cuộn thư; ống xăm lắc ở cột trái */
   .cx-xam { position:absolute; height:370px; opacity:0; transition:opacity .4s; }
@@ -123,14 +128,14 @@
   .cx-xam .hd { display:flex; align-items:center; justify-content:center; gap:14px; }
   .cx-xam .hd::before, .cx-xam .hd::after { content:''; flex:1; max-width:90px; height:1px; background:linear-gradient(90deg, transparent, rgba(125,22,16,.6)); }
   .cx-xam .hd::after { transform:scaleX(-1); }
-  .cx-xam .so { font:900 36px 'Playfair Display', serif; color:var(--lac); letter-spacing:4px; white-space:nowrap; }
-  .cx-xam .tho { margin:14px 0 10px; text-align:center; font:italic 600 32px/1.4 'Lora', serif; color:#4a0f08; }
+  .cx-xam .so { font:900 36px 'Playfair Display', 'Noto Serif SC', serif; color:var(--lac); letter-spacing:4px; white-space:nowrap; }
+  .cx-xam .tho { margin:14px 0 10px; text-align:center; font:italic 600 32px/1.4 'Lora', 'Noto Serif SC', serif; color:#4a0f08; }
   .cx-xam .rule { display:flex; align-items:center; justify-content:center; gap:10px; margin:0 40px 10px; color:var(--gold); font-size:15px; }
   .cx-xam .rule::before, .cx-xam .rule::after { content:''; flex:1; height:1px; background:rgba(184,134,47,.7); }
   .cx-xam .loi { text-align:center; font-size:24px; line-height:1.4; color:#3d2a1c; }
   .cx-xam .loi b { color:var(--lac); }
-  .cx-xam .ft { position:absolute; left:168px; right:30px; bottom:16px; display:flex; justify-content:space-between; font:italic 19px 'Lora', serif; color:#6b4a2e; }
-  .cx-xam .loai { position:absolute; right:22px; top:16px; padding:5px 9px; font:900 18px/1.15 'Playfair Display', serif; letter-spacing:1px; text-align:center; color:var(--tone, #b3140e); border:3px double var(--tone, #b3140e); border-radius:4px; transform:rotate(8deg); background:rgba(255,255,255,.25); white-space:nowrap; text-transform:uppercase; opacity:0; transition:opacity .3s .6s, transform .3s .6s; }
+  .cx-xam .ft { position:absolute; left:168px; right:30px; bottom:16px; display:flex; justify-content:space-between; font:italic 19px 'Lora', 'Noto Serif SC', serif; color:#6b4a2e; }
+  .cx-xam .loai { position:absolute; right:22px; top:16px; padding:5px 9px; font:900 18px/1.15 'Playfair Display', 'Noto Serif SC', serif; letter-spacing:1px; text-align:center; color:var(--tone, #b3140e); border:3px double var(--tone, #b3140e); border-radius:4px; transform:rotate(8deg); background:rgba(255,255,255,.25); white-space:nowrap; text-transform:uppercase; opacity:0; transition:opacity .3s .6s, transform .3s .6s; }
   .cx-xam.open .loai { opacity:.92; transform:rotate(-8deg); }
   .cx-xam .ong { position:absolute; left:16px; bottom:28px; width:120px; height:200px; z-index:2; }
   .cx-xam .cup { position:absolute; left:12px; right:12px; bottom:0; height:130px; border-radius:8px 8px 18px 18px; background:linear-gradient(90deg, #5a1a0c, #a8402a 35%, #c5603e 50%, #8a2e1c 70%, #4a1208); box-shadow:0 8px 16px rgba(0,0,0,.45); }
@@ -143,7 +148,7 @@
   @keyframes cxShake { 0% { transform:rotate(-7deg) } 50% { transform:rotate(7deg) translateY(-3px) } 100% { transform:rotate(-7deg) } }
   .cx-xam .one { position:absolute; left:68px; bottom:143px; width:16px; height:120px; z-index:3; border-radius:4px 4px 0 0; background:linear-gradient(90deg, #c9a46a, #f6e4bb, #b08850); opacity:0; transform:translateY(50px); transition:transform .7s cubic-bezier(.2,1.4,.4,1), opacity .2s; display:flex; justify-content:center; box-shadow:0 0 12px rgba(255,220,140,.8); }
   .cx-xam .one::before { content:''; position:absolute; top:0; left:0; right:0; height:15px; background:#b3140e; border-radius:4px 4px 0 0; }
-  .cx-xam .one span { margin-top:22px; font:900 14px/1 'Playfair Display', serif; color:var(--ink); writing-mode:vertical-rl; }
+  .cx-xam .one span { margin-top:22px; font:900 14px/1 'Playfair Display', 'Noto Serif SC', serif; color:var(--ink); writing-mode:vertical-rl; }
   .cx-xam.up .one { opacity:1; transform:translateY(-60px); }
 
   /* đèn nguyện */
@@ -151,22 +156,29 @@
   .cx-den .lamp { position:relative; width:70px; height:56px; margin:0 auto; }
   .cx-den .lamp img { width:70px; height:56px; object-fit:contain; filter:drop-shadow(0 0 14px rgba(255,190,90,.95)); }
   .cx-den .lamp::before { content:''; position:absolute; left:50%; top:-13px; width:12px; height:22px; margin-left:-6px; border-radius:50% 50% 45% 45%; background:radial-gradient(circle at 50% 70%, #fff7c8, #ffb23e 55%, rgba(255,120,30,0) 75%); animation:cxFlame .5s ease-in-out infinite alternate; }
-  .cx-den .wish { display:inline-block; max-width:260px; margin-top:4px; padding:2px 10px; font:italic 600 25px 'Lora', serif; color:#fff3d0; text-shadow:0 0 10px rgba(255,170,60,.9), 0 2px 3px #000; }
+  .cx-den .wish { display:inline-block; max-width:260px; margin-top:4px; padding:2px 10px; font:italic 600 25px 'Lora', 'Noto Serif SC', serif; color:#fff3d0; text-shadow:0 0 10px rgba(255,170,60,.9), 0 2px 3px #000; }
   .cx-den .by { font-size:22px; color:#f6dfae; opacity:.85; text-shadow:0 2px 3px #000; }
   @keyframes cxFlame { to { transform:scaleY(1.2) translateY(-2px) } }
   @keyframes cxRise { 0% { opacity:0; transform:translateY(0) } 10% { opacity:1 } 50% { transform:translate(18px, var(--mid)) } 85% { opacity:1 } 100% { opacity:0; transform:translate(-10px, var(--rise)) } }
 
-  .cx-toast { position:absolute; text-align:center; font:italic 800 38px 'Playfair Display', serif; color:#fff1c9; text-shadow:0 0 16px rgba(255,180,60,.9), 0 2px 4px #000; opacity:0; transition:opacity .4s; }
+  .cx-toast { position:absolute; text-align:center; font:italic 800 38px 'Playfair Display', 'Noto Serif SC', serif; color:#fff1c9; text-shadow:0 0 16px rgba(255,180,60,.9), 0 2px 4px #000; opacity:0; transition:opacity .4s; }
   .cx-toast::before, .cx-toast::after { content:'❀'; margin:0 14px; font-size:22px; color:var(--gold); vertical-align:middle; }
   .cx-toast.show { opacity:1; }
-  .cx-unmute { position:absolute; left:50%; top:900px; transform:translateX(-50%); padding:14px 40px; font:700 24px 'Lora', serif; color:var(--gold2); border-radius:6px; pointer-events:auto; cursor:pointer; display:none; white-space:nowrap; }
+  /* bản dịch: tiếng Trung không có chữ nghiêng thật (trình duyệt tự kéo xiên), giá lễ phẩm tiếng Anh dài hơn "xu" */
+  html:lang(zh) .cx, html:lang(zh) .cx * { font-style:normal !important; }
+  html:lang(en) .cx-item .pr { font-size:15px; padding:1px 4px; }
+  .cx-unmute { position:absolute; left:50%; top:900px; transform:translateX(-50%); padding:14px 40px; font:700 24px 'Lora', 'Noto Serif SC', serif; color:var(--gold2); border-radius:6px; pointer-events:auto; cursor:pointer; display:none; white-space:nowrap; }
   `;
 
-  const TONES = { 'thượng cát': '#b3140e', 'trung cát': '#a8741a', 'tiểu cát': '#2f7a5a', 'bình an': '#55657f' };
+  // màu con dấu theo hạng quẻ (cả tên đã dịch trong i18n.<lang>.draws.xam)
+  const TONES = { 'thượng cát': '#b3140e', 'trung cát': '#a8741a', 'tiểu cát': '#2f7a5a', 'bình an': '#55657f',
+    'great fortune': '#b3140e', 'good fortune': '#a8741a', 'small fortune': '#2f7a5a', 'peaceful': '#55657f',
+    '上吉': '#b3140e', '中吉': '#a8741a', '小吉': '#2f7a5a', '平安': '#55657f' };
 
   // ---------- Dựng ----------
   function init(o) {
     theme = o.theme; cfg = theme.hud || {};
+    words = cfg.text || {}; locale = LOCALE[theme.lang] || 'vi-VN'; document.documentElement.lang = theme.lang || 'vi';
     root = document.createElement('div');
     root.className = 'cx';
     o.stage.appendChild(root);
@@ -178,11 +190,11 @@
     const unit = esc(cfg.giftCard?.unit || 'công đức');
     root.insertAdjacentHTML('beforeend', `
       <div class="lac cx-plaque" style="left:${L}px;top:${top}px;width:${colW}px">${corners()}<h1 class="gold-text">${esc(plaque.text || theme.name)}</h1>${plaque.sub ? `<p>${esc(plaque.sub)}</p>` : ''}</div>
-      <div class="glass cx-stats" style="right:${L}px;top:${top}px;width:${colW}px"><div><b data-c="people">0</b>Phật tử</div><div><b data-c="likes">0</b>tim</div><div><b data-c="coins">0</b>${unit}</div></div>
+      <div class="glass cx-stats" style="right:${L}px;top:${top}px;width:${colW}px"><div><b data-c="people">0</b>${esc(t('people', 'Phật tử'))}</div><div><b data-c="likes">0</b>${esc(t('likes', 'tim'))}</div><div><b data-c="coins">0</b>${unit}</div></div>
       <div class="glass cx-scroll cx-guide" style="left:${L}px;top:${side}px;width:${colW}px"><i class="rod t"></i><i class="rod b"></i><h3 class="gold-text">${esc(cfg.guide?.title || 'LỐI VÀO')}</h3><ul></ul></div>
       <div class="glass cx-scroll cx-board" style="right:${L}px;top:${side}px;width:${colW}px"><i class="rod t"></i><i class="rod b"></i><h3 class="gold-text">${esc(cfg.board?.title || 'BẢNG VÀNG')}</h3><ol></ol></div>
       <div class="cx-toast" style="${mid};top:${cfg.toastTop ?? 1010}px"></div>
-      <div class="cx-so" style="${mid};top:${cfg.giftCard?.top ?? 1120}px"><div class="who"></div><div class="what"></div><div class="quote"></div><div class="seal">PHÚC<br>LÀNH</div></div>
+      <div class="cx-so" style="${mid};top:${cfg.giftCard?.top ?? 1120}px"><div class="who"></div><div class="what"></div><div class="quote"></div><div class="seal">${t('seal', 'PHÚC\nLÀNH').split('\n').map(esc).join('<br>')}</div></div>
       <div class="cx-kinh" style="left:${L + 50}px;right:${L + 50}px;top:${cfg.periodicTop ?? 790}px"><i class="rod t"></i><i class="rod b"></i><h4></h4><p></p></div>
       <div class="cx-xam" style="left:${L + 46}px;right:${L + 46}px;top:${cfg.drawTop ?? 770}px"><div class="slip"><div class="hd"><span class="so"></span></div><div class="tho"></div><div class="rule">❀</div><div class="loi"></div><div class="ft"><span class="nm"></span><span class="dt"></span></div><div class="loai"></div></div><div class="ong"><div class="sticks">${[0, 12, 24, 36, 48, 60].map((x, i) => `<i style="left:${x}px;height:${50 + (i % 3) * 8}px"></i>`).join('')}</div><div class="cup"></div></div><div class="one"><span></span></div></div>
     `);
@@ -192,7 +204,7 @@
         <div class="cx-item" data-action="${esc(a.id)}"><div class="md">${/\.(png|webp|gif|jpe?g|svg)$/i.test(a.icon || '') ? `<img src="${esc(a.icon)}">` : `<span>${esc(a.icon || '✨')}</span>`}</div><div class="nm">${esc(a.offering || a.label)}</div><span class="pr">${esc(a.card)}</span></div>`).join('')}</div>`);
     }
     if ((theme.goals || []).length) $('.cx-stats', root).insertAdjacentHTML('beforeend', `<div class="cx-goal"><div class="lb"></div><div class="stick"><div class="ash"></div><div class="ember"></div></div></div>`);
-    root.insertAdjacentHTML('beforeend', `<div class="lac cx-unmute">${corners()}Chạm để nghe chuông mõ</div>`);
+    root.insertAdjacentHTML('beforeend', `<div class="lac cx-unmute">${corners()}${esc(t('unmute', 'Chạm để nghe chuông mõ'))}</div>`);
     const un = $('.cx-unmute', root);
     un.onclick = () => { Live.audio()?.resume(); un.style.display = 'none'; K.audio.init(); };
     setTimeout(() => { const a = Live.audio(); if (a && a.state === 'suspended') un.style.display = 'block'; }, 1500);
@@ -223,7 +235,7 @@
     $('ol', board).innerHTML = Array.from({ length: n }, (_, i) => {
       const d = (s.top || [])[i];
       return d ? `<li><span class="rk">${i + 1}</span><div><div class="nm">${esc(d.name)}</div><div class="cd">${fmt(d.coins)} ${esc(cfg.giftCard?.unit || 'công đức')}</div></div></li>`
-        : `<li class="empty"><span class="rk">${i + 1}</span><div><div class="nm">Chờ người hữu duyên</div></div></li>`;
+        : `<li class="empty"><span class="rk">${i + 1}</span><div><div class="nm">${esc(t('waiting', 'Chờ người hữu duyên'))}</div></div></li>`;
     }).join('');
     layoutSides();
     const g = (s.goals || [])[0], ge = $('.cx-goal', root);
@@ -239,14 +251,15 @@
     const ul = root && $('.cx-guide ul', root);
     if (!ul) return;
     const r = data?.rules || {}, rows = [];
-    rows.push(r.joinMode === 'keyword' && r.joinKeywords?.length ? [`«${r.joinKeywords[0]}»`, 'vào chùa'] : ['Bình luận', 'vào chùa']);
+    rows.push(r.joinMode === 'keyword' && r.joinKeywords?.length ? [`«${r.joinKeywords[0]}»`, t('enter', 'vào chùa')] : [t('comment', 'Bình luận'), t('enter', 'vào chùa')]);
     const seen = new Set();
     for (const c of r.chatCommands || []) {
       if (seen.has(c.action)) continue;
       seen.add(c.action);
-      rows.push([`«${c.keywords[0]}»`, c.label || c.action]);
+      // luật chat chứa từ khoá cả 3 thứ tiếng: thẻ hướng dẫn hiện từ khoá + tên lệnh của ngôn ngữ đang chọn (hud.text kw_<id>, cmd_<id>)
+      rows.push([`«${t(`kw_${c.action}`, c.keywords[0])}»`, t(`cmd_${c.action}`, c.label || c.action)]);
     }
-    rows.push(['Thả tim', 'gõ mõ']);
+    rows.push([t('heart', 'Thả tim'), t('heartDo', 'gõ mõ')]);
     const kws = (chars || []).map((c) => c.keywords?.[0]).filter(Boolean);
     ul.innerHTML = rows.slice(0, cfg.guide?.max || 5).map(([k, d]) => `<li><span class="k">${esc(k)}</span><span class="d">${esc(d)}</span></li>`).join('');
   }
@@ -266,7 +279,7 @@
     const g = cfg.giftCard || {};
     const a = (theme.actions || []).find((x) => x.id === ev.action);
     const said = lastWords.get(ev.user?.id);
-    $('.who', el).textContent = ev.user?.name || 'Thí chủ';
+    $('.who', el).textContent = ev.user?.name || t('guest', 'Thí chủ');
     $('.what', el).innerHTML = `${esc(g.verb || 'kính dâng')} <b>${esc(a?.offering || ev.label || ev.gift?.name)}${ev.count > 1 ? ` ×${ev.count}` : ''}</b>${ev.total ? ` · ${fmt(ev.total)} ${esc(g.unit || 'công đức')}` : ''}`;
     $('.quote', el).textContent = said && Date.now() - said.at < 120000 ? `“${said.text}”` : '';
     el.classList.toggle('big', Boolean(ev.big));
@@ -309,12 +322,12 @@
     const loai = String(d.loai || '');
     el.style.setProperty('--tone', TONES[loai.toLowerCase()] || '#b3140e');
     $('.one span', el).textContent = `${d.so || d.n}`;
-    $('.so', el).textContent = `QUẺ SỐ ${d.so || d.n}`;
+    $('.so', el).textContent = t('drawNo', 'QUẺ SỐ {n}', { n: d.so || d.n });
     $('.loai', el).innerHTML = loai.split(' ').map(esc).join('<br>');
     $('.tho', el).innerHTML = [].concat(d.tho || []).map(esc).join('<br>');
-    $('.loi', el).innerHTML = d.loi ? `<b>Lời bàn</b> · ${esc(d.loi)}` : '';
-    $('.nm', el).textContent = `Quẻ của ${ev.user?.name || 'thí chủ'}${d.again ? ' · đã xin hôm nay' : ''}`;
-    $('.dt', el).textContent = new Date().toLocaleDateString('vi-VN');
+    $('.loi', el).innerHTML = d.loi ? `<b>${esc(t('advice', 'Lời bàn'))}</b> · ${esc(d.loi)}` : '';
+    $('.nm', el).textContent = `${t('drawOf', 'Quẻ của {ten}', { ten: ev.user?.name || t('guest', 'thí chủ') })}${d.again ? t('drawAgain', ' · đã xin hôm nay') : ''}`;
+    $('.dt', el).textContent = new Date().toLocaleDateString(locale);
     quoteVoice.delete(ev.user?.id);
     el.classList.remove('up', 'open'); el.classList.add('show');
     const ong = $('.ong', el);
@@ -371,7 +384,7 @@
     const el = root && $('.cx-kinh', root);
     if (!el || !ev.text) return;
     moBeat(12000);
-    $('h4', el).textContent = ev.title || 'THỜI KINH';
+    $('h4', el).textContent = ev.title || t('periodic', 'THỜI KINH');
     $('p', el).textContent = ev.text;
     el.classList.add('show');
     clearTimeout(periodic.t); periodic.t = setTimeout(() => el.classList.remove('show'), 12000);
