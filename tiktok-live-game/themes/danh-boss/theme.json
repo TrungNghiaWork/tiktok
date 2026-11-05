@@ -535,6 +535,22 @@
             }
           ]
         }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} reached a new rank!"
+          }
+        ]
       }
     },
     "zh": {
@@ -680,6 +696,22 @@
             }
           ]
         }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} 晋升新称号！"
+          }
+        ]
       }
     }
   }

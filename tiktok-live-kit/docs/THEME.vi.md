@@ -50,6 +50,8 @@ Vùng an toàn trên khung 1080 × 1920: trên cùng 240px (tên kênh, người
   "spacing": { "col": 0.8, "row": 0.4 },       // khoảng cách người, tính theo chiều cao người
   "obstacles": [{ "x0": 0, "x1": 105, "y0": 0, "y1": 1130 }],            // chân cột, bàn... không đặt người
   "seats": [[440, 980], [640, 980]],           // ghế danh dự cho top người tặng
+  // "slots": [[188, 1260], [364, 1260], ...],  // tuỳ chọn: chỗ CỐ ĐỊNH (vd lưới bàn học) thay cho chỗ tự chia trên sàn;
+  //                                           // đầy thì người lâu không tương tác nhất nhường chỗ
   "points": { "stage": [540, 930], "focus": [540, 600], "entry": [540, 2000] },  // điểm mốc cho hành động, camera
   "emitters": [{ "preset": "smoke", "at": "stage", "every": 90 }],      // hiệu ứng chạy liên tục (at: điểm mốc, [x, y], hoặc x / y)
   "glows": [[300, 760, 40]],                   // đốm sáng lung linh [x, y, bán kính] (nến, đèn)
@@ -155,6 +157,7 @@ Theme khai báo các ngôn ngữ nó có và bản dịch; bảng điều khiể
 }
 ```
 
+- `{lan}` (", 3 lần" khi tặng nhiều lần) đổi theo ngôn ngữ: `, {n} lần` / `, {n} times` / `，{n}次`. Đặt `voice.times` (vd `" ×{n}"`) để viết kiểu riêng.
 - Giọng được phép: `vi-VN-HoaiMyNeural`, `vi-VN-NamMinhNeural`, `en-US-AriaNeural`, `en-US-GuyNeural`, `en-US-JennyNeural`, `en-GB-SoniaNeural`, `zh-CN-XiaoxiaoNeural`, `zh-CN-YunxiNeural`, `zh-CN-XiaoyiNeural`, `zh-TW-HsiaoChenNeural`. Giọng dự phòng Windows (`"fallback": "local"`) tìm giọng cùng ngôn ngữ.
 - **Lệnh chat** không đổi theo ngôn ngữ: ghi từ khoá của cả ba thứ tiếng trong `rules` (vd `["đánh", "attack", "打"]`), người xem gõ tiếng nào cũng được.
 - Tên chiêu trong sự kiện quà / lệnh chat (`{hanh_dong}`, `ev.label`) lấy theo `actions` đã dịch, kể cả khi luật đã lưu trên bảng điều khiển.

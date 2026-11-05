@@ -1,0 +1,686 @@
+{
+  "name": "Cả phòng leo tháp",
+  "description": "Cả phòng cùng đẩy một người leo tháp: thả tim, gõ \"leo\", tặng quà để lên tầng mây, núi tuyết, vũ trụ. Ngừng tay thì gió thổi tụt, nhưng không tụt quá tầng đã lên.",
+  "width": 1080,
+  "height": 1920,
+  "actions": [
+    {
+      "id": "leo",
+      "label": "Leo",
+      "icon": "🧗",
+      "description": "Lệnh chat: đẩy người leo lên 2 m",
+      "steps": [
+        {
+          "play": "cheer"
+        }
+      ]
+    },
+    {
+      "id": "tiepsuc",
+      "label": "Tiếp sức",
+      "icon": "⚡",
+      "card": "1 XU",
+      "description": "Người tặng sáng lên, leo thêm",
+      "steps": [
+        {
+          "aura": 0.7
+        },
+        {
+          "play": "cheer"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "⬆️"
+        }
+      ]
+    },
+    {
+      "id": "daythung",
+      "label": "Dây thừng",
+      "icon": "🪢",
+      "card": "10 XU",
+      "description": "Thả dây kéo người leo lên một đoạn dài",
+      "steps": [
+        {
+          "play": "cheer",
+          "times": 2
+        },
+        {
+          "js": "dayThung"
+        }
+      ]
+    },
+    {
+      "id": "khinhkhicau",
+      "label": "Khinh khí cầu",
+      "icon": "🎈",
+      "card": "100 XU",
+      "description": "Pháo hoa, cả phòng reo, bay vọt lên cao",
+      "steps": [
+        {
+          "spotlight": true
+        },
+        {
+          "play": "cheer",
+          "times": 3
+        },
+        {
+          "js": "khinhKhiCau"
+        },
+        {
+          "crowd": [
+            {
+              "play": "cheer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "joinMode": "all",
+    "joinKeywords": [],
+    "bigGiftCoins": 100,
+    "giftTiers": [
+      {
+        "minCoins": 1,
+        "action": "tiepsuc",
+        "label": "Tiếp sức"
+      },
+      {
+        "minCoins": 10,
+        "action": "daythung",
+        "label": "Dây thừng"
+      },
+      {
+        "minCoins": 100,
+        "action": "khinhkhicau",
+        "label": "Khinh khí cầu"
+      }
+    ],
+    "giftOverrides": [],
+    "chatCommands": [
+      {
+        "keywords": [
+          "leo",
+          "leo lên",
+          "leo đi",
+          "lên",
+          "cố lên",
+          "🧗",
+          "climb",
+          "up",
+          "go",
+          "爬",
+          "上",
+          "加油"
+        ],
+        "match": "exact",
+        "action": "leo",
+        "label": "leo",
+        "cooldownMs": 3000
+      }
+    ]
+  },
+  "bigGift": {
+    "steps": [
+      {
+        "fx": "flash",
+        "strength": 0.2
+      }
+    ]
+  },
+  "characters": [],
+  "npcs": [],
+  "animations": {
+    "cheer": {
+      "frames": [
+        "stand",
+        "cheer",
+        "stand"
+      ],
+      "ms": 650
+    }
+  },
+  "titles": [
+    {
+      "minCoins": 0,
+      "label": "Tập leo"
+    },
+    {
+      "minCoins": 50,
+      "label": "Dân leo núi"
+    },
+    {
+      "minCoins": 300,
+      "label": "Nhà thám hiểm",
+      "aura": 0.4
+    },
+    {
+      "minCoins": 1000,
+      "label": "Chinh phục đỉnh cao",
+      "aura": 0.8
+    }
+  ],
+  "goals": [
+    {
+      "id": "likes",
+      "metric": "likes",
+      "label": "Tim tiếp sức",
+      "every": 1000
+    }
+  ],
+  "voice": {
+    "enabled": true,
+    "voice": "vi-VN-NamMinhNeural",
+    "giftMinCoins": 1,
+    "gift": [
+      "Cảm ơn {ten}, {hanh_dong}{lan}! Leo tiếp nào!",
+      "{ten} {hanh_dong}{lan}, cả phòng lên cao rồi!"
+    ],
+    "bigGift": [
+      "Khinh khí cầu! Cảm ơn {ten}, cả phòng bay lên!"
+    ],
+    "join": [
+      "Chào {ten}! Thả tim hoặc gõ leo để cả phòng lên cao nhé.",
+      "{ten} vừa tới chân tháp."
+    ],
+    "follow": [
+      "Cảm ơn {ten} đã theo dõi kênh."
+    ],
+    "title": [
+      "Chúc mừng {ten} lên danh hiệu {danh_hieu}."
+    ],
+    "goal": [
+      "Cả phòng đã thả {gia_tri} tim tiếp sức!"
+    ],
+    "cooldown": {
+      "join": 15000
+    },
+    "fallbackWords": []
+  },
+  "periodic": {
+    "everyMinutes": 4,
+    "quietSeconds": 20,
+    "title": "CÁCH CHƠI",
+    "items": [
+      "Thả tim, gõ «leo», tặng quà để cả phòng leo lên cao. Mỗi 100 m lên một tầng mới!",
+      "Ngừng tay là gió thổi tụt xuống, nhưng không tụt quá tầng đã lên. Cùng phá kỷ lục hôm nay!"
+    ]
+  },
+  "prompts": {
+    "everySeconds": 80,
+    "quietSeconds": 25,
+    "items": [
+      "Gió sắp thổi rồi! Thả tim giữ độ cao nào ❤️",
+      "Gõ «leo» để lên thêm 2 m 🧗"
+    ]
+  },
+  "hud": {
+    "title": {
+      "text": "LEO THÁP"
+    },
+    "game": {
+      "points": {
+        "chat": 2,
+        "like": 0.5,
+        "coin": 3
+      },
+      "minGift": {
+        "daythung": 40,
+        "khinhkhicau": 200
+      },
+      "maxGift": 250,
+      "floorM": 100,
+      "pxPerM": 6,
+      "idleMs": 8000,
+      "fallPerSec": 1.2,
+      "starsFrom": 600,
+      "tower": {
+        "x": 540,
+        "width": 200,
+        "climberY": 860,
+        "top": 470,
+        "bottom": 1150
+      },
+      "zones": [
+        {
+          "at": 0,
+          "name": "Chân tháp",
+          "sky": "#7ec8ff"
+        },
+        {
+          "at": 100,
+          "name": "Tầng mây",
+          "sky": "#bfe4ff"
+        },
+        {
+          "at": 300,
+          "name": "Đỉnh núi tuyết",
+          "sky": "#ffd9b0"
+        },
+        {
+          "at": 600,
+          "name": "Trời đêm",
+          "sky": "#2b2f6b"
+        },
+        {
+          "at": 1000,
+          "name": "Vũ trụ",
+          "sky": "#0b0b2a"
+        },
+        {
+          "at": 2000,
+          "name": "Mặt Trăng",
+          "sky": "#1c1c3c"
+        },
+        {
+          "at": 5000,
+          "name": "Sao Hỏa",
+          "sky": "#5a1d12"
+        }
+      ]
+    },
+    "text": {
+      "guest": "Khách",
+      "call": "❤️ tim +0,5 m · gõ **LEO** +2 m · 🎁 1 xu = +3 m",
+      "zone": "Đang ở",
+      "wind": "🌬️ Gió thổi! Leo tiếp kẻo tụt",
+      "next": "Còn {m} m tới mốc {h} m",
+      "board": "💪 GÓP SỨC",
+      "none": "Thả tim để leo nào!",
+      "record": "🏆 Kỷ lục: {h} m",
+      "floor": "🎉 {h} M!",
+      "thanks": "⭐ Góp sức nhiều nhất: {ten}",
+      "unmute": "🔔 Chạm để bật âm thanh"
+    }
+  },
+  "colors": {
+    "accent": "#ffd25e",
+    "placeholderRobe": "#5b8f3a"
+  },
+  "sounds": {
+    "leo": {
+      "cooldown": 400,
+      "vary": 0.08
+    },
+    "tang": {
+      "cooldown": 3000,
+      "duck": 0.4,
+      "priority": true
+    },
+    "like": false
+  },
+  "text": {},
+  "reactions": {
+    "like": [
+      {
+        "fx": "emit",
+        "preset": "heart",
+        "at": "head",
+        "count": "likes"
+      }
+    ],
+    "chat": [],
+    "title": [
+      {
+        "aura": 1
+      },
+      {
+        "fx": "emit",
+        "preset": "star",
+        "at": "head",
+        "count": 16
+      },
+      {
+        "toast": "⭐ {ten} lên danh hiệu mới!"
+      }
+    ],
+    "goal": [
+      {
+        "fx": "rain",
+        "preset": "confetti",
+        "count": 80
+      },
+      {
+        "crowd": [
+          {
+            "play": "cheer"
+          }
+        ]
+      }
+    ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Room tower climb",
+      "description": "The whole room pushes one climber up a tower: send hearts, type \"climb\", send gifts to reach the clouds, snowy peaks and space. Stop and the wind pulls you down, but never below a floor you reached.",
+      "actions": {
+        "leo": {
+          "label": "Climb",
+          "description": "Chat command: push the climber up 2 m"
+        },
+        "tiepsuc": {
+          "label": "Boost",
+          "card": "1 COIN",
+          "description": "The giver lights up, the climber goes higher"
+        },
+        "daythung": {
+          "label": "Rope",
+          "card": "10 COINS",
+          "description": "A rope pulls the climber a long way up"
+        },
+        "khinhkhicau": {
+          "label": "Hot-air balloon",
+          "card": "100 COINS",
+          "description": "Fireworks, the room cheers, the climber flies up"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Beginner"
+        },
+        {
+          "minCoins": 50,
+          "label": "Climber"
+        },
+        {
+          "minCoins": 300,
+          "label": "Explorer",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "Summit master",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Boost hearts",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "en-US-GuyNeural",
+        "gift": [
+          "Thanks {ten} for the {hanh_dong}{lan}! Keep climbing!",
+          "{ten} sent a {hanh_dong}{lan}, the room goes higher!"
+        ],
+        "bigGift": [
+          "Hot-air balloon! Thank you {ten}, the whole room flies up!"
+        ],
+        "join": [
+          "Hi {ten}! Send hearts or type climb to help the room go higher.",
+          "{ten} just arrived at the tower."
+        ],
+        "follow": [
+          "Thanks {ten} for following."
+        ],
+        "title": [
+          "Congrats {ten}, you are now a {danh_hieu}."
+        ],
+        "goal": [
+          "The room sent {gia_tri} boost hearts!"
+        ]
+      },
+      "periodic": {
+        "title": "HOW TO PLAY",
+        "items": [
+          "Send hearts, type «climb» and send gifts to push the climber up. Every 100 m is a new floor!",
+          "Stop and the wind pulls you down, but never below a floor you reached. Beat today's record together!"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "The wind is coming! Send hearts to hold on ❤️",
+          "Type «climb» for 2 more metres 🧗"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "TOWER CLIMB"
+        },
+        "game": {
+          "zones": [
+            {
+              "at": 0,
+              "name": "Tower base",
+              "sky": "#7ec8ff"
+            },
+            {
+              "at": 100,
+              "name": "Cloud level",
+              "sky": "#bfe4ff"
+            },
+            {
+              "at": 300,
+              "name": "Snowy peak",
+              "sky": "#ffd9b0"
+            },
+            {
+              "at": 600,
+              "name": "Night sky",
+              "sky": "#2b2f6b"
+            },
+            {
+              "at": 1000,
+              "name": "Outer space",
+              "sky": "#0b0b2a"
+            },
+            {
+              "at": 2000,
+              "name": "The Moon",
+              "sky": "#1c1c3c"
+            },
+            {
+              "at": 5000,
+              "name": "Mars",
+              "sky": "#5a1d12"
+            }
+          ]
+        },
+        "text": {
+          "guest": "Guest",
+          "call": "❤️ heart +0.5 m · type **CLIMB** +2 m · 🎁 1 coin = +3 m",
+          "zone": "Now at",
+          "wind": "🌬️ Windy! Keep climbing or slip",
+          "next": "{m} m to the {h} m mark",
+          "board": "💪 TOP HELPERS",
+          "none": "Send hearts to climb!",
+          "record": "🏆 Record: {h} m",
+          "floor": "🎉 {h} M!",
+          "thanks": "⭐ Top helper: {ten}",
+          "unmute": "🔔 Tap to turn on sound"
+        }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} reached a new rank!"
+          }
+        ]
+      }
+    },
+    "zh": {
+      "name": "全场爬塔",
+      "description": "全场一起推一位攀登者爬塔：点赞、打「爬」、送礼物，登上云层、雪峰、太空。停手就会被风吹下来，但不会低于已到达的楼层。",
+      "actions": {
+        "leo": {
+          "label": "爬",
+          "description": "评论指令：攀登者上升2米"
+        },
+        "tiepsuc": {
+          "label": "加油",
+          "card": "1币",
+          "description": "送礼者发光，攀登者再往上"
+        },
+        "daythung": {
+          "label": "绳索",
+          "card": "10币",
+          "description": "放下绳索把攀登者拉上一大段"
+        },
+        "khinhkhicau": {
+          "label": "热气球",
+          "card": "100币",
+          "description": "烟花，全场欢呼，攀登者飞上高空"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "新手"
+        },
+        {
+          "minCoins": 50,
+          "label": "登山者"
+        },
+        {
+          "minCoins": 300,
+          "label": "探险家",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "登顶大师",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "加油爱心",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "zh-CN-YunxiNeural",
+        "gift": [
+          "谢谢{ten}的{hanh_dong}{lan}！继续爬！",
+          "{ten}送出{hanh_dong}{lan}，全场更高了！"
+        ],
+        "bigGift": [
+          "热气球！谢谢{ten}，全场飞起来了！"
+        ],
+        "join": [
+          "你好{ten}！点赞或打爬，帮全场爬得更高。",
+          "{ten}来到了塔下。"
+        ],
+        "follow": [
+          "谢谢{ten}的关注。"
+        ],
+        "title": [
+          "恭喜{ten}成为{danh_hieu}。"
+        ],
+        "goal": [
+          "全场已送出{gia_tri}个加油爱心！"
+        ]
+      },
+      "periodic": {
+        "title": "玩法",
+        "items": [
+          "点赞、打「爬」、送礼物，推攀登者往上爬。每100米是新的一层！",
+          "停手就会被风吹下来，但不会低于已到达的楼层。一起打破今天的纪录！"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "风要来了！点赞稳住高度 ❤️",
+          "打「爬」再上2米 🧗"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "爬塔"
+        },
+        "game": {
+          "zones": [
+            {
+              "at": 0,
+              "name": "塔底",
+              "sky": "#7ec8ff"
+            },
+            {
+              "at": 100,
+              "name": "云层",
+              "sky": "#bfe4ff"
+            },
+            {
+              "at": 300,
+              "name": "雪峰",
+              "sky": "#ffd9b0"
+            },
+            {
+              "at": 600,
+              "name": "夜空",
+              "sky": "#2b2f6b"
+            },
+            {
+              "at": 1000,
+              "name": "太空",
+              "sky": "#0b0b2a"
+            },
+            {
+              "at": 2000,
+              "name": "月球",
+              "sky": "#1c1c3c"
+            },
+            {
+              "at": 5000,
+              "name": "火星",
+              "sky": "#5a1d12"
+            }
+          ]
+        },
+        "text": {
+          "guest": "游客",
+          "call": "❤️ 点赞 +0.5米 · 打**爬** +2米 · 🎁 1币 = +3米",
+          "zone": "当前",
+          "wind": "🌬️ 起风了！继续爬，否则会下滑",
+          "next": "距离 {h} 米还差 {m} 米",
+          "board": "💪 助力榜",
+          "none": "点赞开始爬！",
+          "record": "🏆 纪录：{h} 米",
+          "floor": "🎉 {h} 米！",
+          "thanks": "⭐ 最佳助力：{ten}",
+          "unmute": "🔔 点一下开启声音"
+        }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} 晋升新称号！"
+          }
+        ]
+      }
+    }
+  }
+}

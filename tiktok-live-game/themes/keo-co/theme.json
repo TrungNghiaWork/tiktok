@@ -518,6 +518,22 @@
           "nextRound": "Round {n} starts in {s} seconds",
           "unmute": "🔔 Tap to turn on sound"
         }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} reached a new rank!"
+          }
+        ]
       }
     },
     "zh": {
@@ -643,6 +659,22 @@
           "nextRound": "第{n}局{s}秒后开始",
           "unmute": "🔔 点一下打开声音"
         }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} 晋升新称号！"
+          }
+        ]
       }
     }
   }

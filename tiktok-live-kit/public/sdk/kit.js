@@ -156,7 +156,7 @@
         break;
       }
       case 'follow': case 'share': case 'title': { const p = S.ensure(ev.user); run(reaction(kind), p, ev); break; }
-      case 'goal': run(reaction('goal'), null, ev); K.hud.toast(`${ev.label}: ${Number(ev.value).toLocaleString('vi-VN')} 🎉`); break;
+      case 'goal': run(reaction('goal'), null, ev); K.hud.toast(`${ev.label}: ${Number(ev.value).toLocaleString({ en: 'en-US', zh: 'zh-CN' }[theme.lang] || 'vi-VN')} 🎉`); break;
       case 'periodic': {
         K.hud.periodic(ev);
         const a = ev.action && (theme.actions || []).find((x) => x.id === ev.action);

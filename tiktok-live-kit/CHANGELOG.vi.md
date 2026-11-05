@@ -5,6 +5,8 @@
 ## Chưa phát hành
 
 - Nhiều ngôn ngữ: theme.json `"langs"` + `"i18n"` (Việt, Anh, Trung). Bảng điều khiển có cài đặt **Ngôn ngữ**, đổi là nạp lại theme bản đó, giọng đọc đổi theo. Mở thêm giọng tiếng Anh và tiếng Trung; giọng dự phòng Windows chọn cùng ngôn ngữ.
+- `scene.json` `"slots"`: chỗ cố định (lưới bàn học, ghế) thay cho chỗ tự chia trên sàn; đầy thì người lâu không tương tác nhất nhường chỗ.
+- Sửa: theme tiếng Anh / Trung đọc số lần tặng bằng tiếng Việt (", 3 lần"); nay `{lan}` theo ngôn ngữ (đặt `voice.times` để đổi). Dòng báo đạt mục tiêu viết số theo ngôn ngữ của theme.
 - Sửa: đổi theme khi overlay đang mở (OBS) thì overlay sang đúng trang theme mới (trước đây tải lại vẫn ở trang theme cũ).
 
 - Bộ sân khấu 3D (`sdk/stage3d.js`, `scene.json` `"stage"`): đèn quét có tia sáng, laser, màn hình phát video lặp (một thư mục thành danh sách phát như màn hình DJ); bước `{ "stage": "party" | "calm" | "strobe" }` và `{ "fx3d": "fireworks" | "confetti" | "beam" | "ring" }`, theme 2D tự đổi sang hiệu ứng 2D.

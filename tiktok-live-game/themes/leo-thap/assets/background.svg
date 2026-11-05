@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <!-- Nền tạm (vẽ tay): bầu trời phía trên (code phủ màu theo tầng, vẽ tháp gạch cuộn ở giữa x 440–640, y 470–1150), bãi cỏ chân tháp cho khán giả từ y ~1150. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4aa3e8"/><stop offset="1" stop-color="#d6efff"/></linearGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc456"/><stop offset="1" stop-color="#3b7a2a"/></linearGradient>
+  </defs>
+  <rect width="1080" height="1160" fill="url(#sky)"/>
+  <g fill="#fff" opacity=".8"><ellipse cx="180" cy="620" rx="110" ry="32"/><ellipse cx="250" cy="600" rx="70" ry="30"/><ellipse cx="880" cy="760" rx="120" ry="30"/><ellipse cx="820" cy="740" rx="70" ry="28"/><ellipse cx="160" cy="980" rx="90" ry="24"/></g>
+  <path d="M0 1160 L180 1010 L320 1110 L470 980 L640 1120 L800 1000 L1080 1150 V1160Z" fill="#6c8fb8" opacity=".55"/>
+  <rect y="1150" width="1080" height="770" fill="url(#grass)"/>
+  <ellipse cx="540" cy="1170" rx="200" ry="26" fill="#3b7a2a" opacity=".6"/>
+  <g fill="#2f6b34" opacity=".35"><circle cx="120" cy="1520" r="44"/><circle cx="960" cy="1460" r="50"/><circle cx="520" cy="1830" r="60"/></g>
+</svg>

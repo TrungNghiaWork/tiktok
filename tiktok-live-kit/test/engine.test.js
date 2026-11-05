@@ -93,3 +93,13 @@ test('đọc bình luận: bỏ từ tục, link, biểu tượng; lệnh chơi 
   assert.equal(v.line(cfg, { kind: 'chat', user: { id: 'b', name: 'Hoa' }, text: 'Hay quá' }), '');
   assert.equal(v.line({ ...cfg, cooldown: {} }, { kind: 'chat', user: { id: 'c', name: 'Tú' }, text: 'xin xăm', command: 'xam' }), '');
 });
+
+test('chỗ cố định: scene.json "slots" thay chỗ tự chia, giữ thứ tự, không giãn theo số người', () => {
+  const desks = { ...SCENE, slots: [[200, 1300], [400, 1300], { x: 600, y: 1420 }] };
+  assert.deepEqual(G.buildSlots(desks, 1.7), [{ x: 200, y: 1300 }, { x: 400, y: 1300 }, { x: 600, y: 1420 }]);
+  const few = G.layoutFor(desks, 1), many = G.layoutFor(desks, 400);
+  assert.equal(few.density, many.density);
+  assert.equal(many.slots.length, 3);
+  assert.equal(G.normalize(SCENE).slots, null); // không khai báo: vẫn tự chia như cũ
+  assert.ok(G.buildSlots(G.normalize(SCENE), 1).length > 150);
+});

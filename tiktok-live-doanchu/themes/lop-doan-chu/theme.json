@@ -1,0 +1,2025 @@
+{
+  "name": "Lớp học đoán chữ",
+  "description": "Bảng đen ra gợi ý và các chữ cái bị xáo trộn, người xem gõ đáp án vào bình luận, ai đúng nhanh được điểm. Người xem thành học sinh ngồi theo bàn, mỗi tiết vinh danh học sinh giỏi.",
+  "width": 1080,
+  "height": 1920,
+  "settings": [
+    {
+      "id": "askSeconds",
+      "label": "Thời gian mỗi câu (giây)",
+      "type": "range",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "default": 25
+    },
+    {
+      "id": "afterFirstSeconds",
+      "label": "Có người đúng đầu tiên thì còn bao nhiêu giây (0 = chờ hết giờ)",
+      "type": "range",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "id": "revealSeconds",
+      "label": "Thời gian hiện đáp án (giây)",
+      "type": "range",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "id": "perPeriod",
+      "label": "Số câu mỗi tiết",
+      "type": "range",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "id": "breakSeconds",
+      "label": "Giải lao giữa hai tiết (giây)",
+      "type": "range",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "default": 12
+    }
+  ],
+  "actions": [
+    {
+      "id": "goiy",
+      "label": "Mở gợi ý",
+      "icon": "💡",
+      "card": "1 XU",
+      "description": "Mở một chữ của đáp án cho cả lớp",
+      "steps": [
+        {
+          "aura": 0.6
+        },
+        {
+          "play": "cheer"
+        },
+        {
+          "js": "goiY"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "💡"
+        }
+      ]
+    },
+    {
+      "id": "themgio",
+      "label": "Thêm giờ",
+      "icon": "⏱",
+      "card": "10 XU",
+      "description": "Câu đang hỏi thêm 10 giây",
+      "steps": [
+        {
+          "aura": 0.8
+        },
+        {
+          "play": "cheer",
+          "times": 2
+        },
+        {
+          "js": "themGio"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "+10s"
+        }
+      ]
+    },
+    {
+      "id": "cauvang",
+      "label": "Câu vàng",
+      "icon": "⭐",
+      "card": "100 XU",
+      "description": "Câu này (hoặc câu sau) điểm ×3 cho cả lớp, pháo hoa",
+      "steps": [
+        {
+          "spotlight": true
+        },
+        {
+          "play": "cheer",
+          "times": 3
+        },
+        {
+          "js": "cauVang"
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "joinMode": "all",
+    "joinKeywords": [],
+    "bigGiftCoins": 100,
+    "giftTiers": [
+      {
+        "minCoins": 1,
+        "action": "goiy",
+        "label": "Mở gợi ý"
+      },
+      {
+        "minCoins": 10,
+        "action": "themgio",
+        "label": "Thêm giờ"
+      },
+      {
+        "minCoins": 100,
+        "action": "cauvang",
+        "label": "Câu vàng"
+      }
+    ],
+    "giftOverrides": [],
+    "chatCommands": []
+  },
+  "bigGift": {
+    "steps": [
+      {
+        "fx": "flash",
+        "strength": 0.2
+      }
+    ]
+  },
+  "characters": [],
+  "npcs": [],
+  "animations": {
+    "cheer": {
+      "frames": [
+        "stand",
+        "cheer",
+        "stand"
+      ],
+      "ms": 650
+    }
+  },
+  "titles": [
+    {
+      "minCoins": 0,
+      "label": "Học sinh"
+    },
+    {
+      "minCoins": 50,
+      "label": "Lớp trưởng"
+    },
+    {
+      "minCoins": 300,
+      "label": "Học sinh giỏi",
+      "aura": 0.4
+    },
+    {
+      "minCoins": 1000,
+      "label": "Trạng nguyên",
+      "aura": 0.8
+    }
+  ],
+  "goals": [
+    {
+      "id": "likes",
+      "metric": "likes",
+      "label": "Tim cổ vũ",
+      "every": 1000
+    }
+  ],
+  "voice": {
+    "enabled": true,
+    "voice": "vi-VN-HoaiMyNeural",
+    "giftMinCoins": 1,
+    "gift": [
+      "Cảm ơn {ten} đã {hanh_dong}{lan} cho cả lớp!",
+      "{ten} {hanh_dong}{lan}, cảm ơn {ten} nha!"
+    ],
+    "bigGift": [
+      "Câu vàng! Cảm ơn {ten}, câu này cả lớp được nhân ba điểm!"
+    ],
+    "join": [
+      "Chào {ten}, mời em vào lớp! Gõ đáp án vào bình luận nhé.",
+      "{ten} vừa vào lớp."
+    ],
+    "follow": [
+      "Cảm ơn {ten} đã theo dõi kênh."
+    ],
+    "title": [
+      "Chúc mừng {ten} lên {danh_hieu}."
+    ],
+    "goal": [
+      "Cả lớp đã thả {gia_tri} tim cổ vũ!"
+    ],
+    "cooldown": {
+      "join": 15000
+    },
+    "fallbackWords": []
+  },
+  "periodic": {
+    "everyMinutes": 4,
+    "quietSeconds": 20,
+    "title": "CÁCH CHƠI",
+    "items": [
+      "Đọc gợi ý, xếp lại các chữ cái rồi gõ đáp án vào bình luận. Ba bạn đúng nhanh nhất được 10, 7, 5 điểm!",
+      "Lớp có hạn chỗ ngồi: tương tác thường xuyên để giữ chỗ trong lớp nhé.",
+      "Quà giúp cả lớp: 1 xu mở một chữ, 10 xu thêm 10 giây, 100 xu câu vàng điểm ×3."
+    ]
+  },
+  "prompts": {
+    "everySeconds": 90,
+    "quietSeconds": 25,
+    "items": [
+      "Ai đoán ra thì gõ ngay nào! ✏️",
+      "Bí quá? Tặng 1 xu để mở một chữ cho cả lớp 💡",
+      "Tương tác để giữ chỗ trong lớp nhé!"
+    ]
+  },
+  "hud": {
+    "title": {
+      "text": "LỚP HỌC ĐOÁN CHỮ"
+    },
+    "game": {
+      "askSeconds": 25,
+      "afterFirstSeconds": 6,
+      "revealSeconds": 6,
+      "perPeriod": 20,
+      "breakSeconds": 12,
+      "points": [
+        10,
+        7,
+        5
+      ],
+      "latePoints": 2,
+      "maxRight": 40,
+      "giftSeconds": 10,
+      "boardSize": 5,
+      "desk": {
+        "width": 150,
+        "height": 44,
+        "lift": 12
+      },
+      "teacherImage": "",
+      "teacherHeight": 260,
+      "words": [
+        {
+          "hint": "Leo trèo giỏi, thích ăn chuối",
+          "a": [
+            "con khỉ",
+            "khỉ"
+          ]
+        },
+        {
+          "hint": "Chúa tể rừng xanh, có bờm oai vệ",
+          "a": [
+            "sư tử",
+            "con sư tử"
+          ]
+        },
+        {
+          "hint": "Cổ rất dài, ăn lá trên cây cao",
+          "a": [
+            "hươu cao cổ",
+            "con hươu cao cổ"
+          ]
+        },
+        {
+          "hint": "Vòi dài, tai to như cái quạt",
+          "a": [
+            "con voi",
+            "voi"
+          ]
+        },
+        {
+          "hint": "Gáy ò ó o mỗi sáng",
+          "a": [
+            "gà trống",
+            "con gà trống",
+            "con gà",
+            "gà"
+          ]
+        },
+        {
+          "hint": "Bơi dưới nước, thở bằng mang",
+          "a": [
+            "con cá",
+            "cá"
+          ]
+        },
+        {
+          "hint": "Mang mai cứng, bò rất chậm",
+          "a": [
+            "con rùa",
+            "rùa"
+          ]
+        },
+        {
+          "hint": "Kêu meo meo, giỏi bắt chuột",
+          "a": [
+            "con mèo",
+            "mèo"
+          ]
+        },
+        {
+          "hint": "Sủa gâu gâu, trung thành giữ nhà",
+          "a": [
+            "con chó",
+            "chó",
+            "cún"
+          ]
+        },
+        {
+          "hint": "Nhảy rất xa, có túi trước bụng, sống ở Úc",
+          "a": [
+            "chuột túi",
+            "kangaroo",
+            "con chuột túi"
+          ]
+        },
+        {
+          "hint": "Ngủ treo ngược, bay ban đêm",
+          "a": [
+            "con dơi",
+            "dơi"
+          ]
+        },
+        {
+          "hint": "Bay đi hút nhuỵ, làm ra mật ngọt",
+          "a": [
+            "con ong",
+            "ong"
+          ]
+        },
+        {
+          "hint": "Tám chân, giăng tơ bắt mồi",
+          "a": [
+            "con nhện",
+            "nhện"
+          ]
+        },
+        {
+          "hint": "Cánh sặc sỡ, lúc nhỏ là con sâu",
+          "a": [
+            "con bướm",
+            "bướm"
+          ]
+        },
+        {
+          "hint": "Kêu ộp ộp dưới ao",
+          "a": [
+            "con ếch",
+            "ếch"
+          ]
+        },
+        {
+          "hint": "Kêu quạc quạc, bơi giỏi, đẻ trứng",
+          "a": [
+            "con vịt",
+            "vịt"
+          ]
+        },
+        {
+          "hint": "Sống ở Nam Cực, đi lạch bạch, không biết bay",
+          "a": [
+            "chim cánh cụt",
+            "cánh cụt"
+          ]
+        },
+        {
+          "hint": "Lông đen trắng, rất thích ăn trúc",
+          "a": [
+            "gấu trúc",
+            "con gấu trúc"
+          ]
+        },
+        {
+          "hint": "Có sừng, giúp nhà nông kéo cày",
+          "a": [
+            "con trâu",
+            "trâu"
+          ]
+        },
+        {
+          "hint": "Gai nhọn mọc khắp người",
+          "a": [
+            "con nhím",
+            "nhím"
+          ]
+        },
+        {
+          "hint": "Biết nói tiếng người, lông sặc sỡ",
+          "a": [
+            "con vẹt",
+            "vẹt"
+          ]
+        },
+        {
+          "hint": "Không có chân, trườn bằng bụng",
+          "a": [
+            "con rắn",
+            "rắn"
+          ]
+        },
+        {
+          "hint": "Đi ngang, có hai cái càng",
+          "a": [
+            "con cua",
+            "cua"
+          ]
+        },
+        {
+          "hint": "Mỏ dài gõ cốc cốc vào thân cây",
+          "a": [
+            "chim gõ kiến",
+            "gõ kiến"
+          ]
+        },
+        {
+          "hint": "Chân dài, hay lội đồng bắt cá, màu trắng",
+          "a": [
+            "con cò",
+            "cò"
+          ]
+        },
+        {
+          "hint": "Chạy nhanh nhất trên cạn, lông có đốm",
+          "a": [
+            "báo săn",
+            "con báo",
+            "báo"
+          ]
+        },
+        {
+          "hint": "Con vật của năm Bính Ngọ 2026",
+          "a": [
+            "con ngựa",
+            "ngựa"
+          ]
+        },
+        {
+          "hint": "Quả vàng cong cong, khỉ rất mê",
+          "a": [
+            "quả chuối",
+            "chuối",
+            "trái chuối"
+          ]
+        },
+        {
+          "hint": "Vỏ có gai, mùi nồng, vua các loại trái cây",
+          "a": [
+            "sầu riêng",
+            "quả sầu riêng",
+            "trái sầu riêng"
+          ]
+        },
+        {
+          "hint": "Vỏ xanh, ruột đỏ, nhiều hạt đen, ăn mùa hè",
+          "a": [
+            "dưa hấu",
+            "quả dưa hấu"
+          ]
+        },
+        {
+          "hint": "Vỏ có nhiều mắt, đội vương miện lá",
+          "a": [
+            "quả dứa",
+            "dứa",
+            "thơm",
+            "khóm"
+          ]
+        },
+        {
+          "hint": "Vỏ đỏ có vảy như rồng, ruột trắng hạt đen",
+          "a": [
+            "thanh long",
+            "quả thanh long"
+          ]
+        },
+        {
+          "hint": "Nước ngọt mát, cùi trắng, vỏ cứng",
+          "a": [
+            "quả dừa",
+            "dừa",
+            "trái dừa"
+          ]
+        },
+        {
+          "hint": "Mọc thành chùm, dùng làm rượu vang",
+          "a": [
+            "quả nho",
+            "nho",
+            "chùm nho"
+          ]
+        },
+        {
+          "hint": "Bánh vuông gói lá dong, ăn ngày Tết",
+          "a": [
+            "bánh chưng"
+          ]
+        },
+        {
+          "hint": "Bánh tròn ăn vào Tết Trung thu",
+          "a": [
+            "bánh trung thu",
+            "bánh nướng",
+            "bánh dẻo"
+          ]
+        },
+        {
+          "hint": "Món nước có bánh phở và thịt bò",
+          "a": [
+            "phở bò",
+            "phở"
+          ]
+        },
+        {
+          "hint": "Bánh kẹp nổi tiếng thế giới của Việt Nam",
+          "a": [
+            "bánh mì",
+            "banh mi"
+          ]
+        },
+        {
+          "hint": "Hạt trắng, nấu lên thành cơm",
+          "a": [
+            "hạt gạo",
+            "gạo"
+          ]
+        },
+        {
+          "hint": "Nước chấm làm từ cá, vị mặn",
+          "a": [
+            "nước mắm",
+            "mắm"
+          ]
+        },
+        {
+          "hint": "Cuộn bánh tráng rồi chiên giòn",
+          "a": [
+            "chả giò",
+            "nem rán",
+            "nem"
+          ]
+        },
+        {
+          "hint": "Dùng để viết lên bảng đen",
+          "a": [
+            "viên phấn",
+            "phấn"
+          ]
+        },
+        {
+          "hint": "Xoá chữ viết bằng bút chì",
+          "a": [
+            "cục tẩy",
+            "tẩy",
+            "cục gôm",
+            "gôm"
+          ]
+        },
+        {
+          "hint": "Dùng để kẻ đường thẳng",
+          "a": [
+            "thước kẻ",
+            "cây thước",
+            "thước"
+          ]
+        },
+        {
+          "hint": "Đeo trên lưng, đựng sách vở đi học",
+          "a": [
+            "cặp sách",
+            "cặp",
+            "ba lô",
+            "balo"
+          ]
+        },
+        {
+          "hint": "Đánh tùng tùng báo giờ ra chơi",
+          "a": [
+            "cái trống",
+            "trống"
+          ]
+        },
+        {
+          "hint": "Có kim giờ và kim phút",
+          "a": [
+            "đồng hồ",
+            "cái đồng hồ"
+          ]
+        },
+        {
+          "hint": "Xoè ra che mưa, cụp lại cầm tay",
+          "a": [
+            "cái ô",
+            "ô",
+            "cây dù",
+            "dù"
+          ]
+        },
+        {
+          "hint": "Soi vào thấy mặt mình",
+          "a": [
+            "cái gương",
+            "gương"
+          ]
+        },
+        {
+          "hint": "Có răng mà không cắn, dùng chải tóc",
+          "a": [
+            "cái lược",
+            "lược"
+          ]
+        },
+        {
+          "hint": "Nhỏ xíu, có lỗ để xâu chỉ",
+          "a": [
+            "cây kim",
+            "kim"
+          ]
+        },
+        {
+          "hint": "Bốn chân mà không biết đi, để ngồi",
+          "a": [
+            "cái ghế",
+            "ghế"
+          ]
+        },
+        {
+          "hint": "Bật lên là sáng cả phòng",
+          "a": [
+            "bóng đèn",
+            "đèn",
+            "cái đèn"
+          ]
+        },
+        {
+          "hint": "Dùng để gọi điện, chụp ảnh, lướt TikTok",
+          "a": [
+            "điện thoại",
+            "cái điện thoại"
+          ]
+        },
+        {
+          "hint": "Muốn mở ổ khoá phải cần nó",
+          "a": [
+            "chìa khoá",
+            "chìa khóa"
+          ]
+        },
+        {
+          "hint": "Hai bánh, đạp bằng chân",
+          "a": [
+            "xe đạp",
+            "chiếc xe đạp"
+          ]
+        },
+        {
+          "hint": "Bay trên trời chở hành khách",
+          "a": [
+            "máy bay",
+            "tàu bay"
+          ]
+        },
+        {
+          "hint": "Chạy trên đường ray, kêu xình xịch",
+          "a": [
+            "tàu hoả",
+            "tàu hỏa",
+            "xe lửa"
+          ]
+        },
+        {
+          "hint": "Nấu cơm bằng điện",
+          "a": [
+            "nồi cơm điện",
+            "nồi cơm"
+          ]
+        },
+        {
+          "hint": "Mọc đằng đông, lặn đằng tây",
+          "a": [
+            "mặt trời",
+            "ông mặt trời"
+          ]
+        },
+        {
+          "hint": "Sáng ban đêm, ngày rằm thì tròn",
+          "a": [
+            "mặt trăng",
+            "ông trăng",
+            "trăng"
+          ]
+        },
+        {
+          "hint": "Bảy sắc màu hiện ra sau cơn mưa",
+          "a": [
+            "cầu vồng"
+          ]
+        },
+        {
+          "hint": "Rơi từ mây xuống làm ướt đất",
+          "a": [
+            "cơn mưa",
+            "mưa"
+          ]
+        },
+        {
+          "hint": "Loé sáng trên trời trước tiếng sấm",
+          "a": [
+            "tia chớp",
+            "chớp"
+          ]
+        },
+        {
+          "hint": "Trắng xốp, trôi lơ lửng trên trời",
+          "a": [
+            "đám mây",
+            "mây"
+          ]
+        },
+        {
+          "hint": "Trắng xoá, rơi ở xứ lạnh vào mùa đông",
+          "a": [
+            "tuyết",
+            "bông tuyết"
+          ]
+        },
+        {
+          "hint": "Ngọn núi phun ra lửa và dung nham",
+          "a": [
+            "núi lửa"
+          ]
+        },
+        {
+          "hint": "Mọc trong đầm, gần bùn mà chẳng hôi tanh mùi bùn",
+          "a": [
+            "hoa sen",
+            "sen"
+          ]
+        },
+        {
+          "hint": "Hoa màu hồng nở rộ ngày Tết miền Bắc",
+          "a": [
+            "hoa đào",
+            "đào"
+          ]
+        },
+        {
+          "hint": "Hoa vàng nở ngày Tết miền Nam",
+          "a": [
+            "hoa mai",
+            "mai"
+          ]
+        },
+        {
+          "hint": "Bông hoa luôn quay theo mặt trời",
+          "a": [
+            "hoa hướng dương",
+            "hướng dương"
+          ]
+        },
+        {
+          "hint": "Thân rỗng có đốt, thành lũy làng quê",
+          "a": [
+            "cây tre",
+            "tre"
+          ]
+        },
+        {
+          "hint": "Dạy học ở trường",
+          "a": [
+            "giáo viên",
+            "cô giáo",
+            "thầy giáo"
+          ]
+        },
+        {
+          "hint": "Khám bệnh, chữa bệnh cho mọi người",
+          "a": [
+            "bác sĩ",
+            "bác sỹ"
+          ]
+        },
+        {
+          "hint": "Dập lửa, cứu người trong đám cháy",
+          "a": [
+            "lính cứu hoả",
+            "lính cứu hỏa",
+            "cứu hoả",
+            "cứu hỏa"
+          ]
+        },
+        {
+          "hint": "Lái máy bay",
+          "a": [
+            "phi công"
+          ]
+        },
+        {
+          "hint": "Trồng lúa trên đồng",
+          "a": [
+            "nông dân",
+            "người nông dân"
+          ]
+        },
+        {
+          "hint": "Nấu ăn trong nhà hàng",
+          "a": [
+            "đầu bếp"
+          ]
+        },
+        {
+          "hint": "Bay vào vũ trụ",
+          "a": [
+            "phi hành gia",
+            "nhà du hành"
+          ]
+        },
+        {
+          "hint": "Thủ đô của Việt Nam",
+          "a": [
+            "hà nội"
+          ]
+        },
+        {
+          "hint": "Thành phố mang tên Bác, lớn nhất miền Nam",
+          "a": [
+            "hồ chí minh",
+            "sài gòn",
+            "tp hcm",
+            "thành phố hồ chí minh"
+          ]
+        },
+        {
+          "hint": "Vịnh có hàng nghìn đảo đá ở Quảng Ninh",
+          "a": [
+            "hạ long",
+            "vịnh hạ long"
+          ]
+        },
+        {
+          "hint": "Thành phố ngàn hoa trên cao nguyên",
+          "a": [
+            "đà lạt"
+          ]
+        },
+        {
+          "hint": "Phố cổ đèn lồng ở Quảng Nam",
+          "a": [
+            "hội an",
+            "phố cổ hội an"
+          ]
+        },
+        {
+          "hint": "Cố đô có sông Hương, núi Ngự",
+          "a": [
+            "huế",
+            "cố đô huế"
+          ]
+        },
+        {
+          "hint": "Đỉnh núi cao nhất Việt Nam",
+          "a": [
+            "fansipan",
+            "phan xi păng",
+            "phanxipang"
+          ]
+        },
+        {
+          "hint": "Đảo lớn nhất Việt Nam, ở Kiên Giang",
+          "a": [
+            "phú quốc",
+            "đảo phú quốc"
+          ]
+        },
+        {
+          "hint": "Cây cầu hình con rồng phun lửa ở Đà Nẵng",
+          "a": [
+            "cầu rồng"
+          ]
+        },
+        {
+          "hint": "Dùng để nhìn",
+          "a": [
+            "con mắt",
+            "mắt",
+            "đôi mắt"
+          ]
+        },
+        {
+          "hint": "Dùng để nghe",
+          "a": [
+            "cái tai",
+            "tai",
+            "đôi tai"
+          ]
+        },
+        {
+          "hint": "Năm ngón, dùng để cầm nắm",
+          "a": [
+            "bàn tay",
+            "tay"
+          ]
+        },
+        {
+          "hint": "Đập thình thịch trong lồng ngực",
+          "a": [
+            "trái tim",
+            "tim",
+            "quả tim"
+          ]
+        },
+        {
+          "hint": "Tiền mừng tuổi trong phong bao đỏ",
+          "a": [
+            "lì xì",
+            "tiền lì xì",
+            "li xi"
+          ]
+        },
+        {
+          "hint": "Đồ chơi Trung thu năm cánh, có nến bên trong",
+          "a": [
+            "đèn ông sao",
+            "ông sao"
+          ]
+        },
+        {
+          "hint": "Trang phục truyền thống của phụ nữ Việt Nam",
+          "a": [
+            "áo dài"
+          ]
+        },
+        {
+          "hint": "Mũ hình chóp làm bằng lá",
+          "a": [
+            "nón lá",
+            "nón"
+          ]
+        },
+        {
+          "hint": "Múa ngày Trung thu, đầu to, có ông Địa đi cùng",
+          "a": [
+            "múa lân",
+            "lân"
+          ]
+        },
+        {
+          "hint": "Bay lên trời nhờ gió và sợi dây",
+          "a": [
+            "con diều",
+            "diều",
+            "cánh diều"
+          ]
+        },
+        {
+          "hint": "Hai đội, hai mươi hai người tranh một quả bóng",
+          "a": [
+            "bóng đá",
+            "đá bóng"
+          ]
+        },
+        {
+          "hint": "Hai đội nắm dây thừng kéo về phía mình",
+          "a": [
+            "kéo co"
+          ]
+        },
+        {
+          "hint": "Bịt mắt rồi đi tìm bắt bạn",
+          "a": [
+            "bịt mắt bắt dê"
+          ]
+        },
+        {
+          "hint": "Nhảy qua sợi dây đang quay vòng",
+          "a": [
+            "nhảy dây"
+          ]
+        },
+        {
+          "hint": "Bàn cờ 64 ô đen trắng, có vua và hậu",
+          "a": [
+            "cờ vua"
+          ]
+        },
+        {
+          "hint": "Ngôi nhà nhỏ của con chim trên cây",
+          "a": [
+            "tổ chim",
+            "tổ"
+          ]
+        },
+        {
+          "hint": "Mùa lạnh nhất trong năm",
+          "a": [
+            "mùa đông",
+            "đông"
+          ]
+        },
+        {
+          "hint": "Ve kêu, hoa phượng nở, học trò nghỉ hè",
+          "a": [
+            "mùa hè",
+            "hè",
+            "mùa hạ"
+          ]
+        },
+        {
+          "hint": "Hoa nở nhiều, cây đâm chồi, mùa đầu năm",
+          "a": [
+            "mùa xuân",
+            "xuân"
+          ]
+        },
+        {
+          "hint": "Lá vàng rơi, trời se lạnh, có Tết Trung thu",
+          "a": [
+            "mùa thu",
+            "thu"
+          ]
+        },
+        {
+          "hint": "Điền từ: Ăn quả nhớ kẻ ___ cây",
+          "a": [
+            "trồng"
+          ]
+        },
+        {
+          "hint": "Điền từ: Có công mài sắt, có ngày nên ___",
+          "a": [
+            "kim"
+          ]
+        },
+        {
+          "hint": "Điền từ: Uống nước nhớ ___",
+          "a": [
+            "nguồn"
+          ]
+        },
+        {
+          "hint": "Điền từ: Tiên học lễ, hậu học ___",
+          "a": [
+            "văn"
+          ]
+        },
+        {
+          "hint": "Điền từ: Không thầy đố mày làm ___",
+          "a": [
+            "nên"
+          ]
+        },
+        {
+          "hint": "Điền từ: Học thầy không tày học ___",
+          "a": [
+            "bạn"
+          ]
+        },
+        {
+          "hint": "Đựng nước uống, mang theo khi đi học",
+          "a": [
+            "bình nước",
+            "chai nước"
+          ]
+        },
+        {
+          "hint": "Ngồi vào đây để học bài trên lớp",
+          "a": [
+            "cái bàn",
+            "bàn học",
+            "bàn"
+          ]
+        }
+      ]
+    },
+    "text": {
+      "title": "LỚP HỌC ĐOÁN CHỮ",
+      "meta": "Tiết {p} · Câu {q}/{n} · {c} bạn",
+      "hintLabel": "✏️ Gợi ý",
+      "gold": "★ CÂU VÀNG ×3",
+      "fast": "⚡ Nhanh nhất: {ten}",
+      "noFast": "⚡ Chưa ai đoán ra…",
+      "count": "{n} bạn đã đúng",
+      "answer": "ĐÁP ÁN",
+      "nobody": "Chưa bạn nào đoán ra, câu sau nhé!",
+      "more": "{n} bạn trả lời đúng",
+      "first": "⚡ {ten} đúng đầu tiên! +{p}",
+      "board": "⭐ TOP TIẾT {p}",
+      "feed": "✅ VỪA ĐÚNG",
+      "waiting": "Chưa có ai",
+      "feedEmpty": "Gõ đáp án nào!",
+      "guest": "Bạn",
+      "periodEnd": "🔔 HẾT TIẾT {n}",
+      "best": "HỌC SINH GIỎI",
+      "noBest": "Tiết này chưa ai ghi điểm",
+      "pts": "{v} điểm",
+      "nextPeriod": "Tiết {n} vào học sau {s} giây",
+      "periodGo": "📚 TIẾT {n} BẮT ĐẦU!",
+      "call": "Gõ **đáp án** vào bình luận · 🎁 1 xu mở chữ · 10 xu +10s · 100 xu **câu vàng ×3**",
+      "noBank": "Chưa có từ: thêm vào theme.json → hud.game.words",
+      "unmute": "🔔 Chạm để bật âm thanh"
+    }
+  },
+  "colors": {
+    "accent": "#ffd25e",
+    "placeholderRobe": "#f2f2ee"
+  },
+  "sounds": {
+    "dung1": {
+      "cooldown": 300
+    },
+    "dung": {
+      "cooldown": 250,
+      "vary": 0.08
+    },
+    "phan": {
+      "cooldown": 400
+    },
+    "trong": {
+      "cooldown": 5000,
+      "priority": true
+    },
+    "win": {
+      "cooldown": 4000,
+      "duck": 0.4,
+      "priority": true
+    },
+    "like": false
+  },
+  "text": {},
+  "reactions": {
+    "like": [
+      {
+        "fx": "emit",
+        "preset": "heart",
+        "at": "head",
+        "count": "likes"
+      }
+    ],
+    "chat": [],
+    "title": [
+      {
+        "aura": 1
+      },
+      {
+        "fx": "emit",
+        "preset": "star",
+        "at": "head",
+        "count": 16
+      },
+      {
+        "toast": "⭐ {ten} lên danh hiệu mới!"
+      }
+    ],
+    "goal": [
+      {
+        "fx": "rain",
+        "preset": "confetti",
+        "count": 80
+      },
+      {
+        "crowd": [
+          {
+            "play": "cheer"
+          }
+        ]
+      }
+    ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Word guess classroom",
+      "description": "The blackboard shows a clue and scrambled letters, viewers type the answer in the comments, the fastest right answers score. Viewers become students at desks; each lesson crowns the top students.",
+      "actions": {
+        "goiy": {
+          "label": "Letter hint",
+          "card": "1 COIN",
+          "description": "Reveal one letter for the whole class"
+        },
+        "themgio": {
+          "label": "Extra time",
+          "card": "10 COINS",
+          "description": "10 more seconds for this question"
+        },
+        "cauvang": {
+          "label": "Golden question",
+          "card": "100 COINS",
+          "description": "This (or the next) question scores ×3 for the class, fireworks"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Student"
+        },
+        {
+          "minCoins": 50,
+          "label": "Class monitor"
+        },
+        {
+          "minCoins": 300,
+          "label": "Top student",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "Valedictorian",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Cheer hearts",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "en-US-AriaNeural",
+        "gift": [
+          "Thanks {ten} for the {hanh_dong}{lan}!",
+          "{ten} sent a {hanh_dong}{lan}. Thank you!"
+        ],
+        "bigGift": [
+          "Golden question! Thank you {ten}, triple points for the whole class!"
+        ],
+        "join": [
+          "Welcome to class, {ten}! Type your answer in the comments.",
+          "{ten} just joined the class."
+        ],
+        "follow": [
+          "Thanks {ten} for following."
+        ],
+        "title": [
+          "Congrats {ten}, you are now a {danh_hieu}."
+        ],
+        "goal": [
+          "The class sent {gia_tri} cheer hearts!"
+        ]
+      },
+      "periodic": {
+        "title": "HOW TO PLAY",
+        "items": [
+          "Read the clue, unscramble the letters and type the answer in the comments. The three fastest get 10, 7 and 5 points!",
+          "Seats are limited: keep chatting to keep your seat in class.",
+          "Gifts help the class: 1 coin reveals a letter, 10 coins add 10 seconds, 100 coins make a golden ×3 question."
+        ]
+      },
+      "prompts": {
+        "items": [
+          "Got it? Type it now! ✏️",
+          "Stuck? Send 1 coin to reveal a letter for everyone 💡",
+          "Keep chatting to keep your seat!"
+        ]
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} reached a new rank!"
+          }
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "WORD GUESS CLASS"
+        },
+        "game": {
+          "words": [
+            {
+              "hint": "Loves bananas, great at climbing",
+              "a": [
+                "monkey",
+                "a monkey"
+              ]
+            },
+            {
+              "hint": "King of the jungle, has a mane",
+              "a": [
+                "lion",
+                "a lion"
+              ]
+            },
+            {
+              "hint": "Very long neck, eats leaves from tall trees",
+              "a": [
+                "giraffe",
+                "a giraffe"
+              ]
+            },
+            {
+              "hint": "Long trunk and huge ears",
+              "a": [
+                "elephant",
+                "an elephant"
+              ]
+            },
+            {
+              "hint": "Says meow and chases mice",
+              "a": [
+                "cat",
+                "a cat",
+                "kitten"
+              ]
+            },
+            {
+              "hint": "Barks, loyal, guards the house",
+              "a": [
+                "dog",
+                "a dog",
+                "puppy"
+              ]
+            },
+            {
+              "hint": "Hard shell, moves very slowly",
+              "a": [
+                "turtle",
+                "tortoise",
+                "a turtle"
+              ]
+            },
+            {
+              "hint": "Buzzes from flower to flower and makes honey",
+              "a": [
+                "bee",
+                "a bee",
+                "honeybee"
+              ]
+            },
+            {
+              "hint": "Eight legs, spins a web",
+              "a": [
+                "spider",
+                "a spider"
+              ]
+            },
+            {
+              "hint": "Black and white, eats bamboo",
+              "a": [
+                "panda",
+                "a panda"
+              ]
+            },
+            {
+              "hint": "Hops far, has a pouch, lives in Australia",
+              "a": [
+                "kangaroo",
+                "a kangaroo"
+              ]
+            },
+            {
+              "hint": "Sleeps upside down, flies at night",
+              "a": [
+                "bat",
+                "a bat"
+              ]
+            },
+            {
+              "hint": "Yellow, curved fruit monkeys love",
+              "a": [
+                "banana",
+                "a banana"
+              ]
+            },
+            {
+              "hint": "Green outside, red inside, black seeds",
+              "a": [
+                "watermelon",
+                "a watermelon"
+              ]
+            },
+            {
+              "hint": "Orange fruit with juicy segments",
+              "a": [
+                "orange",
+                "an orange"
+              ]
+            },
+            {
+              "hint": "Used to write on a blackboard",
+              "a": [
+                "chalk"
+              ]
+            },
+            {
+              "hint": "Removes pencil marks",
+              "a": [
+                "eraser",
+                "rubber"
+              ]
+            },
+            {
+              "hint": "Helps you draw straight lines",
+              "a": [
+                "ruler",
+                "a ruler"
+              ]
+            },
+            {
+              "hint": "Tells the time with two hands",
+              "a": [
+                "clock",
+                "watch",
+                "a clock"
+              ]
+            },
+            {
+              "hint": "Opens a lock",
+              "a": [
+                "key",
+                "a key"
+              ]
+            },
+            {
+              "hint": "Two wheels, you pedal it",
+              "a": [
+                "bicycle",
+                "bike"
+              ]
+            },
+            {
+              "hint": "Flies passengers through the sky",
+              "a": [
+                "airplane",
+                "plane",
+                "aeroplane"
+              ]
+            },
+            {
+              "hint": "Runs on rails",
+              "a": [
+                "train",
+                "a train"
+              ]
+            },
+            {
+              "hint": "Rises in the east, sets in the west",
+              "a": [
+                "sun",
+                "the sun"
+              ]
+            },
+            {
+              "hint": "Shines at night, round when full",
+              "a": [
+                "moon",
+                "the moon"
+              ]
+            },
+            {
+              "hint": "Seven colours after the rain",
+              "a": [
+                "rainbow",
+                "a rainbow"
+              ]
+            },
+            {
+              "hint": "White and fluffy, floats in the sky",
+              "a": [
+                "cloud",
+                "clouds"
+              ]
+            },
+            {
+              "hint": "White and cold, falls in winter",
+              "a": [
+                "snow",
+                "snowflake"
+              ]
+            },
+            {
+              "hint": "A mountain that erupts lava",
+              "a": [
+                "volcano",
+                "a volcano"
+              ]
+            },
+            {
+              "hint": "A flower that turns to face the sun",
+              "a": [
+                "sunflower",
+                "a sunflower"
+              ]
+            },
+            {
+              "hint": "Teaches children at school",
+              "a": [
+                "teacher",
+                "a teacher"
+              ]
+            },
+            {
+              "hint": "Treats sick people",
+              "a": [
+                "doctor",
+                "a doctor"
+              ]
+            },
+            {
+              "hint": "Puts out fires",
+              "a": [
+                "firefighter",
+                "fireman"
+              ]
+            },
+            {
+              "hint": "Flies a plane",
+              "a": [
+                "pilot",
+                "a pilot"
+              ]
+            },
+            {
+              "hint": "Travels into space",
+              "a": [
+                "astronaut",
+                "an astronaut"
+              ]
+            },
+            {
+              "hint": "You see with them",
+              "a": [
+                "eyes",
+                "eye"
+              ]
+            },
+            {
+              "hint": "You hear with them",
+              "a": [
+                "ears",
+                "ear"
+              ]
+            },
+            {
+              "hint": "Beats inside your chest",
+              "a": [
+                "heart",
+                "the heart"
+              ]
+            },
+            {
+              "hint": "Flies on a string in the wind",
+              "a": [
+                "kite",
+                "a kite"
+              ]
+            },
+            {
+              "hint": "22 players and one ball",
+              "a": [
+                "football",
+                "soccer"
+              ]
+            },
+            {
+              "hint": "Capital of Vietnam",
+              "a": [
+                "hanoi",
+                "ha noi"
+              ]
+            },
+            {
+              "hint": "Famous Vietnamese noodle soup",
+              "a": [
+                "pho"
+              ]
+            }
+          ]
+        },
+        "text": {
+          "title": "WORD GUESS CLASS",
+          "meta": "Lesson {p} · Q {q}/{n} · {c} students",
+          "hintLabel": "✏️ Clue",
+          "gold": "★ GOLDEN ×3",
+          "fast": "⚡ Fastest: {ten}",
+          "noFast": "⚡ Nobody yet…",
+          "count": "{n} got it",
+          "answer": "ANSWER",
+          "nobody": "Nobody got it. Next one!",
+          "more": "{n} right answers",
+          "first": "⚡ {ten} got it first! +{p}",
+          "board": "⭐ TOP OF LESSON {p}",
+          "feed": "✅ JUST RIGHT",
+          "waiting": "No one yet",
+          "feedEmpty": "Type your answer!",
+          "guest": "Student",
+          "periodEnd": "🔔 END OF LESSON {n}",
+          "best": "TOP STUDENTS",
+          "noBest": "No points this lesson",
+          "pts": "{v} pts",
+          "nextPeriod": "Lesson {n} starts in {s} s",
+          "periodGo": "📚 LESSON {n} BEGINS!",
+          "call": "Type the **answer** · 🎁 1 coin = letter · 10 coins = +10 s · 100 coins = **golden ×3**",
+          "noBank": "No words yet: add them in theme.json → hud.game.words",
+          "unmute": "🔔 Tap to turn on sound"
+        }
+      }
+    },
+    "zh": {
+      "name": "猜字课堂",
+      "description": "黑板上出提示和打乱的字，观众在评论里打答案，答得快就得分。观众化身课桌前的学生，每节课表彰优秀学生。",
+      "actions": {
+        "goiy": {
+          "label": "揭示提示",
+          "card": "1币",
+          "description": "为全班揭示一个字"
+        },
+        "themgio": {
+          "label": "加时",
+          "card": "10币",
+          "description": "本题加10秒"
+        },
+        "cauvang": {
+          "label": "黄金题",
+          "card": "100币",
+          "description": "本题（或下一题）全班得分×3，放烟花"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "学生"
+        },
+        {
+          "minCoins": 50,
+          "label": "班长"
+        },
+        {
+          "minCoins": 300,
+          "label": "优等生",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "状元",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "加油爱心",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "gift": [
+          "谢谢{ten}的{hanh_dong}{lan}！",
+          "感谢{ten}{hanh_dong}{lan}！"
+        ],
+        "bigGift": [
+          "黄金题！谢谢{ten}，全班得分三倍！"
+        ],
+        "join": [
+          "欢迎{ten}来上课！在评论里打答案吧。",
+          "{ten}走进了教室。"
+        ],
+        "follow": [
+          "谢谢{ten}的关注。"
+        ],
+        "title": [
+          "恭喜{ten}成为{danh_hieu}。"
+        ],
+        "goal": [
+          "全班已送出{gia_tri}个加油爱心！"
+        ]
+      },
+      "periodic": {
+        "title": "玩法",
+        "items": [
+          "看提示，把打乱的字排好，在评论里打答案。最快的三位得10、7、5分！",
+          "座位有限：多互动才能保住教室里的座位。",
+          "礼物帮助全班：1币揭示一个字，10币加10秒，100币开启×3黄金题。"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "猜到了就快打！✏️",
+          "太难了？送1币为全班揭示一个字 💡",
+          "多互动，保住你的座位！"
+        ]
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} 晋升新称号！"
+          }
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "猜字课堂"
+        },
+        "game": {
+          "words": [
+            {
+              "hint": "爱吃香蕉，爬树高手",
+              "a": [
+                "猴子"
+              ]
+            },
+            {
+              "hint": "森林之王，有鬃毛",
+              "a": [
+                "狮子"
+              ]
+            },
+            {
+              "hint": "脖子很长，吃高处的树叶",
+              "a": [
+                "长颈鹿"
+              ]
+            },
+            {
+              "hint": "鼻子很长，耳朵像扇子",
+              "a": [
+                "大象"
+              ]
+            },
+            {
+              "hint": "喵喵叫，会抓老鼠",
+              "a": [
+                "小猫",
+                "猫",
+                "猫咪"
+              ]
+            },
+            {
+              "hint": "汪汪叫，看家护院",
+              "a": [
+                "小狗",
+                "狗"
+              ]
+            },
+            {
+              "hint": "背着硬壳，爬得很慢",
+              "a": [
+                "乌龟"
+              ]
+            },
+            {
+              "hint": "会酿蜂蜜",
+              "a": [
+                "蜜蜂"
+              ]
+            },
+            {
+              "hint": "八条腿，会结网",
+              "a": [
+                "蜘蛛"
+              ]
+            },
+            {
+              "hint": "黑白相间，爱吃竹子",
+              "a": [
+                "熊猫"
+              ]
+            },
+            {
+              "hint": "倒挂着睡觉，夜里飞",
+              "a": [
+                "蝙蝠"
+              ]
+            },
+            {
+              "hint": "黄色弯弯的水果",
+              "a": [
+                "香蕉"
+              ]
+            },
+            {
+              "hint": "外面绿，里面红，有黑籽",
+              "a": [
+                "西瓜"
+              ]
+            },
+            {
+              "hint": "在黑板上写字用的",
+              "a": [
+                "粉笔"
+              ]
+            },
+            {
+              "hint": "擦掉铅笔字",
+              "a": [
+                "橡皮",
+                "橡皮擦"
+              ]
+            },
+            {
+              "hint": "画直线用的",
+              "a": [
+                "尺子"
+              ]
+            },
+            {
+              "hint": "有时针和分针",
+              "a": [
+                "时钟",
+                "钟表",
+                "手表"
+              ]
+            },
+            {
+              "hint": "开锁用的",
+              "a": [
+                "钥匙"
+              ]
+            },
+            {
+              "hint": "两个轮子，用脚踩",
+              "a": [
+                "自行车",
+                "单车"
+              ]
+            },
+            {
+              "hint": "在天上载客飞行",
+              "a": [
+                "飞机"
+              ]
+            },
+            {
+              "hint": "在铁轨上跑",
+              "a": [
+                "火车"
+              ]
+            },
+            {
+              "hint": "东边升起，西边落下",
+              "a": [
+                "太阳"
+              ]
+            },
+            {
+              "hint": "晚上发光，十五最圆",
+              "a": [
+                "月亮"
+              ]
+            },
+            {
+              "hint": "雨后出现的七种颜色",
+              "a": [
+                "彩虹"
+              ]
+            },
+            {
+              "hint": "白白软软，飘在天上",
+              "a": [
+                "白云",
+                "云"
+              ]
+            },
+            {
+              "hint": "冬天从天上飘下来的白色",
+              "a": [
+                "雪花",
+                "雪"
+              ]
+            },
+            {
+              "hint": "会喷出岩浆的山",
+              "a": [
+                "火山"
+              ]
+            },
+            {
+              "hint": "总是朝着太阳的花",
+              "a": [
+                "向日葵"
+              ]
+            },
+            {
+              "hint": "在学校教书的人",
+              "a": [
+                "老师"
+              ]
+            },
+            {
+              "hint": "给病人看病的人",
+              "a": [
+                "医生"
+              ]
+            },
+            {
+              "hint": "扑灭火灾的人",
+              "a": [
+                "消防员"
+              ]
+            },
+            {
+              "hint": "开飞机的人",
+              "a": [
+                "飞行员"
+              ]
+            },
+            {
+              "hint": "飞向太空的人",
+              "a": [
+                "宇航员"
+              ]
+            },
+            {
+              "hint": "用来看东西",
+              "a": [
+                "眼睛"
+              ]
+            },
+            {
+              "hint": "在胸口怦怦跳",
+              "a": [
+                "心脏"
+              ]
+            },
+            {
+              "hint": "靠风和线飞上天",
+              "a": [
+                "风筝"
+              ]
+            },
+            {
+              "hint": "22个人抢一个球的运动",
+              "a": [
+                "足球"
+              ]
+            },
+            {
+              "hint": "越南的首都",
+              "a": [
+                "河内"
+              ]
+            },
+            {
+              "hint": "端午节吃的",
+              "a": [
+                "粽子"
+              ]
+            },
+            {
+              "hint": "中秋节吃的",
+              "a": [
+                "月饼"
+              ]
+            }
+          ]
+        },
+        "text": {
+          "title": "猜字课堂",
+          "meta": "第{p}节 · 第{q}/{n}题 · {c}位同学",
+          "hintLabel": "✏️ 提示",
+          "gold": "★ 黄金题 ×3",
+          "fast": "⚡ 最快：{ten}",
+          "noFast": "⚡ 还没人猜出…",
+          "count": "{n}人答对",
+          "answer": "答案",
+          "nobody": "没人答对，下一题！",
+          "more": "{n}人答对",
+          "first": "⚡ {ten} 最先答对！+{p}",
+          "board": "⭐ 第{p}节 前五",
+          "feed": "✅ 刚答对",
+          "waiting": "还没有人",
+          "feedEmpty": "快打答案！",
+          "guest": "同学",
+          "periodEnd": "🔔 第{n}节下课",
+          "best": "优秀学生",
+          "noBest": "本节课还没人得分",
+          "pts": "{v}分",
+          "nextPeriod": "第{n}节 {s} 秒后上课",
+          "periodGo": "📚 第{n}节 开始！",
+          "call": "在评论里打**答案** · 🎁 1币揭示1字 · 10币+10秒 · 100币**黄金题×3**",
+          "noBank": "还没有词：在 theme.json → hud.game.words 添加",
+          "unmute": "🔔 点一下开启声音"
+        }
+      }
+    }
+  }
+}

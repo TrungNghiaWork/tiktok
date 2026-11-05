@@ -55,7 +55,7 @@ export function createVoice() {
     return fill(template, {
       ten: spokenName(u.name),
       qua: ev.gift?.name || ev.label || 'quà',
-      lan: ev.count > 1 ? `, ${ev.count} lần` : '',
+      lan: ev.count > 1 ? String(voiceCfg.times ?? ', {n} lần').replace('{n}', ev.count) : '', // voice.times: ", {n} times" (đặt sẵn theo ngôn ngữ)
       xu: ev.total ?? '',
       hanh_dong: lowerFirst(ev.label || ''),
       danh_hieu: ev.title || u.title || '',

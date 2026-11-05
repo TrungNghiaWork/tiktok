@@ -36,6 +36,25 @@ Engine là [TikTok Live Kit](https://github.com/duycuf/tiktok-live-kit). Repo n�
 
 Sửa cảnh, luật, giọng đọc: xem `docs/THEME.vi.md` trong kit.
 
+## Ngôn ngữ (Việt · English · 中文)
+
+Bảng điều khiển → tab Live → **Ngôn ngữ**. Đổi xong overlay tự tải lại, chữ trên màn hình và giọng đọc đổi theo.
+
+| | Tiếng Việt | English | 中文 |
+|---|---|---|---|
+| Xin xăm | `xin xăm`, `gieo quẻ` | `fortune` | `求签`, `抽签` |
+| Lạy Phật | `lạy Phật`, `nam mô`, `lạy` | `namo`, `amitabha`, `bow` | `阿弥陀佛`, `拜佛`, `拜` |
+| Thả đèn nguyện | `cầu an`, `cầu cho` | `pray for`, `wish` | `祈福`, `保佑`, `许愿` |
+| Thẻ quẻ | QUẺ SỐ 13 · Trung cát | FORTUNE NO. 13 · Good fortune | 第 13 签 · 中吉 |
+| Giọng đọc | vi-VN-NamMinhNeural | en-US-GuyNeural | zh-CN-YunxiNeural |
+
+Lệnh chat nhận cả ba thứ tiếng cùng lúc, chọn ngôn ngữ nào cũng gõ được. Thẻ hướng dẫn hiện từ khoá của ngôn ngữ đang chọn.
+
+- Bảng 32 quẻ dịch ở `theme.json` → `i18n.en.draws.xam.items`, `i18n.zh.draws.xam.items`, **cùng thứ tự** với bảng gốc. Thêm, bớt quẻ ở bảng gốc thì sửa cả hai bản dịch.
+- Chữ trên màn hình: `hud.text` (tiếng Việt), `i18n.en.hud.text`, `i18n.zh.hud.text`. Từ khoá hiện trên thẻ hướng dẫn là `kw_<lệnh>`, tên lệnh là `cmd_<lệnh>`.
+- Dòng "+10 công đức" nổi trên đầu nằm trong các bước hành động, nên bản dịch chép lại `steps` của `incense`, `bow`, `lotus` và `reactions.like`, `reactions.title`. Sửa hiệu ứng ở bản gốc thì chép lại sang `i18n.en` và `i18n.zh`.
+- Chữ Hán dùng font Noto Sans SC / Noto Serif SC (Google Fonts, cần mạng).
+
 ## Giấy phép
 
 [MIT](LICENSE): dùng, sửa, làm kênh riêng thoải mái, chỉ cần giữ dòng bản quyền. Asset lấy từ nơi khác giữ giấy phép gốc (MIT, CC0), nguồn từng file ở [CREDITS.md](themes/chua/CREDITS.md). Ảnh và nhạc tạo bằng AI: tự kiểm tra điều khoản của công cụ đó nếu dùng thương mại.

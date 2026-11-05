@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <!-- Nền tạm (vẽ tay): lớp học. Tường + cửa sổ y 0–1150 (bảng đen do code vẽ đè lên y 300–700, cô giáo đứng giữa y ~1060),
+       sàn gạch từ y ~1150 cho lưới bàn học sinh (bàn do code vẽ theo scene.json "slots"). -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7e7c6"/><stop offset="1" stop-color="#efd6a6"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0a866"/><stop offset="1" stop-color="#b9783c"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe6ff"/><stop offset="1" stop-color="#e8f7ff"/></linearGradient>
+    <pattern id="tile" width="90" height="60" patternUnits="userSpaceOnUse"><rect width="90" height="60" fill="none" stroke="#9c6430" stroke-opacity=".35" stroke-width="2"/></pattern>
+  </defs>
+  <rect width="1080" height="1160" fill="url(#wall)"/>
+  <rect y="1040" width="1080" height="120" fill="#c98b4b" opacity=".35"/>
+  <!-- cửa sổ hai bên -->
+  <g>
+    <rect x="18" y="760" width="70" height="250" rx="6" fill="url(#glass)" stroke="#8a5a2b" stroke-width="8"/>
+    <rect x="992" y="760" width="70" height="250" rx="6" fill="url(#glass)" stroke="#8a5a2b" stroke-width="8"/>
+    <path d="M53 760 V1010 M18 885 H88 M1027 760 V1010 M992 885 H1062" stroke="#8a5a2b" stroke-width="5"/>
+  </g>
+  <!-- bục giảng -->
+  <path d="M300 1100 h480 l30 60 h-540 Z" fill="#a86c33"/>
+  <rect x="270" y="1150" width="540" height="22" fill="#7d4d20"/>
+  <!-- chậu cây, đồng hồ -->
+  <g><rect x="150" y="1060" width="56" height="50" rx="8" fill="#b5523f"/><circle cx="178" cy="1040" r="34" fill="#4f9a45"/><circle cx="160" cy="1025" r="20" fill="#5fb153"/></g>
+  <g><rect x="874" y="1060" width="56" height="50" rx="8" fill="#b5523f"/><circle cx="902" cy="1040" r="34" fill="#4f9a45"/><circle cx="920" cy="1025" r="20" fill="#5fb153"/></g>
+  <!-- sàn gạch -->
+  <rect y="1160" width="1080" height="760" fill="url(#floor)"/>
+  <rect y="1160" width="1080" height="760" fill="url(#tile)"/>
+</svg>
