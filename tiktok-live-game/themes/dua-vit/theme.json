@@ -1,0 +1,643 @@
+{
+  "name": "Đua vịt",
+  "description": "Đua vịt trên sông quê: gõ \"đua\" thả vịt, gõ \"bơi\", thả tim, tặng quà để vịt của mình về đích trước.",
+  "width": 1080,
+  "height": 1920,
+  "actions": [
+    {
+      "id": "tha",
+      "label": "Thả vịt",
+      "icon": "🦆",
+      "description": "Lệnh chat: thả một con vịt vào vòng đua",
+      "steps": [
+        {
+          "play": "cheer"
+        },
+        {
+          "say": "🦆"
+        }
+      ]
+    },
+    {
+      "id": "boi",
+      "label": "Bơi",
+      "icon": "💦",
+      "description": "Lệnh chat: vịt của mình bơi lên một đoạn",
+      "steps": [
+        {
+          "play": "cheer"
+        }
+      ]
+    },
+    {
+      "id": "tangtoc",
+      "label": "Tăng tốc",
+      "icon": "⚡",
+      "card": "1 XU",
+      "description": "Vịt của người tặng lao lên",
+      "steps": [
+        {
+          "aura": 0.7
+        },
+        {
+          "play": "cheer"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "⚡"
+        }
+      ]
+    },
+    {
+      "id": "songday",
+      "label": "Sóng đẩy",
+      "icon": "🌊",
+      "card": "10 XU",
+      "description": "Một con sóng đẩy vịt của người tặng đi xa",
+      "steps": [
+        {
+          "play": "cheer",
+          "times": 2
+        },
+        {
+          "js": "songDay"
+        }
+      ]
+    },
+    {
+      "id": "tenlua",
+      "label": "Vịt tên lửa",
+      "icon": "🚀",
+      "card": "100 XU",
+      "description": "Pháo hoa, vịt của người tặng bay vọt lên",
+      "steps": [
+        {
+          "spotlight": true
+        },
+        {
+          "play": "cheer",
+          "times": 3
+        },
+        {
+          "js": "tenLua"
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "joinMode": "all",
+    "joinKeywords": [],
+    "bigGiftCoins": 100,
+    "giftTiers": [
+      {
+        "minCoins": 1,
+        "action": "tangtoc",
+        "label": "Tăng tốc"
+      },
+      {
+        "minCoins": 10,
+        "action": "songday",
+        "label": "Sóng đẩy"
+      },
+      {
+        "minCoins": 100,
+        "action": "tenlua",
+        "label": "Vịt tên lửa"
+      }
+    ],
+    "giftOverrides": [],
+    "chatCommands": [
+      {
+        "keywords": [
+          "đua",
+          "dua",
+          "vịt",
+          "thả vịt",
+          "🦆",
+          "race",
+          "join",
+          "duck",
+          "比赛",
+          "鸭",
+          "鸭子",
+          "参加"
+        ],
+        "match": "exact",
+        "action": "tha",
+        "label": "thả vịt",
+        "cooldownMs": 5000
+      },
+      {
+        "keywords": [
+          "bơi",
+          "boi",
+          "bơi đi",
+          "nhanh",
+          "cố lên",
+          "💦",
+          "swim",
+          "go",
+          "faster",
+          "游",
+          "快",
+          "加油"
+        ],
+        "match": "exact",
+        "action": "boi",
+        "label": "bơi",
+        "cooldownMs": 2000
+      }
+    ]
+  },
+  "bigGift": {
+    "steps": [
+      {
+        "fx": "flash",
+        "strength": 0.2
+      }
+    ]
+  },
+  "characters": [],
+  "npcs": [],
+  "animations": {
+    "cheer": {
+      "frames": [
+        "stand",
+        "cheer",
+        "stand"
+      ],
+      "ms": 650
+    }
+  },
+  "titles": [
+    {
+      "minCoins": 0,
+      "label": "Vịt con"
+    },
+    {
+      "minCoins": 50,
+      "label": "Tay chèo"
+    },
+    {
+      "minCoins": 300,
+      "label": "Kình ngư",
+      "aura": 0.4
+    },
+    {
+      "minCoins": 1000,
+      "label": "Vua sông nước",
+      "aura": 0.8
+    }
+  ],
+  "goals": [
+    {
+      "id": "likes",
+      "metric": "likes",
+      "label": "Tim cổ vũ",
+      "every": 1000
+    }
+  ],
+  "voice": {
+    "enabled": true,
+    "voice": "vi-VN-HoaiMyNeural",
+    "giftMinCoins": 1,
+    "gift": [
+      "Cảm ơn {ten}, {hanh_dong}{lan}!",
+      "{ten} {hanh_dong}{lan}, vịt lao lên rồi!"
+    ],
+    "bigGift": [
+      "Vịt tên lửa! Cảm ơn {ten}, bay về đích nào!"
+    ],
+    "join": [
+      "Chào {ten}! Gõ đua để thả vịt nhé.",
+      "{ten} vừa ra bờ sông xem đua vịt."
+    ],
+    "command:tha": [
+      "{ten} thả vịt."
+    ],
+    "follow": [
+      "Cảm ơn {ten} đã theo dõi kênh."
+    ],
+    "title": [
+      "Chúc mừng {ten} lên danh hiệu {danh_hieu}."
+    ],
+    "goal": [
+      "Cả bờ sông đã thả {gia_tri} tim cổ vũ!"
+    ],
+    "cooldown": {
+      "join": 15000,
+      "command:tha": 6000
+    },
+    "fallbackWords": []
+  },
+  "periodic": {
+    "everyMinutes": 4,
+    "quietSeconds": 20,
+    "title": "CÁCH CHƠI",
+    "items": [
+      "Gõ «đua» để thả vịt. Gõ «bơi», thả tim, tặng quà để vịt của bạn bơi nhanh hơn!",
+      "Vịt về đích đầu tiên thắng vòng. Ai thắng nhiều vòng nhất là vô địch hôm nay."
+    ]
+  },
+  "prompts": {
+    "everySeconds": 80,
+    "quietSeconds": 25,
+    "items": [
+      "Gõ «đua» để có vịt trong vòng sau nào! 🦆",
+      "Vịt của bạn chậm quá? Gõ «bơi» liên tục! 💦"
+    ]
+  },
+  "hud": {
+    "title": {
+      "text": "ĐUA VỊT"
+    },
+    "game": {
+      "lobbyMs": 20000,
+      "raceMs": 80000,
+      "restMs": 10000,
+      "afterFirstMs": 4000,
+      "maxDucks": 24,
+      "lanes": 8,
+      "labels": 6,
+      "points": {
+        "chat": 15,
+        "like": 3,
+        "coin": 20,
+        "drift": [
+          11,
+          17
+        ]
+      },
+      "minGift": {
+        "songday": 200,
+        "tenlua": 500
+      },
+      "river": {
+        "top": 540,
+        "bottom": 1110,
+        "start": 160,
+        "finish": 930
+      },
+      "duckImage": "",
+      "maxGift": 400
+    },
+    "text": {
+      "title": "ĐUA VỊT",
+      "guest": "Khách",
+      "call": "Gõ **ĐUA** thả vịt · **BƠI** +15 · ❤️ +3 · 🎁 1 xu = +20",
+      "wait": "Vòng {n} · thả vịt {ducks}/{max} · {time}",
+      "racing": "Vòng {n} · {time}",
+      "rest": "Trao giải",
+      "go": "🦆 VÒNG {n} · BƠI!",
+      "first": "🏁 {ten} về nhất!",
+      "win": "🏆 {ten} THẮNG!",
+      "empty": "Vòng này chưa có vịt nào",
+      "next": "Vòng {n} mở sau {s} giây · gõ ĐUA để thả vịt",
+      "lobby": "🦆 Vòng {n}: gõ ĐUA để thả vịt!",
+      "champs": "👑 VÔ ĐỊCH HÔM NAY",
+      "rank": "🏁 THỨ HẠNG",
+      "wins": "{n} lần",
+      "none": "Gõ ĐUA để thả vịt!",
+      "unmute": "🔔 Chạm để bật âm thanh"
+    }
+  },
+  "colors": {
+    "accent": "#ffd25e",
+    "placeholderRobe": "#4d8fd6"
+  },
+  "sounds": {
+    "coi": {
+      "cooldown": 3000
+    },
+    "nuoc": {
+      "cooldown": 600,
+      "vary": 0.08
+    },
+    "win": {
+      "cooldown": 4000,
+      "duck": 0.4,
+      "priority": true
+    },
+    "like": false
+  },
+  "text": {},
+  "reactions": {
+    "like": [
+      {
+        "fx": "emit",
+        "preset": "heart",
+        "at": "head",
+        "count": "likes"
+      }
+    ],
+    "chat": [],
+    "title": [
+      {
+        "aura": 1
+      },
+      {
+        "fx": "emit",
+        "preset": "star",
+        "at": "head",
+        "count": 16
+      },
+      {
+        "toast": "⭐ {ten} lên danh hiệu mới!"
+      }
+    ],
+    "goal": [
+      {
+        "fx": "rain",
+        "preset": "confetti",
+        "count": 80
+      },
+      {
+        "crowd": [
+          {
+            "play": "cheer"
+          }
+        ]
+      }
+    ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Duck race",
+      "description": "A duck race on a village river: type \"race\" to drop a duck, type \"swim\", send hearts and gifts so your duck finishes first.",
+      "actions": {
+        "tha": {
+          "label": "Drop a duck",
+          "description": "Chat command: drop a duck into the race"
+        },
+        "boi": {
+          "label": "Swim",
+          "description": "Chat command: your duck swims ahead"
+        },
+        "tangtoc": {
+          "label": "Speed boost",
+          "card": "1 COIN",
+          "description": "The giver's duck dashes ahead"
+        },
+        "songday": {
+          "label": "Big wave",
+          "card": "10 COINS",
+          "description": "A wave pushes the giver's duck far ahead"
+        },
+        "tenlua": {
+          "label": "Rocket duck",
+          "card": "100 COINS",
+          "description": "Fireworks, the giver's duck shoots ahead"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Duckling"
+        },
+        {
+          "minCoins": 50,
+          "label": "Paddler"
+        },
+        {
+          "minCoins": 300,
+          "label": "Swimmer",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "River king",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Cheer hearts",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "en-US-AriaNeural",
+        "gift": [
+          "Thanks {ten} for the {hanh_dong}{lan}!",
+          "{ten} sent a {hanh_dong}{lan}, the duck dashes ahead!"
+        ],
+        "bigGift": [
+          "Rocket duck! Thank you {ten}, fly to the finish!"
+        ],
+        "join": [
+          "Hi {ten}! Type race to drop a duck.",
+          "{ten} came to watch the duck race."
+        ],
+        "command:tha": [
+          "{ten} drops a duck."
+        ],
+        "follow": [
+          "Thanks {ten} for following."
+        ],
+        "title": [
+          "Congrats {ten}, you are now a {danh_hieu}."
+        ],
+        "goal": [
+          "The riverbank sent {gia_tri} cheer hearts!"
+        ]
+      },
+      "periodic": {
+        "title": "HOW TO PLAY",
+        "items": [
+          "Type «race» to drop a duck. Type «swim», send hearts and gifts to make your duck faster!",
+          "The first duck to the finish wins the round. Most wins today is the champion."
+        ]
+      },
+      "prompts": {
+        "items": [
+          "Type «race» to get a duck in the next round! 🦆",
+          "Duck too slow? Keep typing «swim»! 💦"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "DUCK RACE"
+        },
+        "text": {
+          "title": "DUCK RACE",
+          "guest": "Guest",
+          "call": "Type **RACE** to join · **SWIM** +15 · ❤️ +3 · 🎁 1 coin = +20",
+          "wait": "Round {n} · ducks {ducks}/{max} · {time}",
+          "racing": "Round {n} · {time}",
+          "rest": "Awards",
+          "go": "🦆 ROUND {n} · SWIM!",
+          "first": "🏁 {ten} finishes first!",
+          "win": "🏆 {ten} WINS!",
+          "empty": "No ducks this round",
+          "next": "Round {n} opens in {s} s · type RACE to join",
+          "lobby": "🦆 Round {n}: type RACE to drop a duck!",
+          "champs": "👑 TODAY'S CHAMPIONS",
+          "rank": "🏁 STANDINGS",
+          "wins": "{n} wins",
+          "none": "Type RACE to drop a duck!",
+          "unmute": "🔔 Tap to turn on sound"
+        }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} reached a new rank!"
+          }
+        ]
+      }
+    },
+    "zh": {
+      "name": "鸭子赛跑",
+      "description": "乡村小河上的鸭子赛跑：打「比赛」放一只鸭子，打「游」、点赞、送礼物让你的鸭子先到终点。",
+      "actions": {
+        "tha": {
+          "label": "放鸭子",
+          "description": "评论指令：放一只鸭子参赛"
+        },
+        "boi": {
+          "label": "游",
+          "description": "评论指令：你的鸭子往前游一段"
+        },
+        "tangtoc": {
+          "label": "加速",
+          "card": "1币",
+          "description": "送礼者的鸭子冲上前"
+        },
+        "songday": {
+          "label": "大浪",
+          "card": "10币",
+          "description": "一个大浪把送礼者的鸭子推远"
+        },
+        "tenlua": {
+          "label": "火箭鸭",
+          "card": "100币",
+          "description": "烟花，送礼者的鸭子飞速前进"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "小鸭"
+        },
+        {
+          "minCoins": 50,
+          "label": "划手"
+        },
+        {
+          "minCoins": 300,
+          "label": "游泳健将",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "河神",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "加油爱心",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "gift": [
+          "谢谢{ten}的{hanh_dong}{lan}！",
+          "{ten}送出{hanh_dong}{lan}，鸭子冲上去了！"
+        ],
+        "bigGift": [
+          "火箭鸭！谢谢{ten}，飞向终点吧！"
+        ],
+        "join": [
+          "你好{ten}！打比赛就能放一只鸭子。",
+          "{ten}来河边看鸭子赛跑了。"
+        ],
+        "command:tha": [
+          "{ten}放了一只鸭子。"
+        ],
+        "follow": [
+          "谢谢{ten}的关注。"
+        ],
+        "title": [
+          "恭喜{ten}成为{danh_hieu}。"
+        ],
+        "goal": [
+          "河岸已送出{gia_tri}个加油爱心！"
+        ]
+      },
+      "periodic": {
+        "title": "玩法",
+        "items": [
+          "打「比赛」放一只鸭子。打「游」、点赞、送礼物让你的鸭子游得更快！",
+          "最先到终点的鸭子赢得本轮。今天赢得最多的就是冠军。"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "打「比赛」，下一轮就有你的鸭子！🦆",
+          "鸭子太慢？一直打「游」！💦"
+        ]
+      },
+      "hud": {
+        "title": {
+          "text": "鸭子赛跑"
+        },
+        "text": {
+          "title": "鸭子赛跑",
+          "guest": "游客",
+          "call": "打**比赛**参加 · **游** +15 · ❤️ +3 · 🎁 1币 = +20",
+          "wait": "第{n}轮 · 鸭子 {ducks}/{max} · {time}",
+          "racing": "第{n}轮 · {time}",
+          "rest": "颁奖",
+          "go": "🦆 第{n}轮 · 游！",
+          "first": "🏁 {ten} 第一个到终点！",
+          "win": "🏆 {ten} 获胜！",
+          "empty": "本轮没有鸭子",
+          "next": "第{n}轮 {s} 秒后开始 · 打比赛参加",
+          "lobby": "🦆 第{n}轮：打比赛放鸭子！",
+          "champs": "👑 今日冠军",
+          "rank": "🏁 排名",
+          "wins": "{n} 胜",
+          "none": "打比赛放鸭子！",
+          "unmute": "🔔 点一下开启声音"
+        }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} 晋升新称号！"
+          }
+        ]
+      }
+    }
+  }
+}

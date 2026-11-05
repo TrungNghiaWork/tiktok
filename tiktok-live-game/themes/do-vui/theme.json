@@ -1,0 +1,1239 @@
+{
+  "name": "Đố vui cả phòng",
+  "description": "Màn hình ra câu đố, người xem gõ đáp án vào bình luận, ai đúng nhanh được điểm. Quà mở chữ gợi ý, thêm giờ, câu vàng cho cả phòng.",
+  "width": 1080,
+  "height": 1920,
+  "actions": [
+    {
+      "id": "goiy",
+      "label": "Mở gợi ý",
+      "icon": "💡",
+      "card": "1 XU",
+      "description": "Mở một chữ của đáp án cho cả phòng",
+      "steps": [
+        {
+          "aura": 0.6
+        },
+        {
+          "play": "cheer"
+        },
+        {
+          "js": "goiY"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "💡"
+        }
+      ]
+    },
+    {
+      "id": "themgio",
+      "label": "Thêm giờ",
+      "icon": "⏱",
+      "card": "10 XU",
+      "description": "Câu đang hỏi thêm 10 giây",
+      "steps": [
+        {
+          "aura": 0.8
+        },
+        {
+          "play": "cheer",
+          "times": 2
+        },
+        {
+          "js": "themGio"
+        },
+        {
+          "fx": "text",
+          "at": "head",
+          "text": "+10s"
+        }
+      ]
+    },
+    {
+      "id": "cauvang",
+      "label": "Câu vàng",
+      "icon": "⭐",
+      "card": "100 XU",
+      "description": "Câu này (hoặc câu sau) điểm ×3 cho cả phòng, pháo hoa",
+      "steps": [
+        {
+          "camera": "person",
+          "zoom": 1.4,
+          "duration": 2800
+        },
+        {
+          "spotlight": true
+        },
+        {
+          "play": "cheer",
+          "times": 3
+        },
+        {
+          "js": "cauVang"
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "joinMode": "all",
+    "joinKeywords": [],
+    "bigGiftCoins": 100,
+    "giftTiers": [
+      {
+        "minCoins": 1,
+        "action": "goiy",
+        "label": "Mở gợi ý"
+      },
+      {
+        "minCoins": 10,
+        "action": "themgio",
+        "label": "Thêm giờ"
+      },
+      {
+        "minCoins": 100,
+        "action": "cauvang",
+        "label": "Câu vàng"
+      }
+    ],
+    "giftOverrides": [],
+    "chatCommands": []
+  },
+  "bigGift": {
+    "steps": [
+      {
+        "fx": "flash",
+        "strength": 0.25
+      }
+    ]
+  },
+  "characters": [],
+  "npcs": [],
+  "animations": {
+    "cheer": {
+      "frames": [
+        "stand",
+        "cheer",
+        "stand"
+      ],
+      "ms": 650
+    }
+  },
+  "titles": [
+    {
+      "minCoins": 0,
+      "label": "Học trò"
+    },
+    {
+      "minCoins": 50,
+      "label": "Thần đồng"
+    },
+    {
+      "minCoins": 300,
+      "label": "Giáo sư",
+      "aura": 0.4
+    },
+    {
+      "minCoins": 1000,
+      "label": "Trạng nguyên",
+      "aura": 0.8
+    }
+  ],
+  "goals": [
+    {
+      "id": "likes",
+      "metric": "likes",
+      "label": "Tim cổ vũ",
+      "every": 1000
+    }
+  ],
+  "voice": {
+    "enabled": true,
+    "voice": "vi-VN-HoaiMyNeural",
+    "giftMinCoins": 1,
+    "gift": [
+      "Cảm ơn {ten} đã {hanh_dong}{lan} cho cả phòng!",
+      "{ten} {hanh_dong}{lan}, cảm ơn {ten} nha!"
+    ],
+    "bigGift": [
+      "Câu vàng! Cảm ơn {ten}, câu này điểm nhân ba cho cả phòng!"
+    ],
+    "join": [
+      "Chào {ten}! Gõ đáp án vào bình luận để ghi điểm nhé.",
+      "{ten} vừa vào phòng đố vui."
+    ],
+    "follow": [
+      "Cảm ơn {ten} đã theo dõi kênh."
+    ],
+    "title": [
+      "Chúc mừng {ten} lên danh hiệu {danh_hieu}."
+    ],
+    "goal": [
+      "Cả phòng đã thả {gia_tri} tim cổ vũ!"
+    ],
+    "cooldown": {
+      "join": 15000
+    },
+    "fallbackWords": []
+  },
+  "periodic": {
+    "everyMinutes": 4,
+    "quietSeconds": 20,
+    "title": "CÁCH CHƠI",
+    "items": [
+      "Gõ đáp án vào bình luận. Ba người đúng nhanh nhất được 10, 7, 5 điểm!",
+      "Quà giúp cả phòng: 1 xu mở một chữ, 10 xu thêm 10 giây, 100 xu câu vàng điểm ×3."
+    ]
+  },
+  "prompts": {
+    "everySeconds": 90,
+    "quietSeconds": 25,
+    "items": [
+      "Ai biết đáp án thì gõ ngay nào! 🧠",
+      "Bí quá? Tặng 1 xu để mở một chữ gợi ý cho cả phòng 💡"
+    ]
+  },
+  "hud": {
+    "game": {
+      "askMs": 25000,
+      "revealMs": 6000,
+      "afterFirstMs": 6000,
+      "points": [
+        10,
+        7,
+        5
+      ],
+      "latePoints": 2,
+      "maxRight": 30,
+      "giftSeconds": 10,
+      "boardSize": 5,
+      "questions": [
+        {
+          "q": "Con gì càng to càng nhỏ?",
+          "a": [
+            "con cua",
+            "cua"
+          ]
+        },
+        {
+          "q": "Cái gì luôn ở phía trước mà không bao giờ tới?",
+          "a": [
+            "ngày mai"
+          ]
+        },
+        {
+          "q": "Thủ đô của Việt Nam là thành phố nào?",
+          "a": [
+            "hà nội"
+          ]
+        },
+        {
+          "q": "Đỉnh núi cao nhất Việt Nam tên là gì?",
+          "a": [
+            "fansipan",
+            "phan xi păng",
+            "phanxipang",
+            "phan xi pang"
+          ]
+        },
+        {
+          "q": "Bánh gì gói bằng lá dong, ăn vào ngày Tết?",
+          "a": [
+            "bánh chưng",
+            "chưng"
+          ]
+        },
+        {
+          "q": "Điền từ: Công cha như núi Thái Sơn, nghĩa mẹ như nước trong ___ chảy ra",
+          "a": [
+            "nguồn"
+          ]
+        },
+        {
+          "q": "Điền từ: Ăn quả nhớ kẻ ___ cây",
+          "a": [
+            "trồng"
+          ]
+        },
+        {
+          "q": "Điền từ: Một con ngựa đau, cả tàu bỏ ___",
+          "a": [
+            "cỏ"
+          ]
+        },
+        {
+          "q": "Điền từ: Có công mài sắt, có ngày nên ___",
+          "a": [
+            "kim"
+          ]
+        },
+        {
+          "q": "Con gì đầu dê mình ốc?",
+          "a": [
+            "con dốc",
+            "dốc"
+          ]
+        },
+        {
+          "q": "1 + 1 × 2 bằng mấy?",
+          "a": [
+            "3",
+            "ba"
+          ]
+        },
+        {
+          "q": "Hồ nào ở Hà Nội gắn với truyền thuyết trả gươm?",
+          "a": [
+            "hồ gươm",
+            "hoàn kiếm",
+            "hồ hoàn kiếm"
+          ]
+        },
+        {
+          "q": "Vịnh nào ở Quảng Ninh là di sản thiên nhiên thế giới?",
+          "a": [
+            "hạ long",
+            "vịnh hạ long"
+          ]
+        },
+        {
+          "q": "Năm 2026 (Bính Ngọ) là năm con gì?",
+          "a": [
+            "ngựa",
+            "con ngựa"
+          ]
+        },
+        {
+          "q": "Hành tinh nào gần Mặt Trời nhất?",
+          "a": [
+            "sao thủy",
+            "thủy tinh",
+            "mercury"
+          ]
+        },
+        {
+          "q": "Cái gì của bạn nhưng người khác gọi nhiều hơn bạn?",
+          "a": [
+            "tên",
+            "cái tên"
+          ]
+        },
+        {
+          "q": "Cái gì càng lấy đi càng to ra?",
+          "a": [
+            "cái hố",
+            "hố",
+            "cái lỗ",
+            "lỗ"
+          ]
+        },
+        {
+          "q": "Nước nào có hình chữ S?",
+          "a": [
+            "việt nam"
+          ]
+        },
+        {
+          "q": "Loại quả nào có gai, mùi rất nồng, được gọi là vua trái cây?",
+          "a": [
+            "sầu riêng"
+          ]
+        },
+        {
+          "q": "Điền từ: Gần mực thì đen, gần đèn thì ___",
+          "a": [
+            "rạng",
+            "sáng"
+          ]
+        },
+        {
+          "q": "Điền từ: Uống nước nhớ ___",
+          "a": [
+            "nguồn"
+          ]
+        },
+        {
+          "q": "Điền từ: Học ăn, học nói, học gói, học ___",
+          "a": [
+            "mở"
+          ]
+        },
+        {
+          "q": "Thành phố nào được gọi là thành phố hoa phượng đỏ?",
+          "a": [
+            "hải phòng"
+          ]
+        },
+        {
+          "q": "Thành phố ngàn hoa trên cao nguyên Lâm Viên là?",
+          "a": [
+            "đà lạt"
+          ]
+        },
+        {
+          "q": "Một giờ có bao nhiêu phút?",
+          "a": [
+            "60",
+            "sáu mươi"
+          ]
+        },
+        {
+          "q": "Mặt Trời mọc ở hướng nào?",
+          "a": [
+            "đông",
+            "hướng đông"
+          ]
+        },
+        {
+          "q": "Tết Trung thu là ngày rằm tháng mấy âm lịch?",
+          "a": [
+            "8",
+            "tám",
+            "tháng 8",
+            "tháng tám"
+          ]
+        },
+        {
+          "q": "Con vật nào có vòi dài nhất?",
+          "a": [
+            "voi",
+            "con voi"
+          ]
+        },
+        {
+          "q": "Một năm có bao nhiêu tháng?",
+          "a": [
+            "12",
+            "mười hai"
+          ]
+        },
+        {
+          "q": "Con gì có cánh mà không biết bay, sống ở Nam Cực?",
+          "a": [
+            "chim cánh cụt",
+            "cánh cụt"
+          ]
+        },
+        {
+          "q": "Điền từ: Lá lành đùm lá ___",
+          "a": [
+            "rách"
+          ]
+        },
+        {
+          "q": "Điền từ: Tốt gỗ hơn tốt ___ sơn",
+          "a": [
+            "nước"
+          ]
+        },
+        {
+          "q": "Màu gì trộn xanh dương với vàng?",
+          "a": [
+            "xanh lá",
+            "xanh lá cây",
+            "xanh lục"
+          ]
+        },
+        {
+          "q": "Con gì ban ngày ngủ, ban đêm bay, treo ngược mình?",
+          "a": [
+            "con dơi",
+            "dơi"
+          ]
+        },
+        {
+          "q": "Món nước nổi tiếng nhất Việt Nam nấu từ bánh phở?",
+          "a": [
+            "phở"
+          ]
+        },
+        {
+          "q": "Loài hoa nào thường được coi là biểu tượng của Việt Nam?",
+          "a": [
+            "hoa sen",
+            "sen"
+          ]
+        },
+        {
+          "q": "Cái gì có răng mà không cắn?",
+          "a": [
+            "cái lược",
+            "lược",
+            "cái cưa",
+            "cưa"
+          ]
+        },
+        {
+          "q": "Đồng bằng lớn nhất Việt Nam là đồng bằng sông nào?",
+          "a": [
+            "cửu long",
+            "sông cửu long",
+            "mê kông",
+            "mekong"
+          ]
+        },
+        {
+          "q": "Con gì kêu ò ó o mỗi sáng?",
+          "a": [
+            "con gà",
+            "gà",
+            "gà trống"
+          ]
+        },
+        {
+          "q": "12 × 12 bằng bao nhiêu?",
+          "a": [
+            "144"
+          ]
+        }
+      ]
+    },
+    "text": {
+      "no": "CÂU {n}",
+      "gold": "★ CÂU VÀNG ×3",
+      "reveal": "Đáp án…",
+      "answer": "ĐÁP ÁN",
+      "nobody": "Chưa ai trả lời đúng, câu sau nhé!",
+      "more": "{n} người trả lời đúng",
+      "first": "⚡ {ten} đúng đầu tiên! +{p}",
+      "board": "🏆 BẢNG ĐIỂM",
+      "feed": "✅ VỪA ĐÚNG",
+      "waiting": "Chưa có ai",
+      "feedEmpty": "Gõ đáp án nào!",
+      "guest": "Khách",
+      "call": "Gõ **đáp án** vào bình luận · 🎁 1 xu mở 1 chữ · 10 xu +10 giây · 100 xu **câu vàng ×3**",
+      "noBank": "Chưa có câu hỏi: thêm vào theme.json → hud.game.questions",
+      "unmute": "🔔 Chạm để bật âm thanh"
+    }
+  },
+  "colors": {
+    "accent": "#ffd25e",
+    "placeholderRobe": "#7a5bd6"
+  },
+  "sounds": {
+    "dung1": {
+      "cooldown": 300
+    },
+    "dung": {
+      "cooldown": 250,
+      "vary": 0.08
+    },
+    "mo": {
+      "cooldown": 400
+    },
+    "win": {
+      "cooldown": 4000,
+      "duck": 0.4,
+      "priority": true
+    },
+    "like": false
+  },
+  "text": {},
+  "reactions": {
+    "like": [
+      {
+        "fx": "emit",
+        "preset": "heart",
+        "at": "head",
+        "count": "likes"
+      }
+    ],
+    "chat": [],
+    "title": [
+      {
+        "aura": 1
+      },
+      {
+        "fx": "emit",
+        "preset": "star",
+        "at": "head",
+        "count": 16
+      },
+      {
+        "toast": "⭐ {ten} lên danh hiệu mới!"
+      }
+    ],
+    "goal": [
+      {
+        "fx": "rain",
+        "preset": "confetti",
+        "count": 80
+      },
+      {
+        "crowd": [
+          {
+            "play": "cheer"
+          }
+        ]
+      }
+    ]
+  },
+  "langs": [
+    "vi",
+    "en",
+    "zh"
+  ],
+  "i18n": {
+    "en": {
+      "name": "Room quiz",
+      "description": "A quiz on screen: viewers type answers in the comments, the fastest right answers score. Gifts reveal letters, add time or make a golden question for the whole room.",
+      "actions": {
+        "goiy": {
+          "label": "Letter hint",
+          "card": "1 COIN",
+          "description": "Reveal one letter of the answer for everyone"
+        },
+        "themgio": {
+          "label": "Extra time",
+          "card": "10 COINS",
+          "description": "The current question gets 10 more seconds"
+        },
+        "cauvang": {
+          "label": "Golden question",
+          "card": "100 COINS",
+          "description": "This (or the next) question scores ×3 for everyone, fireworks"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "Student"
+        },
+        {
+          "minCoins": 50,
+          "label": "Whiz kid"
+        },
+        {
+          "minCoins": 300,
+          "label": "Professor",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "Genius",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "Cheer hearts",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "en-US-AriaNeural",
+        "gift": [
+          "Thanks {ten} for the {hanh_dong}{lan}!",
+          "{ten} sent a {hanh_dong}{lan}. Thank you!"
+        ],
+        "bigGift": [
+          "Golden question! Thank you {ten}, this one scores triple for everyone!"
+        ],
+        "join": [
+          "Hi {ten}! Type your answer in the comments to score.",
+          "{ten} just joined the quiz."
+        ],
+        "follow": [
+          "Thanks {ten} for following."
+        ],
+        "title": [
+          "Congrats {ten}, you are now a {danh_hieu}."
+        ],
+        "goal": [
+          "The room sent {gia_tri} cheer hearts!"
+        ]
+      },
+      "periodic": {
+        "title": "HOW TO PLAY",
+        "items": [
+          "Type your answer in the comments. The three fastest right answers get 10, 7 and 5 points!",
+          "Gifts help everyone: 1 coin reveals a letter, 10 coins add 10 seconds, 100 coins make a golden ×3 question."
+        ]
+      },
+      "prompts": {
+        "items": [
+          "Know the answer? Type it now! 🧠",
+          "Stuck? Send 1 coin to reveal a letter for everyone 💡"
+        ]
+      },
+      "hud": {
+        "game": {
+          "questions": [
+            {
+              "q": "What has keys but can't open locks?",
+              "a": [
+                "piano",
+                "a piano",
+                "keyboard"
+              ]
+            },
+            {
+              "q": "What gets wetter the more it dries?",
+              "a": [
+                "towel",
+                "a towel"
+              ]
+            },
+            {
+              "q": "What has hands but can't clap?",
+              "a": [
+                "clock",
+                "a clock",
+                "watch"
+              ]
+            },
+            {
+              "q": "What is the capital of Vietnam?",
+              "a": [
+                "hanoi",
+                "ha noi"
+              ]
+            },
+            {
+              "q": "What is the largest ocean on Earth?",
+              "a": [
+                "pacific",
+                "pacific ocean",
+                "the pacific"
+              ]
+            },
+            {
+              "q": "How many legs does a spider have?",
+              "a": [
+                "8",
+                "eight"
+              ]
+            },
+            {
+              "q": "Which planet is called the Red Planet?",
+              "a": [
+                "mars"
+              ]
+            },
+            {
+              "q": "What has one eye but can't see?",
+              "a": [
+                "needle",
+                "a needle"
+              ]
+            },
+            {
+              "q": "What goes up but never comes down?",
+              "a": [
+                "age",
+                "your age"
+              ]
+            },
+            {
+              "q": "What is the fastest land animal?",
+              "a": [
+                "cheetah",
+                "a cheetah"
+              ]
+            },
+            {
+              "q": "Mix blue and yellow. What colour do you get?",
+              "a": [
+                "green"
+              ]
+            },
+            {
+              "q": "What is the tallest animal in the world?",
+              "a": [
+                "giraffe",
+                "a giraffe"
+              ]
+            },
+            {
+              "q": "How many continents are there?",
+              "a": [
+                "7",
+                "seven"
+              ]
+            },
+            {
+              "q": "What do bees make?",
+              "a": [
+                "honey"
+              ]
+            },
+            {
+              "q": "Which month has 28 days?",
+              "a": [
+                "all",
+                "all of them",
+                "every month",
+                "all months"
+              ]
+            },
+            {
+              "q": "What is the closest star to Earth?",
+              "a": [
+                "sun",
+                "the sun"
+              ]
+            },
+            {
+              "q": "Which bird is a symbol of peace?",
+              "a": [
+                "dove",
+                "a dove",
+                "pigeon"
+              ]
+            },
+            {
+              "q": "What is the hottest planet in our solar system?",
+              "a": [
+                "venus"
+              ]
+            },
+            {
+              "q": "What can you catch but not throw?",
+              "a": [
+                "cold",
+                "a cold"
+              ]
+            },
+            {
+              "q": "What is the largest mammal?",
+              "a": [
+                "blue whale",
+                "whale",
+                "the blue whale"
+              ]
+            },
+            {
+              "q": "What is 12 × 12?",
+              "a": [
+                "144"
+              ]
+            },
+            {
+              "q": "Which animal is the king of the jungle?",
+              "a": [
+                "lion",
+                "the lion"
+              ]
+            },
+            {
+              "q": "2026 is the year of which zodiac animal?",
+              "a": [
+                "horse",
+                "the horse"
+              ]
+            },
+            {
+              "q": "What is the famous Vietnamese noodle soup?",
+              "a": [
+                "pho",
+                "phở"
+              ]
+            },
+            {
+              "q": "What has a neck but no head?",
+              "a": [
+                "bottle",
+                "a bottle",
+                "shirt"
+              ]
+            },
+            {
+              "q": "How many minutes are in an hour?",
+              "a": [
+                "60",
+                "sixty"
+              ]
+            },
+            {
+              "q": "What is frozen water called?",
+              "a": [
+                "ice"
+              ]
+            },
+            {
+              "q": "Which flower is often seen as a symbol of Vietnam?",
+              "a": [
+                "lotus",
+                "the lotus"
+              ]
+            },
+            {
+              "q": "What is the opposite of 'hot'?",
+              "a": [
+                "cold"
+              ]
+            },
+            {
+              "q": "What has many teeth but can't bite?",
+              "a": [
+                "comb",
+                "a comb",
+                "saw",
+                "zipper"
+              ]
+            }
+          ]
+        },
+        "text": {
+          "no": "QUESTION {n}",
+          "gold": "★ GOLDEN ×3",
+          "reveal": "Answer…",
+          "answer": "ANSWER",
+          "nobody": "Nobody got it. Next one!",
+          "more": "{n} right answers",
+          "first": "⚡ {ten} got it first! +{p}",
+          "board": "🏆 SCORES",
+          "feed": "✅ JUST RIGHT",
+          "waiting": "No one yet",
+          "feedEmpty": "Type your answer!",
+          "guest": "Guest",
+          "call": "Type the **answer** in the comments · 🎁 1 coin = 1 letter · 10 coins = +10 s · 100 coins = **golden ×3**",
+          "noBank": "No questions yet: add them in theme.json → hud.game.questions",
+          "unmute": "🔔 Tap to turn on sound"
+        }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} reached a new rank!"
+          }
+        ]
+      }
+    },
+    "zh": {
+      "name": "全场答题",
+      "description": "屏幕出题，观众在评论里打答案，答得快就得分。礼物为全场揭示提示、加时或开启黄金题。",
+      "actions": {
+        "goiy": {
+          "label": "揭示提示",
+          "card": "1币",
+          "description": "为全场揭示答案中的一个字"
+        },
+        "themgio": {
+          "label": "加时",
+          "card": "10币",
+          "description": "当前题目加10秒"
+        },
+        "cauvang": {
+          "label": "黄金题",
+          "card": "100币",
+          "description": "本题（或下一题）全场得分×3，放烟花"
+        }
+      },
+      "titles": [
+        {
+          "minCoins": 0,
+          "label": "学生"
+        },
+        {
+          "minCoins": 50,
+          "label": "神童"
+        },
+        {
+          "minCoins": 300,
+          "label": "教授",
+          "aura": 0.4
+        },
+        {
+          "minCoins": 1000,
+          "label": "状元",
+          "aura": 0.8
+        }
+      ],
+      "goals": [
+        {
+          "id": "likes",
+          "metric": "likes",
+          "label": "加油爱心",
+          "every": 1000
+        }
+      ],
+      "voice": {
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "gift": [
+          "谢谢{ten}的{hanh_dong}{lan}！",
+          "感谢{ten}{hanh_dong}{lan}！"
+        ],
+        "bigGift": [
+          "黄金题！谢谢{ten}，这题全场得分三倍！"
+        ],
+        "join": [
+          "你好{ten}！在评论里打答案就能得分。",
+          "{ten}来到了答题现场。"
+        ],
+        "follow": [
+          "谢谢{ten}的关注。"
+        ],
+        "title": [
+          "恭喜{ten}成为{danh_hieu}。"
+        ],
+        "goal": [
+          "全场已送出{gia_tri}个加油爱心！"
+        ]
+      },
+      "periodic": {
+        "title": "玩法",
+        "items": [
+          "在评论里打答案。最快答对的三位分别得10、7、5分！",
+          "礼物帮助全场：1币揭示一个字，10币加10秒，100币开启×3黄金题。"
+        ]
+      },
+      "prompts": {
+        "items": [
+          "知道答案就快打出来！🧠",
+          "太难了？送1币为全场揭示一个字 💡"
+        ]
+      },
+      "hud": {
+        "game": {
+          "questions": [
+            {
+              "q": "中国的首都是哪里？",
+              "a": [
+                "北京"
+              ]
+            },
+            {
+              "q": "越南的首都是哪里？",
+              "a": [
+                "河内"
+              ]
+            },
+            {
+              "q": "一年有几个季节？",
+              "a": [
+                "4",
+                "四",
+                "四个"
+              ]
+            },
+            {
+              "q": "世界上最大的海洋是？",
+              "a": [
+                "太平洋"
+              ]
+            },
+            {
+              "q": "哪颗行星被称为红色星球？",
+              "a": [
+                "火星"
+              ]
+            },
+            {
+              "q": "大熊猫最爱吃什么？",
+              "a": [
+                "竹子",
+                "竹"
+              ]
+            },
+            {
+              "q": "一星期有几天？",
+              "a": [
+                "7",
+                "七",
+                "七天"
+              ]
+            },
+            {
+              "q": "端午节吃什么？",
+              "a": [
+                "粽子"
+              ]
+            },
+            {
+              "q": "中秋节吃什么？",
+              "a": [
+                "月饼"
+              ]
+            },
+            {
+              "q": "陆地上跑得最快的动物是？",
+              "a": [
+                "猎豹"
+              ]
+            },
+            {
+              "q": "蜜蜂酿的是什么？",
+              "a": [
+                "蜂蜜",
+                "蜜"
+              ]
+            },
+            {
+              "q": "2026年是什么生肖年？",
+              "a": [
+                "马",
+                "马年"
+              ]
+            },
+            {
+              "q": "填空：举头望明月，低头思___",
+              "a": [
+                "故乡"
+              ]
+            },
+            {
+              "q": "填空：床前明月光，疑是地上___",
+              "a": [
+                "霜"
+              ]
+            },
+            {
+              "q": "世界上最高的山峰是？",
+              "a": [
+                "珠穆朗玛峰",
+                "珠峰",
+                "珠穆朗玛"
+              ]
+            },
+            {
+              "q": "离太阳最近的行星是？",
+              "a": [
+                "水星"
+              ]
+            },
+            {
+              "q": "蓝色加黄色是什么颜色？",
+              "a": [
+                "绿色",
+                "绿"
+              ]
+            },
+            {
+              "q": "什么动物被称为百兽之王？",
+              "a": [
+                "老虎",
+                "虎",
+                "狮子"
+              ]
+            },
+            {
+              "q": "12乘以12等于多少？",
+              "a": [
+                "144"
+              ]
+            },
+            {
+              "q": "一天有多少个小时？",
+              "a": [
+                "24",
+                "二十四"
+              ]
+            },
+            {
+              "q": "中国最长的河流是？",
+              "a": [
+                "长江"
+              ]
+            },
+            {
+              "q": "填空：春眠不觉晓，处处闻啼___",
+              "a": [
+                "鸟"
+              ]
+            },
+            {
+              "q": "什么东西天天在你身边，却看不见？",
+              "a": [
+                "空气"
+              ]
+            },
+            {
+              "q": "常被视为越南象征的花是什么？",
+              "a": [
+                "莲花",
+                "荷花"
+              ]
+            },
+            {
+              "q": "一小时有多少分钟？",
+              "a": [
+                "60",
+                "六十"
+              ]
+            },
+            {
+              "q": "太阳从哪个方向升起？",
+              "a": [
+                "东",
+                "东方",
+                "东边"
+              ]
+            },
+            {
+              "q": "什么东西越洗越脏？",
+              "a": [
+                "水"
+              ]
+            },
+            {
+              "q": "企鹅生活在南极还是北极？",
+              "a": [
+                "南极"
+              ]
+            },
+            {
+              "q": "一年有几个月？",
+              "a": [
+                "12",
+                "十二",
+                "十二个"
+              ]
+            },
+            {
+              "q": "会倒挂着睡觉的会飞的动物是？",
+              "a": [
+                "蝙蝠"
+              ]
+            }
+          ]
+        },
+        "text": {
+          "no": "第 {n} 题",
+          "gold": "★ 黄金题 ×3",
+          "reveal": "揭晓…",
+          "answer": "答案",
+          "nobody": "没人答对，下一题！",
+          "more": "{n} 人答对",
+          "first": "⚡ {ten} 最先答对！+{p}",
+          "board": "🏆 积分榜",
+          "feed": "✅ 刚答对",
+          "waiting": "还没有人",
+          "feedEmpty": "快打答案！",
+          "guest": "游客",
+          "call": "在评论里打**答案** · 🎁 1币揭示1字 · 10币+10秒 · 100币**黄金题×3**",
+          "noBank": "还没有题目：在 theme.json → hud.game.questions 添加",
+          "unmute": "🔔 点一下开启声音"
+        }
+      },
+      "reactions": {
+        "title": [
+          {
+            "aura": 1
+          },
+          {
+            "fx": "emit",
+            "preset": "star",
+            "at": "head",
+            "count": 16
+          },
+          {
+            "toast": "⭐ {ten} 晋升新称号！"
+          }
+        ]
+      }
+    }
+  }
+}

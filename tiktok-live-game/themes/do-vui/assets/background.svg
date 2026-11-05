@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <!-- Nền tạm (vẽ tay): sân khấu gameshow đố vui. Trên: màn LED tối (bảng câu hỏi đè lên y 260–880), giữa: bục MC, dưới: sàn khán giả từ y ~1250. -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140a33"/><stop offset=".55" stop-color="#2a1260"/><stop offset="1" stop-color="#3b1a7a"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b145c"/><stop offset="1" stop-color="#0d0624"/></linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2b0" stop-opacity=".55"/><stop offset="1" stop-color="#fff2b0" stop-opacity="0"/></linearGradient>
+    <linearGradient id="beam2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd7ff" stop-opacity=".45"/><stop offset="1" stop-color="#7fd7ff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffcf4a" stop-opacity=".5"/><stop offset="1" stop-color="#ffcf4a" stop-opacity="0"/></radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="14" cy="14" r="3" fill="#ffffff" opacity=".08"/></pattern>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#wall)"/>
+  <rect width="1080" height="1100" fill="url(#dots)"/>
+  <!-- khung màn LED lớn phía sau bảng câu hỏi -->
+  <rect x="80" y="244" width="920" height="640" rx="34" fill="#0b0620" stroke="#6c3bd1" stroke-width="6"/>
+  <rect x="92" y="256" width="896" height="616" rx="26" fill="none" stroke="#ffcf4a" stroke-opacity=".35" stroke-width="3" stroke-dasharray="4 14"/>
+  <!-- đèn rọi -->
+  <path d="M150 0 L60 1300 L330 1300 Z" fill="url(#beam2)"/>
+  <path d="M930 0 L750 1300 L1020 1300 Z" fill="url(#beam2)"/>
+  <path d="M540 0 L380 1250 L700 1250 Z" fill="url(#beam)"/>
+  <!-- bục MC giữa sân khấu -->
+  <ellipse cx="540" cy="1080" rx="380" ry="120" fill="url(#glow)"/>
+  <path d="M360 1010 h360 l40 130 h-440 Z" fill="#4a1e9a" stroke="#ffcf4a" stroke-width="4"/>
+  <rect x="440" y="900" width="200" height="120" rx="14" fill="#5b26b8" stroke="#ffcf4a" stroke-width="4"/>
+  <text x="540" y="978" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#ffcf4a" text-anchor="middle">?</text>
+  <!-- dải đèn bóng tròn -->
+  <g fill="#ffcf4a"><circle cx="120" cy="912" r="9"/><circle cx="200" cy="912" r="9"/><circle cx="280" cy="912" r="9"/><circle cx="360" cy="912" r="9"/><circle cx="720" cy="912" r="9"/><circle cx="800" cy="912" r="9"/><circle cx="880" cy="912" r="9"/><circle cx="960" cy="912" r="9"/></g>
+  <!-- sàn khán giả -->
+  <rect y="1140" width="1080" height="780" fill="url(#floor)"/>
+  <g stroke="#7a4be0" stroke-opacity=".35" stroke-width="3"><path d="M0 1240 H1080 M0 1380 H1080 M0 1540 H1080 M0 1720 H1080"/><path d="M540 1140 V1920 M300 1140 L120 1920 M780 1140 L960 1920"/></g>
+</svg>
