@@ -50,6 +50,8 @@ Safe zones on the 1080 × 1920 frame: top 240px (channel name, viewers), 100px o
   "spacing": { "col": 0.8, "row": 0.4 },       // spacing between people, in person heights
   "obstacles": [{ "x0": 0, "x1": 105, "y0": 0, "y1": 1130 }],            // pillar bases, tables... no people here
   "seats": [[440, 980], [640, 980]],           // honor seats for top gifters
+  // "slots": [[188, 1260], [364, 1260], ...],  // optional FIXED places (e.g. a grid of desks) instead of auto slots on the floor;
+  //                                           // when full, the least active person gives up their place
   "points": { "stage": [540, 930], "focus": [540, 600], "entry": [540, 2000] },  // anchor points for actions, camera
   "emitters": [{ "preset": "smoke", "at": "stage", "every": 90 }],      // continuous effects (at: anchor, [x, y], or x / y)
   "glows": [[300, 760, 40]],                   // flickering lights [x, y, radius] (candles, lamps)

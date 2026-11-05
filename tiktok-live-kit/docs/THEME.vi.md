@@ -50,6 +50,8 @@ Vùng an toàn trên khung 1080 × 1920: trên cùng 240px (tên kênh, người
   "spacing": { "col": 0.8, "row": 0.4 },       // khoảng cách người, tính theo chiều cao người
   "obstacles": [{ "x0": 0, "x1": 105, "y0": 0, "y1": 1130 }],            // chân cột, bàn... không đặt người
   "seats": [[440, 980], [640, 980]],           // ghế danh dự cho top người tặng
+  // "slots": [[188, 1260], [364, 1260], ...],  // tuỳ chọn: chỗ CỐ ĐỊNH (vd lưới bàn học) thay cho chỗ tự chia trên sàn;
+  //                                           // đầy thì người lâu không tương tác nhất nhường chỗ
   "points": { "stage": [540, 930], "focus": [540, 600], "entry": [540, 2000] },  // điểm mốc cho hành động, camera
   "emitters": [{ "preset": "smoke", "at": "stage", "every": 90 }],      // hiệu ứng chạy liên tục (at: điểm mốc, [x, y], hoặc x / y)
   "glows": [[300, 760, 40]],                   // đốm sáng lung linh [x, y, bán kính] (nến, đèn)

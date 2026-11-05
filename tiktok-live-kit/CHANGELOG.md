@@ -5,6 +5,7 @@
 ## Unreleased
 
 - Multiple languages: theme.json `"langs"` + `"i18n"` (Vietnamese, English, Chinese). The control panel gets a **Language** setting; changing it reloads the theme in that language and switches the voice. English and Chinese voices added; the Windows fallback voice follows the language.
+- `scene.json` `"slots"`: fixed places (a grid of desks, chairs) instead of automatic slots on the floor; when full, the least active person gives up their place.
 - Fix: in English and Chinese themes the voice read the gift count as Vietnamese (", 3 lần"); `{lan}` now follows the language (`voice.times` to override). The goal toast formats numbers in the theme language.
 - Fix: switching themes while the overlay is open (OBS) now moves it to the new theme page (it used to reload the old theme page).
 

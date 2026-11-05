@@ -9,6 +9,8 @@
 //   spacing             { col, row }   khoảng cách ngang / dọc tính theo chiều cao người (mặc định 0.74 / 0.36)
 //   obstacles           [{ x0, x1, y0, y1 }]  vùng không đặt người (chân cột, bàn...)
 //   seats               [[x, y], ...]  ghế danh dự theo thứ tự ưu tiên
+//   slots               [[x, y], ...]  chỗ đứng / ngồi CỐ ĐỊNH (vd lưới bàn học) thay cho chỗ tự chia trên floor; đầy thì người
+//                       lâu không tương tác nhất nhường chỗ. Thứ tự trong danh sách = thứ tự xếp người vào
 
 (function (root) {
   const DEFAULTS = {
@@ -29,6 +31,8 @@
     s.spacing = { ...DEFAULTS.spacing, ...(scene.spacing || {}) };
     s.obstacles = scene.obstacles || [];
     s.seats = (scene.seats || []).map((p) => (Array.isArray(p) ? { x: p[0], y: p[1] } : p));
+    s.normalized = true;
+    s.slots = Array.isArray(scene.slots) && scene.slots.length ? scene.slots.map((p) => (Array.isArray(p) ? { x: p[0], y: p[1] } : { x: p.x, y: p.y })) : null;
     return s;
   }
 
@@ -51,7 +55,8 @@
 
   /** Chỗ đứng trên sàn với độ thưa `density` (1 = dày nhất, 1.6 = thưa). Thứ tự: gần nơi thờ / sân khấu trước, sát lối giữa trước. */
   function buildSlots(scene, density = 1) {
-    const s = scene.horizonY !== undefined && scene.person?.refY ? scene : normalize(scene);
+    const s = scene.normalized ? scene : normalize(scene);
+    if (s.slots) return s.slots.map((p) => ({ x: Math.round(p.x), y: Math.round(p.y) })); // chỗ cố định: giữ nguyên thứ tự khai báo
     const list = [];
     const ax = s.aisle ? s.aisle.x : (s.floor.left + s.floor.right) / 2;
     for (let y = s.floor.top; y <= s.floor.bottom; y += personH(s, y) * s.spacing.row * density) {
@@ -68,6 +73,7 @@
   /** Bộ chỗ đứng theo số người: phòng vắng thì thưa (nhìn vẫn kín), đông thì dày. */
   function layoutFor(scene, count) {
     const s = normalize(scene);
+    if (s.slots) return { density: 1, slots: buildSlots(s, 1) }; // chỗ cố định: không giãn / dồn theo số người
     for (const d of LEVELS) {
       const slots = buildSlots(s, d);
       if (slots.length >= count * 1.15 || d === LEVELS[LEVELS.length - 1]) return { density: d, slots };
