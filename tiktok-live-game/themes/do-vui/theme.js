@@ -136,6 +136,7 @@
     const board = el('div', 'panel dv-side dv-board'); board.style.right = `${L}px`; board.append(el('h3', '', G.t('board', {}, '🏆 BẢNG ĐIỂM')), el('ol'));
     const feed = el('div', 'panel dv-side dv-feed'); feed.style.left = `${L}px`; feed.append(el('h3', '', G.t('feed', {}, '✅ VỪA ĐÚNG')), el('ul'));
     root.append(q, call, board, feed);
+    for (const c of ['.gm-banner', '.gm-toast', '.gm-unmute']) root.append($(c, root)); // thẻ đáp án nổi trên bảng điểm
     const stack = () => { call.style.top = `${q.offsetTop + q.offsetHeight + 12}px`; const y = call.offsetTop + call.offsetHeight + 16; board.style.top = `${y}px`; feed.style.top = `${y}px`; };
     stack(); document.fonts?.ready.then(stack); new ResizeObserver(stack).observe(q);
 
