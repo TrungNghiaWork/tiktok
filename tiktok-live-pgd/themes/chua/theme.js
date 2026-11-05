@@ -117,9 +117,9 @@
   .cx-kinh p { margin:0; font:italic 28px/1.45 'Lora', 'Noto Serif SC', serif; }
 
   /* quẻ xăm: tờ giấy dó khung sơn son, mở từ giữa ra như cuộn thư; ống xăm lắc ở cột trái */
-  .cx-xam { position:absolute; height:370px; opacity:0; transition:opacity .4s; }
+  .cx-xam { position:absolute; min-height:370px; opacity:0; transition:opacity .4s; } /* thơ dài xuống 3 dòng: thẻ tự cao thêm, không đè dòng tên */
   .cx-xam.show { opacity:1; }
-  .cx-xam .slip { position:absolute; inset:0; box-sizing:border-box; padding:22px 30px 18px 168px; color:var(--ink); border-radius:6px;
+  .cx-xam .slip { position:relative; min-height:370px; box-sizing:border-box; padding:22px 30px 58px 168px; color:var(--ink); border-radius:6px;
     background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,.45), transparent 55%), repeating-linear-gradient(92deg, rgba(120,80,30,.045) 0 2px, transparent 2px 6px), linear-gradient(180deg, #f8eed6, #ecd9ae);
     border:6px solid var(--lac); box-shadow: 0 0 0 2px var(--gold), inset 0 0 0 7px #f8eed6, inset 0 0 0 8px rgba(184,134,47,.9), inset 0 0 0 11px #f8eed6, inset 0 0 0 12px rgba(125,22,16,.55), 0 16px 36px rgba(0,0,0,.55);
     clip-path:inset(0 50% 0 50%); transition:clip-path .75s cubic-bezier(.2,.8,.2,1); }
@@ -235,7 +235,7 @@
     $('ol', board).innerHTML = Array.from({ length: n }, (_, i) => {
       const d = (s.top || [])[i];
       return d ? `<li><span class="rk">${i + 1}</span><div><div class="nm">${esc(d.name)}</div><div class="cd">${fmt(d.coins)} ${esc(cfg.giftCard?.unit || 'công đức')}</div></div></li>`
-        : `<li class="empty"><span class="rk">${i + 1}</span><div><div class="nm">${esc(t('waiting', 'Chờ người hữu duyên'))}</div></div></li>`;
+        : `<li class="empty"><span class="rk">${i + 1}</span><div><div class="nm">${esc(t('waiting', 'Chờ hữu duyên'))}</div></div></li>`;
     }).join('');
     layoutSides();
     const g = (s.goals || [])[0], ge = $('.cx-goal', root);

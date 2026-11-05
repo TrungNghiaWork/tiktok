@@ -155,6 +155,7 @@ Theme khai báo các ngôn ngữ nó có và bản dịch; bảng điều khiể
 }
 ```
 
+- `{lan}` (", 3 lần" khi tặng nhiều lần) đổi theo ngôn ngữ: `, {n} lần` / `, {n} times` / `，{n}次`. Đặt `voice.times` (vd `" ×{n}"`) để viết kiểu riêng.
 - Giọng được phép: `vi-VN-HoaiMyNeural`, `vi-VN-NamMinhNeural`, `en-US-AriaNeural`, `en-US-GuyNeural`, `en-US-JennyNeural`, `en-GB-SoniaNeural`, `zh-CN-XiaoxiaoNeural`, `zh-CN-YunxiNeural`, `zh-CN-XiaoyiNeural`, `zh-TW-HsiaoChenNeural`. Giọng dự phòng Windows (`"fallback": "local"`) tìm giọng cùng ngôn ngữ.
 - **Lệnh chat** không đổi theo ngôn ngữ: ghi từ khoá của cả ba thứ tiếng trong `rules` (vd `["đánh", "attack", "打"]`), người xem gõ tiếng nào cũng được.
 - Tên chiêu trong sự kiện quà / lệnh chat (`{hanh_dong}`, `ev.label`) lấy theo `actions` đã dịch, kể cả khi luật đã lưu trên bảng điều khiển.

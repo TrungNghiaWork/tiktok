@@ -712,7 +712,7 @@
       "likes": "tim",
       "seal": "PHÚC\nLÀNH",
       "unmute": "Chạm để nghe chuông mõ",
-      "waiting": "Chờ người hữu duyên",
+      "waiting": "Chờ hữu duyên",
       "comment": "Bình luận",
       "enter": "vào chùa",
       "heart": "Thả tim",
@@ -1296,7 +1296,7 @@
       "voice": {
         "voice": "en-US-GuyNeural",
         "gift": [
-          "Namo Amitabha. Thank you, {ten}, for the {hanh_dong}. {loi}."
+          "Namo Amitabha. Thank you, {ten}, for the {hanh_dong}{lan}. {loi}."
         ],
         "bigGift": [
           "Namo Amitabha. With a generous heart, {ten} makes the {hanh_dong}. {loi}. May this merit spread everywhere."
@@ -1927,10 +1927,10 @@
       "voice": {
         "voice": "zh-CN-YunxiNeural",
         "gift": [
-          "南无阿弥陀佛。感谢施主{ten}{hanh_dong}。{loi}。"
+          "南无阿弥陀佛。感谢施主{ten}{hanh_dong}{lan}。{loi}。"
         ],
         "bigGift": [
-          "南无阿弥陀佛。施主{ten}发心{hanh_dong}。{loi}。愿以此功德，普及于一切。"
+          "南无阿弥陀佛。施主{ten}发心{hanh_dong}{lan}。{loi}。愿以此功德，普及于一切。"
         ],
         "follow": [
           "感谢佛弟子{ten}的关注。"

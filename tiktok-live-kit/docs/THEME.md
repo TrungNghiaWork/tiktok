@@ -157,6 +157,7 @@ A theme declares its languages and translations; the control panel then shows a 
 }
 ```
 
+- `{lan}` (", 3 times" when a gift is sent several times) follows the language: `, {n} lần` / `, {n} times` / `，{n}次`. Set `voice.times` (e.g. `" ×{n}"`) to write your own.
 - Allowed voices: `vi-VN-HoaiMyNeural`, `vi-VN-NamMinhNeural`, `en-US-AriaNeural`, `en-US-GuyNeural`, `en-US-JennyNeural`, `en-GB-SoniaNeural`, `zh-CN-XiaoxiaoNeural`, `zh-CN-YunxiNeural`, `zh-CN-XiaoyiNeural`, `zh-TW-HsiaoChenNeural`. The Windows fallback (`"fallback": "local"`) looks for a voice of the same language.
 - **Chat commands** don't switch with the language: list keywords of all three languages in `rules` (e.g. `["đánh", "attack", "打"]`) so viewers can type any of them.
 - The action label in gift / command events (`{hanh_dong}`, `ev.label`) comes from the translated `actions`, even if rules were saved in the control panel.

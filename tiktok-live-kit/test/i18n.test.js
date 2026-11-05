@@ -77,3 +77,16 @@ test('tts: giọng Anh / Trung được dùng đúng, giọng lạ về giọng 
   await new Promise((r) => setTimeout(r, 350));
   assert.deepEqual(used, ['en-US-GuyNeural', 'zh-CN-XiaoxiaoNeural', 'vi-VN-HoaiMyNeural']);
 });
+
+test('i18n: {lan} (số lần tặng) đọc theo ngôn ngữ của theme, theme đặt voice.times thì dùng câu của theme', async () => {
+  const { createVoice } = await import('../src/core/voice.js');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'tlk-times-'));
+  const t = { ...base, voice: { ...base.voice, enabled: true, gift: ['{ten} {hanh_dong}{lan}.'] }, i18n: { en: { voice: { gift: ['{ten} {hanh_dong}{lan}.'] } }, zh: { voice: { gift: ['{ten}{hanh_dong}{lan}。'], times: '{n}连' } } } };
+  fs.mkdirSync(path.join(dir, 'boss')); fs.writeFileSync(path.join(dir, 'boss', 'theme.json'), JSON.stringify(t));
+  const ev = { kind: 'gift', user: { id: 'a', name: 'Lan' }, label: 'Đánh', total: 5, count: 3 };
+  const line = (lang) => createVoice().line(loadTheme(dir, 'boss', lang).voice, ev);
+  assert.equal(line('vi'), 'Lan đánh, 3 lần.');
+  assert.equal(line('en'), 'Lan đánh, 3 times.');
+  assert.equal(line('zh'), 'Lanđánh3连。');
+  assert.equal(createVoice().line({ enabled: true, gift: ['{ten}{lan}'] }, { ...ev, count: 1 }), 'Lan'); // một lần: bỏ trống
+});

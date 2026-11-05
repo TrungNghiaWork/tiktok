@@ -59,6 +59,8 @@ export function localize(t, lang) {
   return out;
 }
 
+const TIMES = { vi: ', {n} lần', en: ', {n} times', zh: '，{n}次' };
+
 export function loadTheme(dirs, id, lang) {
   const all = listThemes(dirs);
   const found = all.find((t) => t.id === id) || all[0];
@@ -68,13 +70,14 @@ export function loadTheme(dirs, id, lang) {
   const raw = readJson(path.join(dir, 'theme.json'), {});
   const langs = (Array.isArray(raw.langs) ? raw.langs : []).filter((l) => LANG_NAMES[l]);
   const t = localize(raw, lang);
+  const useLang = langs.includes(lang) ? lang : langs[0] || 'vi';
   const langSetting = langs.length > 1 ? [{ id: 'lang', label: 'Ngôn ngữ (chữ trên màn hình + giọng đọc)', type: 'select', default: langs[0], options: langs.map((l) => ({ value: l, label: LANG_NAMES[l] })) }] : [];
   const own = [...langSetting, ...(Array.isArray(t.settings) ? t.settings : [])];
   return {
     id: pick,
     dir,
     langs,
-    lang: langs.includes(lang) ? lang : langs[0] || 'vi',
+    lang: useLang,
     name: t.name || pick,
     width: t.width || 1080,
     height: t.height || 1920,
@@ -84,7 +87,8 @@ export function loadTheme(dirs, id, lang) {
     rules: t.rules || {},
     text: t.text || {},
     settings: [...own, ...STANDARD_SETTINGS.filter((s) => !own.some((o) => o.id === s.id))],
-    voice: t.voice || {},
+    // {lan} trong câu đọc: ", 3 lần" / ", 3 times" / "，3次" theo ngôn ngữ; theme đặt voice.times để đổi
+    voice: { times: TIMES[useLang] || TIMES.vi, ...(t.voice || {}) },
     periodic: t.periodic || {},
     prompts: t.prompts || {},
     draws: t.draws || {},
